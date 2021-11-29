@@ -20,34 +20,45 @@ setup:
      	movlw	0x0
 	movwf	TRISE, A	    ; Port E all outputs ; set PORTE to 11111100, output=0 input=1
 	
-	
-	movlw	0x01
-	movwf	PORTE, A	    ;  high 
-	
-	movlw	0x0
-	
-;	goto	start
+	goto	start
 
+start:
+	; set port as output - to sensor
+	movlw	0x01		    ; high - 4us
+	movwf	PORTE, A	
+	movlw	1		    ; wait 4us
+	call	delay_x4us
+	; reset to zero
+	movlw	0x00		    ; low - for delay while reading the input
+	movwf	PORTE, A
+
+	; set port as input - to sensor
+	movlw	0x01
+	movwf	TRISE, A
 	
-;	
-;
-;delay_x4us:		    ; delay given in chunks of 4 microsecond in W
-;	movwf	delay_cnt_low, A	; now need to multiply by 16
-;	swapf   delay_cnt_low, F, A	; swap nibbles
-;	movlw	0x0f	    
-;	andwf	delay_cnt_low, W, A ; move low nibble to W
-;	movwf	delay_cnt_high, A	; then to LCD_cnt_h
-;	movlw	0xf0	    
-;	andwf	delay_cnt_low, F, A ; keep high nibble in LCD_cnt_l
-;	call	delay_basic
-;	return
-;
-;delay_basic:			; delay routine	4 instruction loop == 250ns	    
-;	movlw 	0x00		; W=0
-;	
-;lp1:	decf 	delay_cnt_low, F, A	; no carry when 0x00 -> 0xff
-;	subwfb 	delay_cnt_high, F, A	; no carry when 0x00 -> 0xff
-;	bc 	lp1		; carry, then loop again
-;	return			; carry reset so return
+	; low - delay
+	movlw	250		    ; low - wait 1ms
+	call	delay_x4us	
+	
+	
+
+delay_x4us:		    ; delay given in chunks of 4 microsecond in W
+	movwf	delay_cnt_low, A	; now need to multiply by 16
+	swapf   delay_cnt_low, F, A	; swap nibbles
+	movlw	0x0f	    
+	andwf	delay_cnt_low, W, A ; move low nibble to W
+	movwf	delay_cnt_high, A	; then to LCD_cnt_h
+	movlw	0xf0	    
+	andwf	delay_cnt_low, F, A ; keep high nibble in LCD_cnt_l
+	call	delay_basic
+	return
+
+delay_basic:			; delay routine	4 instruction loop == 250ns	    
+	movlw 	0x00		; W=0
+	
+lp1:	decf 	delay_cnt_low, F, A	; no carry when 0x00 -> 0xff
+	subwfb 	delay_cnt_high, F, A	; no carry when 0x00 -> 0xff
+	bc 	lp1		; carry, then loop again
+	return			; carry reset so return
 	
 end
