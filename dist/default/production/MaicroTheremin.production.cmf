@@ -11,15 +11,20 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
+$build/default/production/signal.o
+code CODE 0 0 0 22 1
 $build/default/production/main.o
-code CODE 0 0 0 194 1
-udata_acs COMRAM 1 5 5 3 1
+code CODE 0 0 0 178 1
+udata_acs COMRAM 1 7 7 2 1
 config CONFIG 4 300000 300000 E 1
 $build/default/production/config.o
 config CONFIG 4 300000 300000 E 1
 $build/default/production/lcd.o
 udata_acs COMRAM 1 0 0 5 1
 lcd_code CODE 0 1FF02 1FF02 FE 1
+$build/default/production/delay.o
+code CODE 0 0 0 32 1
+udata_acs COMRAM 1 5 5 2 1
 # %UNUSED Section
 # This section enumerates the unused ranges of each CLASS. Each entry
 # is described on a single line as follows:
@@ -38,18 +43,18 @@ BANK6 600-6FF 1
 BANK7 700-7FF 1
 BANK8 800-8FF 1
 BANK9 900-9FF 1
-CONST 194-1FF01 1
+CONST 178-1FF01 1
 IDLOC 200000-200007 1
 SMALLCONST 1000-1FF01 1
-CODE 194-1FF01 1
+CODE 178-1FF01 1
 BANK10 A00-AFF 1
 BANK11 B00-BFF 1
 BANK12 C00-CFF 1
 BANK13 D00-DFF 1
 BANK14 E00-EFF 1
 BANK15 F00-F15 1
-BIGRAM 194-F15 1
-COMRAM 8-5F 1
+BIGRAM 178-F15 1
+COMRAM 9-5F 1
 EEDATA F00000-F003FF 1
 MEDIUMCONST 1000-FFFF 1
 MEDIUMCONST 11000-1FF01 1
@@ -66,73 +71,75 @@ MEDIUMCONST 11000-1FF01 1
 # are in ascending order of addresses.
 # All other numeric values are in decimal.
 %LINETAB
+$build/default/production/signal.o
+0 code CODE >9:H:\microprocessor\project\MaicroTheremin\signal.s
+2 code CODE >10:H:\microprocessor\project\MaicroTheremin\signal.s
+4 code CODE >11:H:\microprocessor\project\MaicroTheremin\signal.s
+8 code CODE >12:H:\microprocessor\project\MaicroTheremin\signal.s
+A code CODE >16:H:\microprocessor\project\MaicroTheremin\signal.s
+C code CODE >17:H:\microprocessor\project\MaicroTheremin\signal.s
+E code CODE >19:H:\microprocessor\project\MaicroTheremin\signal.s
+10 code CODE >20:H:\microprocessor\project\MaicroTheremin\signal.s
+14 code CODE >26:H:\microprocessor\project\MaicroTheremin\signal.s
+16 code CODE >27:H:\microprocessor\project\MaicroTheremin\signal.s
+18 code CODE >29:H:\microprocessor\project\MaicroTheremin\signal.s
+1A code CODE >30:H:\microprocessor\project\MaicroTheremin\signal.s
+1E code CODE >36:H:\microprocessor\project\MaicroTheremin\signal.s
+20 code CODE >37:H:\microprocessor\project\MaicroTheremin\signal.s
 $build/default/production/main.o
-0 code CODE >14:H:\microprocessor\project\MaicroTheremin\main.s
-0 code CODE >15:H:\microprocessor\project\MaicroTheremin\main.s
-4 code CODE >17:H:\microprocessor\project\MaicroTheremin\main.s
-100 code CODE >21:H:\microprocessor\project\MaicroTheremin\main.s
-102 code CODE >22:H:\microprocessor\project\MaicroTheremin\main.s
-104 code CODE >24:H:\microprocessor\project\MaicroTheremin\main.s
-106 code CODE >25:H:\microprocessor\project\MaicroTheremin\main.s
-108 code CODE >26:H:\microprocessor\project\MaicroTheremin\main.s
-10A code CODE >27:H:\microprocessor\project\MaicroTheremin\main.s
-10C code CODE >28:H:\microprocessor\project\MaicroTheremin\main.s
-10E code CODE >29:H:\microprocessor\project\MaicroTheremin\main.s
-110 code CODE >30:H:\microprocessor\project\MaicroTheremin\main.s
-112 code CODE >31:H:\microprocessor\project\MaicroTheremin\main.s
-114 code CODE >35:H:\microprocessor\project\MaicroTheremin\main.s
-118 code CODE >42:H:\microprocessor\project\MaicroTheremin\main.s
-11A code CODE >43:H:\microprocessor\project\MaicroTheremin\main.s
-11E code CODE >44:H:\microprocessor\project\MaicroTheremin\main.s
-120 code CODE >51:H:\microprocessor\project\MaicroTheremin\main.s
-122 code CODE >52:H:\microprocessor\project\MaicroTheremin\main.s
-124 code CODE >53:H:\microprocessor\project\MaicroTheremin\main.s
-126 code CODE >54:H:\microprocessor\project\MaicroTheremin\main.s
-128 code CODE >55:H:\microprocessor\project\MaicroTheremin\main.s
+0 code CODE >19:H:\microprocessor\project\MaicroTheremin\main.s
+0 code CODE >20:H:\microprocessor\project\MaicroTheremin\main.s
+4 code CODE >22:H:\microprocessor\project\MaicroTheremin\main.s
+100 code CODE >26:H:\microprocessor\project\MaicroTheremin\main.s
+102 code CODE >27:H:\microprocessor\project\MaicroTheremin\main.s
+104 code CODE >28:H:\microprocessor\project\MaicroTheremin\main.s
+108 code CODE >31:H:\microprocessor\project\MaicroTheremin\main.s
+10A code CODE >32:H:\microprocessor\project\MaicroTheremin\main.s
+10C code CODE >33:H:\microprocessor\project\MaicroTheremin\main.s
+10E code CODE >34:H:\microprocessor\project\MaicroTheremin\main.s
+110 code CODE >38:H:\microprocessor\project\MaicroTheremin\main.s
+114 code CODE >42:H:\microprocessor\project\MaicroTheremin\main.s
+116 code CODE >43:H:\microprocessor\project\MaicroTheremin\main.s
+118 code CODE >44:H:\microprocessor\project\MaicroTheremin\main.s
+11A code CODE >45:H:\microprocessor\project\MaicroTheremin\main.s
+11C code CODE >48:H:\microprocessor\project\MaicroTheremin\main.s
+11E code CODE >49:H:\microprocessor\project\MaicroTheremin\main.s
+120 code CODE >50:H:\microprocessor\project\MaicroTheremin\main.s
+122 code CODE >51:H:\microprocessor\project\MaicroTheremin\main.s
+124 code CODE >52:H:\microprocessor\project\MaicroTheremin\main.s
+126 code CODE >53:H:\microprocessor\project\MaicroTheremin\main.s
+12A code CODE >56:H:\microprocessor\project\MaicroTheremin\main.s
 12C code CODE >57:H:\microprocessor\project\MaicroTheremin\main.s
 12E code CODE >58:H:\microprocessor\project\MaicroTheremin\main.s
 130 code CODE >59:H:\microprocessor\project\MaicroTheremin\main.s
 132 code CODE >62:H:\microprocessor\project\MaicroTheremin\main.s
 134 code CODE >63:H:\microprocessor\project\MaicroTheremin\main.s
 136 code CODE >64:H:\microprocessor\project\MaicroTheremin\main.s
-138 code CODE >67:H:\microprocessor\project\MaicroTheremin\main.s
-13C code CODE >68:H:\microprocessor\project\MaicroTheremin\main.s
-140 code CODE >77:H:\microprocessor\project\MaicroTheremin\main.s
-142 code CODE >78:H:\microprocessor\project\MaicroTheremin\main.s
-146 code CODE >81:H:\microprocessor\project\MaicroTheremin\main.s
-148 code CODE >82:H:\microprocessor\project\MaicroTheremin\main.s
-14A code CODE >83:H:\microprocessor\project\MaicroTheremin\main.s
-14C code CODE >84:H:\microprocessor\project\MaicroTheremin\main.s
-14E code CODE >85:H:\microprocessor\project\MaicroTheremin\main.s
-150 code CODE >86:H:\microprocessor\project\MaicroTheremin\main.s
-152 code CODE >87:H:\microprocessor\project\MaicroTheremin\main.s
-154 code CODE >88:H:\microprocessor\project\MaicroTheremin\main.s
-158 code CODE >89:H:\microprocessor\project\MaicroTheremin\main.s
-15A code CODE >92:H:\microprocessor\project\MaicroTheremin\main.s
-15C code CODE >94:H:\microprocessor\project\MaicroTheremin\main.s
-15E code CODE >95:H:\microprocessor\project\MaicroTheremin\main.s
-160 code CODE >96:H:\microprocessor\project\MaicroTheremin\main.s
-162 code CODE >97:H:\microprocessor\project\MaicroTheremin\main.s
-164 code CODE >103:H:\microprocessor\project\MaicroTheremin\main.s
-166 code CODE >104:H:\microprocessor\project\MaicroTheremin\main.s
-168 code CODE >108:H:\microprocessor\project\MaicroTheremin\main.s
-16C code CODE >111:H:\microprocessor\project\MaicroTheremin\main.s
-16E code CODE >114:H:\microprocessor\project\MaicroTheremin\main.s
-170 code CODE >115:H:\microprocessor\project\MaicroTheremin\main.s
-174 code CODE >117:H:\microprocessor\project\MaicroTheremin\main.s
+138 code CODE >65:H:\microprocessor\project\MaicroTheremin\main.s
+13A code CODE >69:H:\microprocessor\project\MaicroTheremin\main.s
+13E code CODE >70:H:\microprocessor\project\MaicroTheremin\main.s
+142 code CODE >81:H:\microprocessor\project\MaicroTheremin\main.s
+144 code CODE >82:H:\microprocessor\project\MaicroTheremin\main.s
+148 code CODE >91:H:\microprocessor\project\MaicroTheremin\main.s
+14A code CODE >92:H:\microprocessor\project\MaicroTheremin\main.s
+14C code CODE >94:H:\microprocessor\project\MaicroTheremin\main.s
+150 code CODE >95:H:\microprocessor\project\MaicroTheremin\main.s
+152 code CODE >97:H:\microprocessor\project\MaicroTheremin\main.s
+154 code CODE >98:H:\microprocessor\project\MaicroTheremin\main.s
+158 code CODE >100:H:\microprocessor\project\MaicroTheremin\main.s
+15A code CODE >101:H:\microprocessor\project\MaicroTheremin\main.s
+15C code CODE >102:H:\microprocessor\project\MaicroTheremin\main.s
+15E code CODE >103:H:\microprocessor\project\MaicroTheremin\main.s
+160 code CODE >107:H:\microprocessor\project\MaicroTheremin\main.s
+162 code CODE >108:H:\microprocessor\project\MaicroTheremin\main.s
+164 code CODE >110:H:\microprocessor\project\MaicroTheremin\main.s
+168 code CODE >111:H:\microprocessor\project\MaicroTheremin\main.s
+16A code CODE >113:H:\microprocessor\project\MaicroTheremin\main.s
+16C code CODE >114:H:\microprocessor\project\MaicroTheremin\main.s
+170 code CODE >116:H:\microprocessor\project\MaicroTheremin\main.s
+172 code CODE >117:H:\microprocessor\project\MaicroTheremin\main.s
+174 code CODE >118:H:\microprocessor\project\MaicroTheremin\main.s
 176 code CODE >119:H:\microprocessor\project\MaicroTheremin\main.s
-178 code CODE >120:H:\microprocessor\project\MaicroTheremin\main.s
-17A code CODE >121:H:\microprocessor\project\MaicroTheremin\main.s
-17C code CODE >125:H:\microprocessor\project\MaicroTheremin\main.s
-17E code CODE >126:H:\microprocessor\project\MaicroTheremin\main.s
-180 code CODE >130:H:\microprocessor\project\MaicroTheremin\main.s
-184 code CODE >133:H:\microprocessor\project\MaicroTheremin\main.s
-186 code CODE >136:H:\microprocessor\project\MaicroTheremin\main.s
-188 code CODE >137:H:\microprocessor\project\MaicroTheremin\main.s
-18C code CODE >139:H:\microprocessor\project\MaicroTheremin\main.s
-18E code CODE >141:H:\microprocessor\project\MaicroTheremin\main.s
-190 code CODE >142:H:\microprocessor\project\MaicroTheremin\main.s
-192 code CODE >143:H:\microprocessor\project\MaicroTheremin\main.s
 $build/default/production/lcd.o
 1FF02 lcd_code CODE >18:H:\microprocessor\project\MaicroTheremin\lcd.s
 1FF04 lcd_code CODE >19:H:\microprocessor\project\MaicroTheremin\lcd.s
@@ -238,6 +245,30 @@ $build/default/production/lcd.o
 1FFFA lcd_code CODE >138:H:\microprocessor\project\MaicroTheremin\lcd.s
 1FFFC lcd_code CODE >139:H:\microprocessor\project\MaicroTheremin\lcd.s
 1FFFE lcd_code CODE >140:H:\microprocessor\project\MaicroTheremin\lcd.s
+$build/default/production/delay.o
+0 code CODE >14:H:\microprocessor\project\MaicroTheremin\delay.s
+2 code CODE >15:H:\microprocessor\project\MaicroTheremin\delay.s
+4 code CODE >16:H:\microprocessor\project\MaicroTheremin\delay.s
+6 code CODE >17:H:\microprocessor\project\MaicroTheremin\delay.s
+8 code CODE >18:H:\microprocessor\project\MaicroTheremin\delay.s
+A code CODE >19:H:\microprocessor\project\MaicroTheremin\delay.s
+C code CODE >20:H:\microprocessor\project\MaicroTheremin\delay.s
+E code CODE >21:H:\microprocessor\project\MaicroTheremin\delay.s
+12 code CODE >22:H:\microprocessor\project\MaicroTheremin\delay.s
+14 code CODE >26:H:\microprocessor\project\MaicroTheremin\delay.s
+16 code CODE >27:H:\microprocessor\project\MaicroTheremin\delay.s
+18 code CODE >28:H:\microprocessor\project\MaicroTheremin\delay.s
+1A code CODE >29:H:\microprocessor\project\MaicroTheremin\delay.s
+1C code CODE >30:H:\microprocessor\project\MaicroTheremin\delay.s
+1E code CODE >31:H:\microprocessor\project\MaicroTheremin\delay.s
+20 code CODE >32:H:\microprocessor\project\MaicroTheremin\delay.s
+22 code CODE >33:H:\microprocessor\project\MaicroTheremin\delay.s
+26 code CODE >35:H:\microprocessor\project\MaicroTheremin\delay.s
+28 code CODE >40:H:\microprocessor\project\MaicroTheremin\delay.s
+2A code CODE >41:H:\microprocessor\project\MaicroTheremin\delay.s
+2C code CODE >42:H:\microprocessor\project\MaicroTheremin\delay.s
+2E code CODE >43:H:\microprocessor\project\MaicroTheremin\delay.s
+30 code CODE >44:H:\microprocessor\project\MaicroTheremin\delay.s
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -251,7 +282,7 @@ $build/default/production/lcd.o
 # is the name of the object file in which the symbol was defined.
 %SYMTAB
 __Hspace_0 20000 0 ABS 0 - -
-__Hspace_1 8 0 ABS 0 - -
+__Hspace_1 9 0 ABS 0 - -
 __Hspace_3 0 0 ABS 0 - -
 __Hspace_4 60000E 0 ABS 0 - -
 __Hudata_bank0 0 0 ABS 0 udata_bank0 -
@@ -284,7 +315,7 @@ __Hdata 0 0 ABS 0 data -
 __Lcode 0 0 ABS 0 code -
 __Ldata 0 0 ABS 0 data -
 __S0 20000 0 ABS 0 - -
-__S1 8 0 ABS 0 - -
+__S1 9 0 ABS 0 - -
 __S3 0 0 ABS 0 - -
 __Ludata_bank10 0 0 ABS 0 udata_bank10 -
 __Ludata_bank11 0 0 ABS 0 udata_bank11 -
@@ -292,6 +323,7 @@ __Ludata_bank12 0 0 ABS 0 udata_bank12 -
 __Ludata_bank13 0 0 ABS 0 udata_bank13 -
 __Ludata_bank14 0 0 ABS 0 udata_bank14 -
 __Ludata_bank15 0 0 ABS 0 udata_bank15 -
+signal_setup 0 0 CODE 0 code build/default/production/signal.o
 __Lconfig 0 0 CONFIG 4 config -
 LCD_Write_Message 1FF64 0 CODE 0 lcd_code build/default/production/lcd.o
 isa$std 1 0 ABS 0 - build/default/production/main.o
@@ -300,6 +332,8 @@ __Lspace_0 0 0 ABS 0 - -
 __Lspace_1 0 0 ABS 0 - -
 __Lspace_3 0 0 ABS 0 - -
 __Lspace_4 0 0 ABS 0 - -
+delay_x1us 14 0 CODE 0 code build/default/production/delay.o
+delay_x4us 0 0 CODE 0 code build/default/production/delay.o
 __Ludata_bank0 0 0 ABS 0 udata_bank0 -
 __Ludata_bank1 0 0 ABS 0 udata_bank1 -
 __Ludata_bank2 0 0 ABS 0 udata_bank2 -
@@ -337,7 +371,7 @@ __Ludata_acs 0 0 ABS 0 udata_acs -
 # and size are in units of delta. The file address is in units of bytes.
 # All other numeric quantities are in decimal.
 %SEGMENTS
-udata_acs 1 0 0 8 1
+udata_acs 1 0 0 9 1
 lcd_code 0 1FF02 1FF02 FE 1
 # %NOTES Section
 # This section contains data of all the note-psects.  The beginning of the section

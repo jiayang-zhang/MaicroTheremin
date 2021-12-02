@@ -1,6 +1,6 @@
-# 1 "main.s"
+# 1 "signal.s"
 # 1 "<built-in>" 1
-# 1 "main.s" 2
+# 1 "signal.s" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 1 3
 
 
@@ -10956,138 +10956,42 @@ stk_offset SET 0
 auto_size SET 0
 ENDM
 # 5 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 2 3
-# 1 "main.s" 2
+# 2 "signal.s" 2
 
-
-extrn LCD_Setup, LCD_Write_Message, LCD_Write_Instruction, LCD_Send_Byte_D
+global signal_setup
 extrn delay_x4us, delay_x1us
-extrn signal_setup
-; ======================== note =========================
-; PORTE for sensor01 I/O
-; PORTH for sensor02 I/O
-; PORTF for sensor01 reading
-; PORTJ for sensor02 reading
-
-psect udata_acs
-
-sensor_clock01: ds 1
-sensor_clock02: ds 1
 
 psect code, abs
-main:
- org 0x0
- goto setup
 
- org 0x100 ; Main code starts here at address 0x100
-
-  ; ******* Programme FLASH read Setup Code ****
-setup:
- bcf ((EECON1) and 0FFh), 6, a ; point to Flash program memory
- bsf ((EECON1) and 0FFh), 7, a ; access Flash program memory
- call signal_setup
-
-; ; set port as output ; output=0 input=1
+signal_setup:
  movlw 0x0
- movwf TRISF, A ; output
- movlw 0x0
- movwf TRISJ, A ; output
-
-
-; call LCD_Setup ; setup LCD
- goto start
-
-start:
- ; set port as output ; output=0 input=1
- movlw 0x00 ; high - 4us
- movwf TRISE, A
- movlw 0x00
- movwf TRISH, A
-
- ; output 1 - to sensor
- movlw 0x01
- movwf PORTE, A
- movlw 0x01
- movwf PORTH, A
- movlw 1 ; output signal - 4us
- call delay_x4us
-
- ; output 0 - to sensor
- movlw 0x00 ; for delay and reading the input
- movwf PORTE, A
- movlw 0x00
- movwf PORTH, A
-
- ; set port as input - read position
- movlw 0x01
- movwf TRISE, A
- movlw 0x01
- movwf TRISH, A
-
-
- ; start the countdown
- call count_loop_init_1
- call count_loop_init_2
-
- ; call LCD
-; call lcd_position
-; movf sensor_clock, w, A ; output message to LCD
-;; movlw 0x01
-; call LCD_Send_Byte_D
-
-
-
- ; timegap before next postion measurement
- movlw 250
- call delay_x4us ; no output signal - 4us
-
-
- ; repeat position reading
-; bra start
-
-
-; ===================== countdown function ==================================
-count_loop_init_1:
-     movlw 0 ; 8-bits: count from 0 to 255
- movwf sensor_clock01, A
-count_loop_1:
- movff sensor_clock01, PORTF, A ; check update frequency
- incf sensor_clock01, A ; increment clock
-
- movlw 6 ; delay 24us
- call delay_x4us
-
- movlw 0
- cpfseq PORTE, A ; compare PORTE with w, skip if equals
- bra count_loop_1
+ movwf TRISD, A
+ call pwm
  return
 
 
-count_loop_init_2:
-     movlw 0 ; 8-bits: count from 0 to 255
- movwf sensor_clock02, A
-count_loop_2:
- movff sensor_clock02, PORTJ, A ; check update frequency
- incf sensor_clock02, A ; increment clock
+pwm:
+ movlw 0x01
+ movwf PORTD, A
 
- movlw 6
- call delay_x4us
+ movlw 250 ; time period 250us for C4
+ call delay_x1us
+; movlw 220
+; call delay_x4us
+; movlw 31
+; call delay_x1us
 
- movlw 0
- cpfseq PORTH, A
- bra count_loop_2
+ movlw 0x0
+ movwf PORTD, A
+
+ movlw 250 ; time period 250us for C4
+ call delay_x1us
+; movlw 220
+; call delay_x4us
+; movlw 31
+; call delay_x1us
+
+ bra pwm
  return
-
-
-
-;lcd_position:
-; ; write to DDRAM --> set which each pixel block
-; ;(CGRAM --> each pixel within a block)
-;
-; ; movlw 11000000B ; position address instruction ; hex = 40
-; movlw 11000001B ; hex = 41
-; call LCD_Write_Instruction
-; return
-;
-
 
 end
