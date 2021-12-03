@@ -11,19 +11,19 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$build/default/production/transducer.o
-trans_code CODE 0 1FE9A 1FE9A 68 1
-$build/default/production/signal.o
+$build/default/debug/signal.o
 sig_code CODE 0 1FE38 1FE38 30 1
-$build/default/production/main.o
-code CODE 0 0 0 11C 1
+$build/default/debug/config.o
 config CONFIG 4 300000 300000 E 1
-$build/default/production/config.o
-config CONFIG 4 300000 300000 E 1
-$build/default/production/lcd.o
+$build/default/debug/lcd.o
 udata_acs COMRAM 1 0 0 5 1
 lcd_code CODE 0 1FF02 1FF02 FE 1
-$build/default/production/delay.o
+$build/default/debug/transducer.o
+trans_code CODE 0 1FE9A 1FE9A 68 1
+$build/default/debug/main.o
+code CODE 0 0 0 11C 1
+config CONFIG 4 300000 300000 E 1
+$build/default/debug/delay.o
 delay_code CODE 0 1FE68 1FE68 32 1
 udata_acs COMRAM 1 5 5 2 1
 # %UNUSED Section
@@ -72,53 +72,7 @@ MEDIUMCONST 11000-1FE37 1
 # are in ascending order of addresses.
 # All other numeric values are in decimal.
 %LINETAB
-$build/default/production/transducer.o
-1FE9A trans_code CODE >23:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE9C trans_code CODE >24:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE9E trans_code CODE >25:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEA0 trans_code CODE >26:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEA2 trans_code CODE >30:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEA4 trans_code CODE >31:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEA6 trans_code CODE >32:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEA8 trans_code CODE >33:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEAA trans_code CODE >36:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEAC trans_code CODE >37:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEAE trans_code CODE >38:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEB0 trans_code CODE >39:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEB2 trans_code CODE >40:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEB4 trans_code CODE >41:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEB8 trans_code CODE >44:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEBA trans_code CODE >45:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEBC trans_code CODE >46:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEBE trans_code CODE >47:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEC0 trans_code CODE >50:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEC2 trans_code CODE >51:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEC4 trans_code CODE >52:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEC6 trans_code CODE >53:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEC8 trans_code CODE >57:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FECC trans_code CODE >58:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FED0 trans_code CODE >61:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FED2 trans_code CODE >66:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FED4 trans_code CODE >67:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FED6 trans_code CODE >69:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEDA trans_code CODE >70:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEDC trans_code CODE >72:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEDE trans_code CODE >73:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEE2 trans_code CODE >75:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEE4 trans_code CODE >76:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEE6 trans_code CODE >77:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEE8 trans_code CODE >78:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEEA trans_code CODE >82:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEEC trans_code CODE >83:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEEE trans_code CODE >85:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEF2 trans_code CODE >86:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEF4 trans_code CODE >88:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEF6 trans_code CODE >89:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEFA trans_code CODE >91:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEFC trans_code CODE >92:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FEFE trans_code CODE >93:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FF00 trans_code CODE >95:H:\microprocessor\project\MaicroTheremin\transducer.s
-$build/default/production/signal.o
+$build/default/debug/signal.o
 1FE38 sig_code CODE >9:H:\microprocessor\project\MaicroTheremin\signal.s
 1FE3A sig_code CODE >10:H:\microprocessor\project\MaicroTheremin\signal.s
 1FE3C sig_code CODE >11:H:\microprocessor\project\MaicroTheremin\signal.s
@@ -139,20 +93,7 @@ $build/default/production/signal.o
 1FE62 sig_code CODE >47:H:\microprocessor\project\MaicroTheremin\signal.s
 1FE64 sig_code CODE >48:H:\microprocessor\project\MaicroTheremin\signal.s
 1FE66 sig_code CODE >52:H:\microprocessor\project\MaicroTheremin\signal.s
-$build/default/production/main.o
-0 code CODE >11:H:\microprocessor\project\MaicroTheremin\main.s
-0 code CODE >12:H:\microprocessor\project\MaicroTheremin\main.s
-4 code CODE >14:H:\microprocessor\project\MaicroTheremin\main.s
-100 code CODE >18:H:\microprocessor\project\MaicroTheremin\main.s
-102 code CODE >19:H:\microprocessor\project\MaicroTheremin\main.s
-104 code CODE >25:H:\microprocessor\project\MaicroTheremin\main.s
-108 code CODE >26:H:\microprocessor\project\MaicroTheremin\main.s
-10C code CODE >29:H:\microprocessor\project\MaicroTheremin\main.s
-110 code CODE >32:H:\microprocessor\project\MaicroTheremin\main.s
-114 code CODE >36:H:\microprocessor\project\MaicroTheremin\main.s
-118 code CODE >38:H:\microprocessor\project\MaicroTheremin\main.s
-11A code CODE >39:H:\microprocessor\project\MaicroTheremin\main.s
-$build/default/production/lcd.o
+$build/default/debug/lcd.o
 1FF02 lcd_code CODE >18:H:\microprocessor\project\MaicroTheremin\lcd.s
 1FF04 lcd_code CODE >19:H:\microprocessor\project\MaicroTheremin\lcd.s
 1FF06 lcd_code CODE >20:H:\microprocessor\project\MaicroTheremin\lcd.s
@@ -257,7 +198,66 @@ $build/default/production/lcd.o
 1FFFA lcd_code CODE >138:H:\microprocessor\project\MaicroTheremin\lcd.s
 1FFFC lcd_code CODE >139:H:\microprocessor\project\MaicroTheremin\lcd.s
 1FFFE lcd_code CODE >140:H:\microprocessor\project\MaicroTheremin\lcd.s
-$build/default/production/delay.o
+$build/default/debug/transducer.o
+1FE9A trans_code CODE >23:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FE9C trans_code CODE >24:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FE9E trans_code CODE >25:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEA0 trans_code CODE >26:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEA2 trans_code CODE >30:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEA4 trans_code CODE >31:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEA6 trans_code CODE >32:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEA8 trans_code CODE >33:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEAA trans_code CODE >36:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEAC trans_code CODE >37:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEAE trans_code CODE >38:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEB0 trans_code CODE >39:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEB2 trans_code CODE >40:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEB4 trans_code CODE >41:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEB8 trans_code CODE >44:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEBA trans_code CODE >45:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEBC trans_code CODE >46:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEBE trans_code CODE >47:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEC0 trans_code CODE >50:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEC2 trans_code CODE >51:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEC4 trans_code CODE >52:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEC6 trans_code CODE >53:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEC8 trans_code CODE >57:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FECC trans_code CODE >58:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FED0 trans_code CODE >61:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FED2 trans_code CODE >66:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FED4 trans_code CODE >67:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FED6 trans_code CODE >69:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEDA trans_code CODE >70:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEDC trans_code CODE >72:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEDE trans_code CODE >73:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEE2 trans_code CODE >75:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEE4 trans_code CODE >76:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEE6 trans_code CODE >77:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEE8 trans_code CODE >78:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEEA trans_code CODE >82:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEEC trans_code CODE >83:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEEE trans_code CODE >85:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEF2 trans_code CODE >86:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEF4 trans_code CODE >88:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEF6 trans_code CODE >89:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEFA trans_code CODE >91:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEFC trans_code CODE >92:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FEFE trans_code CODE >93:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FF00 trans_code CODE >95:H:\microprocessor\project\MaicroTheremin\transducer.s
+$build/default/debug/main.o
+0 code CODE >11:H:\microprocessor\project\MaicroTheremin\main.s
+0 code CODE >12:H:\microprocessor\project\MaicroTheremin\main.s
+4 code CODE >14:H:\microprocessor\project\MaicroTheremin\main.s
+100 code CODE >18:H:\microprocessor\project\MaicroTheremin\main.s
+102 code CODE >19:H:\microprocessor\project\MaicroTheremin\main.s
+104 code CODE >25:H:\microprocessor\project\MaicroTheremin\main.s
+108 code CODE >26:H:\microprocessor\project\MaicroTheremin\main.s
+10C code CODE >29:H:\microprocessor\project\MaicroTheremin\main.s
+110 code CODE >32:H:\microprocessor\project\MaicroTheremin\main.s
+114 code CODE >36:H:\microprocessor\project\MaicroTheremin\main.s
+118 code CODE >38:H:\microprocessor\project\MaicroTheremin\main.s
+11A code CODE >39:H:\microprocessor\project\MaicroTheremin\main.s
+$build/default/debug/delay.o
 1FE68 delay_code CODE >14:H:\microprocessor\project\MaicroTheremin\delay.s
 1FE6A delay_code CODE >15:H:\microprocessor\project\MaicroTheremin\delay.s
 1FE6C delay_code CODE >16:H:\microprocessor\project\MaicroTheremin\delay.s
@@ -293,8 +293,8 @@ $build/default/production/delay.o
 # was defined in a psect then <psect> will be "-". File-name
 # is the name of the object file in which the symbol was defined.
 %SYMTAB
-sensor_clock01 0 0 CONST 0 data build/default/production/transducer.o
-sensor_clock02 1 0 CONST 0 data build/default/production/transducer.o
+sensor_clock01 0 0 CONST 0 data build/default/debug/transducer.o
+sensor_clock02 1 0 CONST 0 data build/default/debug/transducer.o
 __Ltrans_code 0 0 ABS 0 trans_code -
 __Hspace_0 20000 0 ABS 0 - -
 __Hspace_1 7 0 ABS 0 - -
@@ -310,14 +310,14 @@ __Hudata_bank6 0 0 ABS 0 udata_bank6 -
 __Hudata_bank7 0 0 ABS 0 udata_bank7 -
 __Hudata_bank8 0 0 ABS 0 udata_bank8 -
 __Hudata_bank9 0 0 ABS 0 udata_bank9 -
-pwm 1FE3E 0 CODE 0 sig_code build/default/production/signal.o
+pwm 1FE3E 0 CODE 0 sig_code build/default/debug/signal.o
 __Hlcd_code 0 0 ABS 0 lcd_code -
 __Hdelay_code 0 0 ABS 0 delay_code -
-trans_get 1FEA2 0 CODE 0 trans_code build/default/production/transducer.o
+trans_get 1FEA2 0 CODE 0 trans_code build/default/debug/transducer.o
 __Ldelay_code 0 0 ABS 0 delay_code -
 __Lsig_code 0 0 ABS 0 sig_code -
-LCD_Send_Byte_D 1FF8E 0 CODE 0 lcd_code build/default/production/lcd.o
-microtone 1FE62 0 CODE 0 sig_code build/default/production/signal.o
+LCD_Send_Byte_D 1FF8E 0 CODE 0 lcd_code build/default/debug/lcd.o
+microtone 1FE62 0 CODE 0 sig_code build/default/debug/signal.o
 __Hudata_bank10 0 0 ABS 0 udata_bank10 -
 __Hudata_bank11 0 0 ABS 0 udata_bank11 -
 __Hudata_bank12 0 0 ABS 0 udata_bank12 -
@@ -325,8 +325,8 @@ __Hudata_bank13 0 0 ABS 0 udata_bank13 -
 __Hudata_bank14 0 0 ABS 0 udata_bank14 -
 __Hudata_bank15 0 0 ABS 0 udata_bank15 -
 __Hsig_code 0 0 ABS 0 sig_code -
-LCD_Write_Instruction 1FF58 0 CODE 0 lcd_code build/default/production/lcd.o
-isa$xinst 0 0 ABS 0 - build/default/production/main.o
+LCD_Write_Instruction 1FF58 0 CODE 0 lcd_code build/default/debug/lcd.o
+isa$xinst 0 0 ABS 0 - build/default/debug/main.o
 __Hedata 0 0 ABS 0 edata -
 __Hudata 0 0 ABS 0 udata -
 __Hconfig 30000E 0 CONFIG 4 config -
@@ -345,17 +345,17 @@ __Ludata_bank12 0 0 ABS 0 udata_bank12 -
 __Ludata_bank13 0 0 ABS 0 udata_bank13 -
 __Ludata_bank14 0 0 ABS 0 udata_bank14 -
 __Ludata_bank15 0 0 ABS 0 udata_bank15 -
-signal_setup 1FE38 0 CODE 0 sig_code build/default/production/signal.o
+signal_setup 1FE38 0 CODE 0 sig_code build/default/debug/signal.o
 __Lconfig 0 0 CONFIG 4 config -
-LCD_Write_Message 1FF64 0 CODE 0 lcd_code build/default/production/lcd.o
-isa$std 1 0 ABS 0 - build/default/production/main.o
-LCD_Setup 1FF02 0 CODE 0 lcd_code build/default/production/lcd.o
+LCD_Write_Message 1FF64 0 CODE 0 lcd_code build/default/debug/lcd.o
+isa$std 1 0 ABS 0 - build/default/debug/main.o
+LCD_Setup 1FF02 0 CODE 0 lcd_code build/default/debug/lcd.o
 __Lspace_0 0 0 ABS 0 - -
 __Lspace_1 0 0 ABS 0 - -
 __Lspace_3 0 0 ABS 0 - -
 __Lspace_4 0 0 ABS 0 - -
-delay_x1us 1FE7C 0 CODE 0 delay_code build/default/production/delay.o
-delay_x4us 1FE68 0 CODE 0 delay_code build/default/production/delay.o
+delay_x1us 1FE7C 0 CODE 0 delay_code build/default/debug/delay.o
+delay_x4us 1FE68 0 CODE 0 delay_code build/default/debug/delay.o
 __Ludata_bank0 0 0 ABS 0 udata_bank0 -
 __Ludata_bank1 0 0 ABS 0 udata_bank1 -
 __Ludata_bank2 0 0 ABS 0 udata_bank2 -
@@ -367,7 +367,7 @@ __Ludata_bank7 0 0 ABS 0 udata_bank7 -
 __Ludata_bank8 0 0 ABS 0 udata_bank8 -
 __Ludata_bank9 0 0 ABS 0 udata_bank9 -
 __Llcd_code 0 0 ABS 0 lcd_code -
-transducer_setup 1FE9A 0 CODE 0 trans_code build/default/production/transducer.o
+transducer_setup 1FE9A 0 CODE 0 trans_code build/default/debug/transducer.o
 __Hudata_acs 0 0 ABS 0 udata_acs -
 __Htrans_code 0 0 ABS 0 trans_code -
 __Ludata_acs 0 0 ABS 0 udata_acs -

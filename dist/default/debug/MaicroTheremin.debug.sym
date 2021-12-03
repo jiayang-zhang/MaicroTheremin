@@ -83,7 +83,7 @@ trans_code 1FE9A 1FF01 CODE 1FE9A 0
 delay_code 1FE68 1FE99 CODE 1FE68 0
 sig_code 1FE38 1FE67 CODE 1FE38 0
 %locals
-build/default/production/main.o
+build/default/debug/main.o
 C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\proc\\pic18f87k22.inc
 main.s
 11 0 0 CODE 0
@@ -98,9 +98,9 @@ main.s
 36 114 0 CODE 0
 38 118 0 CODE 0
 39 11A 0 CODE 0
-build/default/production/config.o
+build/default/debug/config.o
 C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\proc\\pic18f87k22.inc
-build/default/production/lcd.o
+build/default/debug/lcd.o
 C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\proc\\pic18f87k22.inc
 lcd.s
 18 1FF02 0 CODE 0
@@ -207,7 +207,7 @@ lcd.s
 138 1FFFA 0 CODE 0
 139 1FFFC 0 CODE 0
 140 1FFFE 0 CODE 0
-build/default/production/delay.o
+build/default/debug/delay.o
 C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\proc\\pic18f87k22.inc
 delay.s
 14 1FE68 0 CODE 0
@@ -233,7 +233,7 @@ delay.s
 43 1FE94 0 CODE 0
 44 1FE96 0 CODE 0
 45 1FE98 0 CODE 0
-build/default/production/signal.o
+build/default/debug/signal.o
 C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\proc\\pic18f87k22.inc
 signal.s
 9 1FE38 0 CODE 0
@@ -256,7 +256,7 @@ signal.s
 47 1FE62 0 CODE 0
 48 1FE64 0 CODE 0
 52 1FE66 0 CODE 0
-build/default/production/transducer.o
+build/default/debug/transducer.o
 C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\proc\\pic18f87k22.inc
 transducer.s
 23 1FE9A 0 CODE 0

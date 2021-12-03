@@ -7,7 +7,7 @@ delay_cnt_low:	ds  1
 delay_cnt_high:	ds  1
 
     
-psect	code, abs
+psect	delay_code, class=CODE
 
 ; ===================== x4us delay function ==================================
 delay_x4us:		    ; delay given in chunks of 4 microsecond in W
@@ -22,6 +22,7 @@ delay_x4us:		    ; delay given in chunks of 4 microsecond in W
 	return
 	
 ; ===================== x1us delay function ==================================	
+	
 delay_x1us:		    ; delay given in chunks of 1 microsecond in W
 	movwf	delay_cnt_low, A	; now need to multiply by 4
 	swapf   delay_cnt_low, F, A	; swap nibbles
@@ -42,3 +43,5 @@ lp1:	decf 	delay_cnt_low, F, A	; no carry when 0x00 -> 0xff
 	subwfb 	delay_cnt_high, F, A	; no carry when 0x00 -> 0xff
 	bc 	lp1		; carry, then loop again
 	return			; carry reset so return
+	
+end
