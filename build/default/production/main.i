@@ -10961,7 +10961,7 @@ ENDM
 
 ;extrn LCD_Setup, LCD_Write_Message, LCD_Write_Instruction, LCD_Send_Byte_D
 extrn delay_x4us, delay_x1us
-extrn signal_setup, pwm, microtone
+extrn signal_setup, pwm_c4, microtone
 extrn transducer_setup, trans_get, sensor_clock01, sensor_clock02
 
 
@@ -10977,24 +10977,30 @@ setup:
  bcf ((EECON1) and 0FFh), 6, a ; point to Flash program memory
  bsf ((EECON1) and 0FFh), 7, a ; access Flash program memory
 
-; ; set port as output ; output=0 input=1
-
-
-
+ ; set port as output ; output=0 input=1
  call signal_setup
  call transducer_setup
 
-; call LCD_Setup ; setup LCD
+ ; call LCD_Setup ; setup LCD
  goto start
 
 start:
- call trans_get
+ ; call trans_get
+ ; call pwm
+ ; after some cycles, stop
+ ; repeat
 
-; call pwm
 
+; call trans_get
+
+; movf sensor_clock01, w, A ; number does not get updated. maybe working at
+; movwf 0x06, A
+
+
+; call pwm_c4 ; pwm is being branched so never reaches next line.
  call microtone
 
- bra start
+; bra start
  return
 
 
@@ -11007,6 +11013,5 @@ start:
 ; call LCD_Write_Instruction
 ; return
 ;
-
 
     end

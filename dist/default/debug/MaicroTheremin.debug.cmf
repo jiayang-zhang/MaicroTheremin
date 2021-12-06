@@ -12,7 +12,7 @@
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
 $build/default/debug/signal.o
-sig_code CODE 0 1FE38 1FE38 30 1
+sig_code CODE 0 1FE1E 1FE1E 3C 1
 $build/default/debug/config.o
 config CONFIG 4 300000 300000 E 1
 $build/default/debug/lcd.o
@@ -21,10 +21,10 @@ lcd_code CODE 0 1FF02 1FF02 FE 1
 $build/default/debug/transducer.o
 trans_code CODE 0 1FE9A 1FE9A 68 1
 $build/default/debug/main.o
-code CODE 0 0 0 11C 1
+code CODE 0 0 0 116 1
 config CONFIG 4 300000 300000 E 1
 $build/default/debug/delay.o
-delay_code CODE 0 1FE68 1FE68 32 1
+delay_code CODE 0 1FE5A 1FE5A 40 1
 udata_acs COMRAM 1 5 5 2 1
 # %UNUSED Section
 # This section enumerates the unused ranges of each CLASS. Each entry
@@ -44,21 +44,21 @@ BANK6 600-6FF 1
 BANK7 700-7FF 1
 BANK8 800-8FF 1
 BANK9 900-9FF 1
-CONST 11C-1FE37 1
+CONST 116-1FE1D 1
 IDLOC 200000-200007 1
-SMALLCONST 1000-1FE37 1
-CODE 11C-1FE37 1
+SMALLCONST 1000-1FE1D 1
+CODE 116-1FE1D 1
 BANK10 A00-AFF 1
 BANK11 B00-BFF 1
 BANK12 C00-CFF 1
 BANK13 D00-DFF 1
 BANK14 E00-EFF 1
 BANK15 F00-F15 1
-BIGRAM 11C-F15 1
+BIGRAM 116-F15 1
 COMRAM 7-5F 1
 EEDATA F00000-F003FF 1
 MEDIUMCONST 1000-FFFF 1
-MEDIUMCONST 11000-1FE37 1
+MEDIUMCONST 11000-1FE1D 1
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
 # The beginning of the section is indicated by %LINETAB.
@@ -73,26 +73,32 @@ MEDIUMCONST 11000-1FE37 1
 # All other numeric values are in decimal.
 %LINETAB
 $build/default/debug/signal.o
-1FE38 sig_code CODE >9:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE3A sig_code CODE >10:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE3C sig_code CODE >11:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE3E sig_code CODE >23:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE40 sig_code CODE >24:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE42 sig_code CODE >26:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE44 sig_code CODE >27:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE48 sig_code CODE >28:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE4A sig_code CODE >29:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE4E sig_code CODE >33:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE50 sig_code CODE >34:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE52 sig_code CODE >36:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE54 sig_code CODE >37:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE58 sig_code CODE >38:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE5A sig_code CODE >39:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE5E sig_code CODE >43:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE60 sig_code CODE >44:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE62 sig_code CODE >47:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE64 sig_code CODE >48:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE66 sig_code CODE >52:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE1E sig_code CODE >14:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE20 sig_code CODE >15:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE22 sig_code CODE >16:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE24 sig_code CODE >28:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE26 sig_code CODE >29:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE28 sig_code CODE >35:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE2A sig_code CODE >36:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE2E sig_code CODE >39:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE30 sig_code CODE >40:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE32 sig_code CODE >46:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE34 sig_code CODE >47:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE38 sig_code CODE >50:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE3A sig_code CODE >51:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE3C sig_code CODE >54:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE3E sig_code CODE >55:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE40 sig_code CODE >56:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE42 sig_code CODE >57:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE44 sig_code CODE >59:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE46 sig_code CODE >60:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE48 sig_code CODE >62:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE4A sig_code CODE >63:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE4C sig_code CODE >66:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE4E sig_code CODE >67:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE50 sig_code CODE >69:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE54 sig_code CODE >70:H:\microprocessor\project\MaicroTheremin\signal.s
+1FE58 sig_code CODE >72:H:\microprocessor\project\MaicroTheremin\signal.s
 $build/default/debug/lcd.o
 1FF02 lcd_code CODE >18:H:\microprocessor\project\MaicroTheremin\lcd.s
 1FF04 lcd_code CODE >19:H:\microprocessor\project\MaicroTheremin\lcd.s
@@ -250,37 +256,43 @@ $build/default/debug/main.o
 4 code CODE >14:H:\microprocessor\project\MaicroTheremin\main.s
 100 code CODE >18:H:\microprocessor\project\MaicroTheremin\main.s
 102 code CODE >19:H:\microprocessor\project\MaicroTheremin\main.s
-104 code CODE >25:H:\microprocessor\project\MaicroTheremin\main.s
-108 code CODE >26:H:\microprocessor\project\MaicroTheremin\main.s
-10C code CODE >29:H:\microprocessor\project\MaicroTheremin\main.s
-110 code CODE >32:H:\microprocessor\project\MaicroTheremin\main.s
-114 code CODE >36:H:\microprocessor\project\MaicroTheremin\main.s
-118 code CODE >38:H:\microprocessor\project\MaicroTheremin\main.s
-11A code CODE >39:H:\microprocessor\project\MaicroTheremin\main.s
+104 code CODE >22:H:\microprocessor\project\MaicroTheremin\main.s
+108 code CODE >23:H:\microprocessor\project\MaicroTheremin\main.s
+10C code CODE >26:H:\microprocessor\project\MaicroTheremin\main.s
+110 code CODE >42:H:\microprocessor\project\MaicroTheremin\main.s
+114 code CODE >45:H:\microprocessor\project\MaicroTheremin\main.s
 $build/default/debug/delay.o
-1FE68 delay_code CODE >14:H:\microprocessor\project\MaicroTheremin\delay.s
-1FE6A delay_code CODE >15:H:\microprocessor\project\MaicroTheremin\delay.s
-1FE6C delay_code CODE >16:H:\microprocessor\project\MaicroTheremin\delay.s
-1FE6E delay_code CODE >17:H:\microprocessor\project\MaicroTheremin\delay.s
-1FE70 delay_code CODE >18:H:\microprocessor\project\MaicroTheremin\delay.s
-1FE72 delay_code CODE >19:H:\microprocessor\project\MaicroTheremin\delay.s
-1FE74 delay_code CODE >20:H:\microprocessor\project\MaicroTheremin\delay.s
-1FE76 delay_code CODE >21:H:\microprocessor\project\MaicroTheremin\delay.s
-1FE7A delay_code CODE >22:H:\microprocessor\project\MaicroTheremin\delay.s
-1FE7C delay_code CODE >27:H:\microprocessor\project\MaicroTheremin\delay.s
-1FE7E delay_code CODE >28:H:\microprocessor\project\MaicroTheremin\delay.s
-1FE80 delay_code CODE >29:H:\microprocessor\project\MaicroTheremin\delay.s
-1FE82 delay_code CODE >30:H:\microprocessor\project\MaicroTheremin\delay.s
-1FE84 delay_code CODE >31:H:\microprocessor\project\MaicroTheremin\delay.s
-1FE86 delay_code CODE >32:H:\microprocessor\project\MaicroTheremin\delay.s
-1FE88 delay_code CODE >33:H:\microprocessor\project\MaicroTheremin\delay.s
-1FE8A delay_code CODE >34:H:\microprocessor\project\MaicroTheremin\delay.s
-1FE8E delay_code CODE >36:H:\microprocessor\project\MaicroTheremin\delay.s
-1FE90 delay_code CODE >41:H:\microprocessor\project\MaicroTheremin\delay.s
-1FE92 delay_code CODE >42:H:\microprocessor\project\MaicroTheremin\delay.s
-1FE94 delay_code CODE >43:H:\microprocessor\project\MaicroTheremin\delay.s
-1FE96 delay_code CODE >44:H:\microprocessor\project\MaicroTheremin\delay.s
-1FE98 delay_code CODE >45:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE5A delay_code CODE >14:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE5C delay_code CODE >15:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE5E delay_code CODE >16:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE60 delay_code CODE >17:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE62 delay_code CODE >18:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE64 delay_code CODE >19:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE66 delay_code CODE >20:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE68 delay_code CODE >21:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE6C delay_code CODE >22:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE6E delay_code CODE >27:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE70 delay_code CODE >29:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE72 delay_code CODE >30:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE74 delay_code CODE >31:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE76 delay_code CODE >32:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE78 delay_code CODE >33:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE7A delay_code CODE >35:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE7C delay_code CODE >36:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE7E delay_code CODE >37:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE80 delay_code CODE >38:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE82 delay_code CODE >39:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE84 delay_code CODE >41:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE86 delay_code CODE >42:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE88 delay_code CODE >43:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE8A delay_code CODE >45:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE8C delay_code CODE >46:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE8E delay_code CODE >47:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE90 delay_code CODE >52:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE92 delay_code CODE >53:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE94 delay_code CODE >54:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE96 delay_code CODE >55:H:\microprocessor\project\MaicroTheremin\delay.s
+1FE98 delay_code CODE >56:H:\microprocessor\project\MaicroTheremin\delay.s
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -310,14 +322,14 @@ __Hudata_bank6 0 0 ABS 0 udata_bank6 -
 __Hudata_bank7 0 0 ABS 0 udata_bank7 -
 __Hudata_bank8 0 0 ABS 0 udata_bank8 -
 __Hudata_bank9 0 0 ABS 0 udata_bank9 -
-pwm 1FE3E 0 CODE 0 sig_code build/default/debug/signal.o
 __Hlcd_code 0 0 ABS 0 lcd_code -
 __Hdelay_code 0 0 ABS 0 delay_code -
+pwm_c4 1FE24 0 CODE 0 sig_code build/default/debug/signal.o
 trans_get 1FEA2 0 CODE 0 trans_code build/default/debug/transducer.o
 __Ldelay_code 0 0 ABS 0 delay_code -
 __Lsig_code 0 0 ABS 0 sig_code -
 LCD_Send_Byte_D 1FF8E 0 CODE 0 lcd_code build/default/debug/lcd.o
-microtone 1FE62 0 CODE 0 sig_code build/default/debug/signal.o
+microtone 1FE3C 0 CODE 0 sig_code build/default/debug/signal.o
 __Hudata_bank10 0 0 ABS 0 udata_bank10 -
 __Hudata_bank11 0 0 ABS 0 udata_bank11 -
 __Hudata_bank12 0 0 ABS 0 udata_bank12 -
@@ -345,7 +357,7 @@ __Ludata_bank12 0 0 ABS 0 udata_bank12 -
 __Ludata_bank13 0 0 ABS 0 udata_bank13 -
 __Ludata_bank14 0 0 ABS 0 udata_bank14 -
 __Ludata_bank15 0 0 ABS 0 udata_bank15 -
-signal_setup 1FE38 0 CODE 0 sig_code build/default/debug/signal.o
+signal_setup 1FE1E 0 CODE 0 sig_code build/default/debug/signal.o
 __Lconfig 0 0 CONFIG 4 config -
 LCD_Write_Message 1FF64 0 CODE 0 lcd_code build/default/debug/lcd.o
 isa$std 1 0 ABS 0 - build/default/debug/main.o
@@ -354,8 +366,8 @@ __Lspace_0 0 0 ABS 0 - -
 __Lspace_1 0 0 ABS 0 - -
 __Lspace_3 0 0 ABS 0 - -
 __Lspace_4 0 0 ABS 0 - -
-delay_x1us 1FE7C 0 CODE 0 delay_code build/default/debug/delay.o
-delay_x4us 1FE68 0 CODE 0 delay_code build/default/debug/delay.o
+delay_x1us 1FE6E 0 CODE 0 delay_code build/default/debug/delay.o
+delay_x4us 1FE5A 0 CODE 0 delay_code build/default/debug/delay.o
 __Ludata_bank0 0 0 ABS 0 udata_bank0 -
 __Ludata_bank1 0 0 ABS 0 udata_bank1 -
 __Ludata_bank2 0 0 ABS 0 udata_bank2 -
@@ -395,9 +407,9 @@ __Ludata_acs 0 0 ABS 0 udata_acs -
 # and size are in units of delta. The file address is in units of bytes.
 # All other numeric quantities are in decimal.
 %SEGMENTS
-sig_code 0 1FE38 1FE38 30 1
+sig_code 0 1FE1E 1FE1E 3C 1
 trans_code 0 1FE9A 1FE9A 68 1
-delay_code 0 1FE68 1FE68 32 1
+delay_code 0 1FE5A 1FE5A 40 1
 udata_acs 1 0 0 7 1
 lcd_code 0 1FF02 1FF02 FE 1
 # %NOTES Section

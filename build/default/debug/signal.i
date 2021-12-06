@@ -10958,8 +10958,13 @@ ENDM
 # 5 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 2 3
 # 2 "signal.s" 2
 
-global signal_setup, pwm, microtone
+global signal_setup, pwm_c4, microtone
 extrn delay_x4us, delay_x1us, sensor_clock01, sensor_clock02
+
+
+psect data
+half_period_h: ds 1
+half_period_l: ds 1
 
 psect sig_code, class = CODE
 
@@ -10968,7 +10973,7 @@ signal_setup:
  movwf TRISD, A
  return
 
-pwm:
+pwm_c4:
  ; =================== note =================
  ; C4
  ; 250 delay_x4us
@@ -10981,34 +10986,47 @@ pwm:
  movlw 0x01
  movwf PORTD, A
 
- movlw 250 ; time period 250us for C4
- call delay_x4us
- movlw 228
- call delay_x4us
-; movlw 20
-; call delay_x1us
+; movlw 250 ; time period 250us for C4
+; call delay_x4us
+; movlw 228
+; call delay_x4us
+ movlw 10
+ call delay_x1us
+
 
  movlw 0x0
  movwf PORTD, A
 
- movlw 250 ; time period 250us for C4
- call delay_x4us
- movlw 228
- call delay_x4us
-; movlw 20
-; call delay_x1us
+; movlw 250 ; time period 250us for C4
+; call delay_x4us
+; movlw 228
+; call delay_x4us
+ movlw 10
+ call delay_x1us
 
- bra pwm
+
+ bra pwm_c4
  return
 
 microtone:
- movlw 11
- mulwf sensor_clock01
+ clrf PRODH
+ clrf PRODL
+ movlw 56
+ movwf half_period_l, A
 
-; nop
+ movlw 6
+ mulwf half_period_l ; PRODH: PRODL
+
+ movlw 0xDE
+ addwf PRODL, A
+ ; add carry bit to PRODH
+
+ movlw 0x01
+ addwfc PRODH, A
+
+ movff PRODL, 0x07, A
+ movff PRODH, 0x06, A
 
  return
-;
-
 
 end
