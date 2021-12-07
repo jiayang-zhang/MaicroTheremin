@@ -79,7 +79,7 @@ count_loop_1:
 
 	
 count_loop_init_2:	
-    	movlw	0x0			    ; 8-bits: count from 0 to 255
+    	movlw	0			    ; 8-bits: count from 0 to 255
 	movwf	sensor_clock02, A
 count_loop_2:
 	movff	sensor_clock02, PORTH, A	    ; check update frequency

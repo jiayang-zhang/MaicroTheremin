@@ -10958,13 +10958,16 @@ ENDM
 # 5 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 2 3
 # 2 "signal.s" 2
 
-global signal_setup, pwm_c4, microtone
+global signal_setup, microtone, pwm
 extrn delay_x4us, delay_x1us, sensor_clock01, sensor_clock02
 
 
-psect data
+psect udata_acs
 half_period_h: ds 1
 half_period_l: ds 1
+counter_256: ds 1
+counter_1us: ds 1
+counter_length: ds 1
 
 psect sig_code, class = CODE
 
@@ -11009,13 +11012,8 @@ pwm_c4:
  return
 
 microtone:
- clrf PRODH
- clrf PRODL
- movlw 56
- movwf half_period_l, A
-
  movlw 6
- mulwf half_period_l ; PRODH: PRODL
+ mulwf sensor_clock01 ; PRODH: PRODL
 
  movlw 0xDE
  addwf PRODL, A
@@ -11024,8 +11022,59 @@ microtone:
  movlw 0x01
  addwfc PRODH, A
 
- movff PRODL, 0x07, A
+ return
+
+pwm:
+; movlw 0x07
+; movwf PRODH, A
+; movlw 0x77
+; movwf PRODL, A
+
  movff PRODH, 0x06, A
+ movff PRODL, 0x07, A
+;
+; movlw 7
+; movwf counter_256, A
+; movlw 77
+; movwf counter_1us, A
+
+; movff PRODL, counter_1us, A
+ movlw 78
+ movwf counter_length, A
+
+pwm_loop:
+ movlw 0x01 ; time period for high
+ movwf PORTD, A
+
+ call loop_256
+ movf counter_1us, W, A
+ call delay_x1us
+
+
+ movlw 0x00 ; time period for low
+ movwf PORTD, A
+
+ call loop_256
+ movf counter_1us, W, A
+ call delay_x1us
+
+
+; decfsz counter_length, A ; one beat length
+; bra pwm_loop
+
+ return
+
+
+loop_256:
+; movlw 0
+; cpfsgt counter_256, A
+; return
+loop_256_inner:
+ movlw 64
+ call delay_x4us
+
+ decfsz counter_256, A
+ bra loop_256_inner
 
  return
 

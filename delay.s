@@ -7,7 +7,7 @@ delay_cnt_low:	ds  1
 delay_cnt_high:	ds  1
 
     
-psect	delay_code, class=CODE
+psect	delay_code, class = CODE
 
 ; ===================== x4us delay function ==================================
 delay_x4us:		    ; delay given in chunks of 4 microsecond in W
