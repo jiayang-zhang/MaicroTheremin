@@ -10981,19 +10981,15 @@ setup:
  call signal_setup
  call transducer_setup
 
- movlw 0x00
- movwf TRISB, A
-
  goto start
 
 start:
  call trans_get
 
  call microtone
-;
-; movff sensor_clock01, PORTB, A
+;;
+;; movff sensor_clock01, PORTB, A
  call pwm
-
 
 
 

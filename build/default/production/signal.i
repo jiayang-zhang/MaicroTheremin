@@ -10956,7 +10956,8 @@ stk_offset SET 0
 auto_size SET 0
 ENDM
 # 5 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 2 3
-# 2 "signal.s" 2
+# 1 "signal.s" 2
+
 
 global signal_setup, microtone, pwm
 extrn delay_x4us, delay_x1us, sensor_clock01, sensor_clock02
@@ -11040,7 +11041,7 @@ pwm:
 ; movwf counter_1us, A
 
 ; movff PRODL, counter_1us, A
- movlw 10
+ movlw 30
  movwf counter_length, A
 
 pwm_loop:

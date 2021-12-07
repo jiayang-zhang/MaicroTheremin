@@ -22,19 +22,21 @@ setup:
 	call	signal_setup
 	call	transducer_setup
 	
-	movlw	0x00
-	movwf	TRISB, A
-	
 	goto	start	
 	
 start:
 	call	trans_get
 	
-	call	microtone
-;	
-;	movff	sensor_clock01, PORTB, A
-	call	pwm
+	;call	trans_capture_pitch
+	;btfss	PIR1, CCP1IF
+	;call	microtone ;update freq if capture flag triggered
 	
+	
+	
+	call	microtone
+;;	
+;;	movff	sensor_clock01, PORTB, A
+	call	pwm	; waveform of choice
 
     
  

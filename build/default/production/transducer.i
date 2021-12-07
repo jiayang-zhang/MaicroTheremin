@@ -10956,7 +10956,8 @@ stk_offset SET 0
 auto_size SET 0
 ENDM
 # 5 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 2 3
-# 2 "transducer.s" 2
+# 1 "transducer.s" 2
+
 
 
 global transducer_setup, trans_get
@@ -10965,7 +10966,7 @@ global sensor_clock01, sensor_clock02
 
 extrn delay_x4us, delay_x1us
 
-psect data
+psect udata_acs
 sensor_clock01: ds 1
 sensor_clock02: ds 1
 
@@ -10978,41 +10979,59 @@ psect trans_code, class = CODE
 ; PORTH for sensor02 reading
 
 transducer_setup:
-     movlw 0x0
+     movlw 0
  movwf TRISF, A ; output
- movlw 0x0
+ movlw 0
  movwf TRISH, A ; output
+ return
+
+
+trans_capture_pitch:
+
+ MOVLW b'00000100'
+ MOVWF CCP1CON ;Capture Mode, every falling edge on ((PORTC) and 0FFh), 2, a
+ BSF STATUS,RP0 ;Bank 1
+ BSF TRISC,2 ;Make ((PORTC) and 0FFh), 2, a input
+ CLRF TRISB ;Make PORTB output
+ BCF STATUS,RP0 ;Bank 0
+ BSF T1CON,((T1CON) and 0FFh), 0, a
+
+
+
 
 trans_get:
  ; set port as output ; output=0 input=1
- movlw 0x00 ; high - 4us
+ movlw 0 ; high - 4us
  movwf TRISE, A
- movlw 0x00
- movwf TRISJ, A
-
  ; output 1 - to sensor
- movlw 0x01
+ movlw 1
  movwf PORTE, A
- movlw 0x01
+ movlw 1 ; output signal - 4us
+ call delay_x4us
+ ; output 0 - to sensor
+ movlw 0 ; for delay and reading the input
+ movwf PORTE, A
+ ; set port as input - read position
+ movlw 1
+ movwf TRISE, A
+ movlw 188 ; output signal - 4us
+ call delay_x4us
+ ; start the countdown
+ call count_loop_init_1
+
+
+ movlw 0
+ movwf TRISJ, A
+ movlw 1
  movwf PORTJ, A
  movlw 1 ; output signal - 4us
  call delay_x4us
-
- ; output 0 - to sensor
- movlw 0x00 ; for delay and reading the input
- movwf PORTE, A
- movlw 0x00
+ movlw 0
  movwf PORTJ, A
-
- ; set port as input - read position
- movlw 0x01
- movwf TRISE, A
- movlw 0x01
+ movlw 1
  movwf TRISJ, A
-
-
- ; start the countdown
- call count_loop_init_1
+ movlw 188 ; output signal - 4us
+ call delay_x4us
  call count_loop_init_2
 
 
@@ -11021,11 +11040,11 @@ trans_get:
 
 ; ===================== countdown function ==================================
 count_loop_init_1:
-     movlw 0 ; 8-bits: count from 0 to 255
+     movlw 256 ; 8-bits: count from 0 to 255
  movwf sensor_clock01, A
 count_loop_1:
  movff sensor_clock01, PORTF, A ; check update frequency
- incf sensor_clock01, A ; increment clock
+ decf sensor_clock01, A ; increment clock
 
  movlw 6 ; delay 24us
  call delay_x4us

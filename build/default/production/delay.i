@@ -10956,7 +10956,8 @@ stk_offset SET 0
 auto_size SET 0
 ENDM
 # 5 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 2 3
-# 2 "delay.s" 2
+# 1 "delay.s" 2
+
 
 global delay_x4us, delay_x1us
 
