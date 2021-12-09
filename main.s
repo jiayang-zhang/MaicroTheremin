@@ -2,7 +2,7 @@
  
 ;extrn	LCD_Setup, LCD_Write_Message, LCD_Write_Instruction, LCD_Send_Byte_D
 extrn	delay_x4us, delay_x1us
-extrn	signal_setup, microtone, pwm
+extrn	signal_setup, microtone, volume_update, pwm
 extrn	transducer_setup, trans_get, sensor_clock01, sensor_clock02
     
  
@@ -34,7 +34,7 @@ start:
 	
 	
 	call	microtone
-;;	
+	call	volume_update
 ;;	movff	sensor_clock01, PORTB, A
 	call	pwm	; waveform of choice
 

@@ -10986,17 +10986,19 @@ transducer_setup:
  return
 
 
-trans_capture_pitch:
-
- MOVLW b'00000100'
- MOVWF CCP1CON ;Capture Mode, every falling edge on ((PORTC) and 0FFh), 2, a
- BSF STATUS,RP0 ;Bank 1
- BSF TRISC,2 ;Make ((PORTC) and 0FFh), 2, a input
- CLRF TRISB ;Make PORTB output
- BCF STATUS,RP0 ;Bank 0
- BSF T1CON,((T1CON) and 0FFh), 0, a
-
-
+;trans_capture_pitch:
+;
+; movlw b'00000100'
+; movwf CCP1CON ;Capture Mode, every falling edge on ((PORTC) and 0FFh), 2, a
+; movlw b'00110100'
+; movwf T1CON ;Capture Mode, every falling edge on ((PORTC) and 0FFh), 2, a
+; bsf STATUS,RP0 ;Bank 1
+; bsf TRISC,2 ;Make ((PORTC) and 0FFh), 2, a input
+; clrf TRISB ;Make PORTB output
+;; bcf STATUS,RP0 ;Bank 0
+;; bsf T1CON,((T1CON) and 0FFh), 0, a
+; return
+;
 
 
 trans_get:
@@ -11044,9 +11046,10 @@ count_loop_init_1:
  movwf sensor_clock01, A
 count_loop_1:
  movff sensor_clock01, PORTF, A ; check update frequency
- decf sensor_clock01, A ; increment clock
+ dcfsnz sensor_clock01, A ; increment clock
+ return
 
- movlw 6 ; delay 24us
+ movlw 2 ; delay 24us
  call delay_x4us
 
  movlw 0
@@ -11056,13 +11059,14 @@ count_loop_1:
 
 
 count_loop_init_2:
-     movlw 0 ; 8-bits: count from 0 to 255
+     movlw 256 ; 8-bits: count from 0 to 255
  movwf sensor_clock02, A
 count_loop_2:
- movff sensor_clock02, PORTH, A ; check update frequency
- incf sensor_clock02, A ; increment clock
+; movff sensor_clock02, PORTH, A ; check update frequency
+ dcfsnz sensor_clock02, A ; increment clock
+ return
 
- movlw 6
+ movlw 2
  call delay_x4us
 
  movlw 0

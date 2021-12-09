@@ -1,6 +1,6 @@
 #include <xc.inc>
 
-global	signal_setup, microtone, pwm
+global	signal_setup, microtone, volume_update, pwm
 extrn	delay_x4us, delay_x1us, sensor_clock01, sensor_clock02
 
 
@@ -69,10 +69,25 @@ microtone:
 	
 	return 
 
+volume_update:
+    
+	movff	sensor_clock02, PORTH, A
+	return
+
+	
+cycle_count:
+    
+	
+	
+	
+	
 pwm:	
 
-	movlw	30
+	movlw	50
 	movwf	counter_length, A
+	
+	
+	
 	
 pwm_loop:
 	movlw	0x01		     ; time period for high

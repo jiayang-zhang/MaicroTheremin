@@ -10961,7 +10961,7 @@ ENDM
 
 ;extrn LCD_Setup, LCD_Write_Message, LCD_Write_Instruction, LCD_Send_Byte_D
 extrn delay_x4us, delay_x1us
-extrn signal_setup, microtone, pwm
+extrn signal_setup, microtone, volume_update, pwm
 extrn transducer_setup, trans_get, sensor_clock01, sensor_clock02
 
 
@@ -10986,10 +10986,16 @@ setup:
 start:
  call trans_get
 
+ ;call trans_capture_pitch
+ ;btfss PIR1, ((PIR3) and 0FFh), 1, a
+ ;call microtone ;update freq if capture flag triggered
+
+
+
  call microtone
-;;
+ call volume_update
 ;; movff sensor_clock01, PORTB, A
- call pwm
+ call pwm ; waveform of choice
 
 
 
