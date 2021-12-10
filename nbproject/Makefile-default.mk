@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.s config.s lcd.s delay.s signal.s transducer.s maths.s
+SOURCEFILES_QUOTED_IF_SPACED=main.s config.s lcd.s delay.s signal.s transducer.s maths.s interrupts.s
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/config.o ${OBJECTDIR}/lcd.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/signal.o ${OBJECTDIR}/transducer.o ${OBJECTDIR}/maths.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/config.o.d ${OBJECTDIR}/lcd.o.d ${OBJECTDIR}/delay.o.d ${OBJECTDIR}/signal.o.d ${OBJECTDIR}/transducer.o.d ${OBJECTDIR}/maths.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/config.o ${OBJECTDIR}/lcd.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/signal.o ${OBJECTDIR}/transducer.o ${OBJECTDIR}/maths.o ${OBJECTDIR}/interrupts.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/config.o.d ${OBJECTDIR}/lcd.o.d ${OBJECTDIR}/delay.o.d ${OBJECTDIR}/signal.o.d ${OBJECTDIR}/transducer.o.d ${OBJECTDIR}/maths.o.d ${OBJECTDIR}/interrupts.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/config.o ${OBJECTDIR}/lcd.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/signal.o ${OBJECTDIR}/transducer.o ${OBJECTDIR}/maths.o
+OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/config.o ${OBJECTDIR}/lcd.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/signal.o ${OBJECTDIR}/transducer.o ${OBJECTDIR}/maths.o ${OBJECTDIR}/interrupts.o
 
 # Source Files
-SOURCEFILES=main.s config.s lcd.s delay.s signal.s transducer.s maths.s
+SOURCEFILES=main.s config.s lcd.s delay.s signal.s transducer.s maths.s interrupts.s
 
 
 
@@ -150,6 +150,14 @@ ${OBJECTDIR}/maths.o: maths.s  nbproject/Makefile-${CND_CONF}.mk
 	maths.s \
 	 -misa=std -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -fmax-errors=20 -mwarn=0 -xassembler-with-cpp
 	
+${OBJECTDIR}/interrupts.o: interrupts.s  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/interrupts.o 
+	${MP_AS} -mcpu=PIC18F87K22 -c \
+	-o ${OBJECTDIR}/interrupts.o \
+	interrupts.s \
+	 -misa=std -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -fmax-errors=20 -mwarn=0 -xassembler-with-cpp
+	
 else
 ${OBJECTDIR}/main.o: main.s  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
@@ -205,6 +213,14 @@ ${OBJECTDIR}/maths.o: maths.s  nbproject/Makefile-${CND_CONF}.mk
 	${MP_AS} -mcpu=PIC18F87K22 -c \
 	-o ${OBJECTDIR}/maths.o \
 	maths.s \
+	 -misa=std -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -fmax-errors=20 -mwarn=0 -xassembler-with-cpp
+	
+${OBJECTDIR}/interrupts.o: interrupts.s  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/interrupts.o 
+	${MP_AS} -mcpu=PIC18F87K22 -c \
+	-o ${OBJECTDIR}/interrupts.o \
+	interrupts.s \
 	 -misa=std -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -fmax-errors=20 -mwarn=0 -xassembler-with-cpp
 	
 endif

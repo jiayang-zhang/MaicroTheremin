@@ -7,6 +7,13 @@ extrn	transducer_setup, trans_get, sensor_clock01, sensor_clock02
     
     
 psect	code, abs
+
+rst:	org	0x0
+	bra	setup
+	
+interrupt:
+	
+	org	0x8
 	
 	
 main:
