@@ -10978,7 +10978,7 @@ psect sig_code, class = CODE
 signal_setup:
  movlw 0x0
  movwf TRISD, A
- movlw 0x01
+ movlw 0x00
  movwf counter_ref_high
  movlw 0x00
  movwf counter_ref_low
@@ -11036,6 +11036,95 @@ microtone:
  movff PRODH, half_period_h, A
  movff PRODL, half_period_l, A
 
+
+ return
+
+
+
+
+volume_update:
+; movlw 0xff
+; movwf PORTH, A
+ movff sensor_clock02, PORTH, A
+ return
+
+
+cycle_count:
+; movff half_period_h, ARG1H
+; movff half_period_l, ARG1L
+;
+; movlw 0x1B
+; movwf ARG2L
+; movlw 0x00
+; movwf ARG2H
+;
+; call MUL16x16
+;
+; movff counter_ref_low, dummy_cr_low
+; movff counter_ref_high, dummy_cr_high
+;
+; movf RES1, W, A
+; subwf dummy_cr_low, A
+;
+; movf RES2, W, A
+; subwfb dummy_cr_high, A
+
+ movff counter_ref_high, RES2, A
+ movff counter_ref_low, RES1, A
+
+; movff dummy_cr_low, PORTB, A
+
+ return
+
+
+pwm:
+ call cycle_count
+ movlw 30
+ movwf counter_ref_low
+
+pwm_loop:
+ movlw 0x01 ; time period for high
+ movwf PORTD, A
+
+ call loop_256
+ movf half_period_l, W, A
+ call delay_x1us
+
+
+ movlw 0x00 ; time period for low
+ movwf PORTD, A
+
+ call loop_256
+ movf half_period_l, W, A
+ call delay_x1us
+
+ decfsz counter_ref_low, A
+ bra pwm_loop
+ return
+
+ decfsz RES1, A ; one beat length
+ bra pwm_loop
+
+ movlw 0x0
+ cpfseq RES2
+ return
+
+ decf RES2, A
+ movlw 128
+ movwf RES1, A
+ bra pwm_loop
+
+
+
+loop_256:
+ movff half_period_h, dummy_256, A
+
+loop_256_inner:
+ movlw 64
+ call delay_x4us
+
+ decfsz dummy_256, A
+ bra loop_256_inner
 
  return
 
@@ -11149,90 +11238,5 @@ pentatone:
 
 
  return
-
-
-volume_update:
- movlw 0xff
- movwf PORTH, A
-; movff sensor_clock02, PORTH, A
- return
-
-
-cycle_count:
- movff half_period_h, ARG1H
- movff half_period_l, ARG1L
-
- movlw 0x1B
- movwf ARG2L
- movlw 0x00
- movwf ARG2H
-
- call MUL16x16
-
- movff counter_ref_low, dummy_cr_low
- movff counter_ref_high, dummy_cr_high
-
- movf RES1, W, A
- subwf dummy_cr_low, A
-
- movf RES2, W, A
- subwfb dummy_cr_high, A
-
- movff dummy_cr_high, RES2, A
- movff dummy_cr_low, RES1, A
-
- movff dummy_cr_low, PORTB, A
-
- return
-
-
-pwm:
- call cycle_count
-pwm_loop:
- movlw 0x01 ; time period for high
- movwf PORTD, A
-
- call loop_256
- movf half_period_l, W, A
- call delay_x1us
-
-
- movlw 0x00 ; time period for low
- movwf PORTD, A
-
- call loop_256
- movf half_period_l, W, A
- call delay_x1us
-
-
- decfsz RES1, A ; one beat length
- bra pwm_loop
-
- movlw 0x00
- cpfseq RES2
- return
-
- decf RES2, A
- movlw 128
- movwf RES1, A
- bra pwm_loop
-
- return
-
-
-
-loop_256:
- movff half_period_h, dummy_256, A
-
-loop_256_inner:
- movlw 64
- call delay_x4us
-
- decfsz dummy_256, A
- bra loop_256_inner
-
- return
-
-
 
 end

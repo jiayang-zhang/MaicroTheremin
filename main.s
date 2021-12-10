@@ -7,6 +7,8 @@ extrn	transducer_setup, trans_get, sensor_clock01, sensor_clock02
     
     
 psect	code, abs
+	
+	
 main:
 	org	0x0
 	goto	setup
@@ -33,8 +35,8 @@ start:
 	
 	
 	call	microtone
-;	call	pentatone
-	call	volume_update
+	call	pentatone
+;	call	volume_update
 ;;;	movff	sensor_clock01, PORTB, A
 	call	pwm	; waveform of choice
 

@@ -10992,8 +10992,8 @@ start:
 
 
  call microtone
-; call pentatone
- call volume_update
+ call pentatone
+; call volume_update
 ;;; movff sensor_clock01, PORTB, A
  call pwm ; waveform of choice
 
