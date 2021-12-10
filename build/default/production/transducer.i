@@ -11022,19 +11022,19 @@ trans_get:
  call count_loop_init_1
 
 
- movlw 0
- movwf TRISJ, A
- movlw 1
- movwf PORTJ, A
- movlw 1 ; output signal - 4us
- call delay_x4us
- movlw 0
- movwf PORTJ, A
- movlw 1
- movwf TRISJ, A
- movlw 188 ; output signal - 4us
- call delay_x4us
- call count_loop_init_2
+; movlw 0
+; movwf TRISJ, A
+; movlw 1
+; movwf PORTJ, A
+; movlw 1 ; output signal - 4us
+; call delay_x4us
+; movlw 0
+; movwf PORTJ, A
+; movlw 1
+; movwf TRISJ, A
+; movlw 188 ; output signal - 4us
+; call delay_x4us
+; call count_loop_init_2
 
 
  return

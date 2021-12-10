@@ -10961,10 +10961,8 @@ ENDM
 
 ;extrn LCD_Setup, LCD_Write_Message, LCD_Write_Instruction, LCD_Send_Byte_D
 extrn delay_x4us, delay_x1us
-extrn signal_setup, microtone, volume_update, pwm
+extrn signal_setup, microtone, pentatone, volume_update, pwm
 extrn transducer_setup, trans_get, sensor_clock01, sensor_clock02
-
-extrn MUL16x16, ARG1H, ARG1L, ARG2H, ARG2L, RES3, RES2, RES1, RES0
 
 
 psect code, abs
@@ -10986,9 +10984,6 @@ setup:
  goto start
 
 start:
-
-
-
  call trans_get
 
  ;call trans_capture_pitch
@@ -10997,6 +10992,7 @@ start:
 
 
  call microtone
+; call pentatone
  call volume_update
 ;;; movff sensor_clock01, PORTB, A
  call pwm ; waveform of choice

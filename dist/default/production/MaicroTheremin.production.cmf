@@ -12,25 +12,25 @@
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
 $build/default/production/transducer.o
-trans_code CODE 0 1FDEA 1FDEA 7C 1
-udata_acs COMRAM 1 12 12 2 1
+trans_code CODE 0 1FD54 1FD54 5C 1
+udata_acs COMRAM 1 14 14 2 1
 $build/default/production/maths.o
-maths_code CODE 0 1FD70 1FD70 3A 1
+maths_code CODE 0 1FCDA 1FCDA 3A 1
 udata_acs COMRAM 1 0 0 8 1
 $build/default/production/signal.o
-sig_code CODE 0 1FE66 1FE66 9C 1
-udata_acs COMRAM 1 8 8 5 1
+sig_code CODE 0 1FEAE 1FEAE 152 1
+udata_acs COMRAM 1 8 8 7 1
 $build/default/production/main.o
 code CODE 0 0 0 124 1
 config CONFIG 4 300000 300000 E 1
 $build/default/production/config.o
 config CONFIG 4 300000 300000 E 1
 $build/default/production/lcd.o
-udata_acs COMRAM 1 D D 5 1
-lcd_code CODE 0 1FF02 1FF02 FE 1
+udata_acs COMRAM 1 F F 5 1
+lcd_code CODE 0 1FDB0 1FDB0 FE 1
 $build/default/production/delay.o
-delay_code CODE 0 1FDAA 1FDAA 40 1
-udata_acs COMRAM 1 14 14 2 1
+delay_code CODE 0 1FD14 1FD14 40 1
+udata_acs COMRAM 1 16 16 2 1
 # %UNUSED Section
 # This section enumerates the unused ranges of each CLASS. Each entry
 # is described on a single line as follows:
@@ -49,10 +49,10 @@ BANK6 600-6FF 1
 BANK7 700-7FF 1
 BANK8 800-8FF 1
 BANK9 900-9FF 1
-CONST 124-1FD6F 1
+CONST 124-1FCD9 1
 IDLOC 200000-200007 1
-SMALLCONST 1000-1FD6F 1
-CODE 124-1FD6F 1
+SMALLCONST 1000-1FCD9 1
+CODE 124-1FCD9 1
 BANK10 A00-AFF 1
 BANK11 B00-BFF 1
 BANK12 C00-CFF 1
@@ -60,10 +60,10 @@ BANK13 D00-DFF 1
 BANK14 E00-EFF 1
 BANK15 F00-F15 1
 BIGRAM 124-F15 1
-COMRAM 16-5F 1
+COMRAM 18-5F 1
 EEDATA F00000-F003FF 1
 MEDIUMCONST 1000-FFFF 1
-MEDIUMCONST 11000-1FD6F 1
+MEDIUMCONST 11000-1FCD9 1
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
 # The beginning of the section is indicated by %LINETAB.
@@ -78,302 +78,375 @@ MEDIUMCONST 11000-1FD6F 1
 # All other numeric values are in decimal.
 %LINETAB
 $build/default/production/transducer.o
-1FDEA trans_code CODE >23:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FDEC trans_code CODE >24:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FDEE trans_code CODE >25:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FDF0 trans_code CODE >26:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FDF2 trans_code CODE >27:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FDF4 trans_code CODE >47:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FDF6 trans_code CODE >48:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FDF8 trans_code CODE >50:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FDFA trans_code CODE >51:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FDFC trans_code CODE >52:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FDFE trans_code CODE >53:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE02 trans_code CODE >55:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE04 trans_code CODE >56:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE06 trans_code CODE >58:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE08 trans_code CODE >59:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE0A trans_code CODE >60:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE0C trans_code CODE >61:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE10 trans_code CODE >63:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE14 trans_code CODE >66:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE16 trans_code CODE >67:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE18 trans_code CODE >68:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE1A trans_code CODE >69:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE1C trans_code CODE >70:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE1E trans_code CODE >71:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE22 trans_code CODE >72:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE24 trans_code CODE >73:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE26 trans_code CODE >74:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE28 trans_code CODE >75:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE2A trans_code CODE >76:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE2C trans_code CODE >77:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE30 trans_code CODE >78:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE34 trans_code CODE >81:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE36 trans_code CODE >86:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE38 trans_code CODE >87:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE3A trans_code CODE >89:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE3E trans_code CODE >90:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE40 trans_code CODE >91:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE42 trans_code CODE >93:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE44 trans_code CODE >94:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE48 trans_code CODE >96:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE4A trans_code CODE >97:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE4C trans_code CODE >98:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE4E trans_code CODE >99:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE50 trans_code CODE >103:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE52 trans_code CODE >104:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE54 trans_code CODE >107:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE56 trans_code CODE >108:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE58 trans_code CODE >110:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE5A trans_code CODE >111:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE5E trans_code CODE >113:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE60 trans_code CODE >114:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE62 trans_code CODE >115:H:\microprocessor\project\MaicroTheremin\transducer.s
-1FE64 trans_code CODE >117:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD54 trans_code CODE >23:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD56 trans_code CODE >24:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD58 trans_code CODE >25:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD5A trans_code CODE >26:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD5C trans_code CODE >27:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD5E trans_code CODE >47:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD60 trans_code CODE >48:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD62 trans_code CODE >50:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD64 trans_code CODE >51:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD66 trans_code CODE >52:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD68 trans_code CODE >53:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD6C trans_code CODE >55:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD6E trans_code CODE >56:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD70 trans_code CODE >58:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD72 trans_code CODE >59:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD74 trans_code CODE >60:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD76 trans_code CODE >61:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD7A trans_code CODE >63:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD7E trans_code CODE >81:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD80 trans_code CODE >86:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD82 trans_code CODE >87:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD84 trans_code CODE >89:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD88 trans_code CODE >90:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD8A trans_code CODE >91:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD8C trans_code CODE >93:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD8E trans_code CODE >94:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD92 trans_code CODE >96:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD94 trans_code CODE >97:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD96 trans_code CODE >98:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD98 trans_code CODE >99:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD9A trans_code CODE >103:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD9C trans_code CODE >104:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FD9E trans_code CODE >107:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FDA0 trans_code CODE >108:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FDA2 trans_code CODE >110:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FDA4 trans_code CODE >111:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FDA8 trans_code CODE >113:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FDAA trans_code CODE >114:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FDAC trans_code CODE >115:H:\microprocessor\project\MaicroTheremin\transducer.s
+1FDAE trans_code CODE >117:H:\microprocessor\project\MaicroTheremin\transducer.s
 $build/default/production/maths.o
-1FD70 maths_code CODE >29:H:\microprocessor\project\MaicroTheremin\maths.s
-1FD72 maths_code CODE >30:H:\microprocessor\project\MaicroTheremin\maths.s
-1FD74 maths_code CODE >32:H:\microprocessor\project\MaicroTheremin\maths.s
-1FD78 maths_code CODE >33:H:\microprocessor\project\MaicroTheremin\maths.s
-1FD7C maths_code CODE >35:H:\microprocessor\project\MaicroTheremin\maths.s
-1FD7E maths_code CODE >36:H:\microprocessor\project\MaicroTheremin\maths.s
-1FD80 maths_code CODE >38:H:\microprocessor\project\MaicroTheremin\maths.s
-1FD84 maths_code CODE >39:H:\microprocessor\project\MaicroTheremin\maths.s
-1FD88 maths_code CODE >41:H:\microprocessor\project\MaicroTheremin\maths.s
-1FD8A maths_code CODE >42:H:\microprocessor\project\MaicroTheremin\maths.s
-1FD8C maths_code CODE >44:H:\microprocessor\project\MaicroTheremin\maths.s
-1FD8E maths_code CODE >45:H:\microprocessor\project\MaicroTheremin\maths.s
-1FD90 maths_code CODE >46:H:\microprocessor\project\MaicroTheremin\maths.s
-1FD92 maths_code CODE >47:H:\microprocessor\project\MaicroTheremin\maths.s
-1FD94 maths_code CODE >48:H:\microprocessor\project\MaicroTheremin\maths.s
-1FD96 maths_code CODE >49:H:\microprocessor\project\MaicroTheremin\maths.s
-1FD98 maths_code CODE >51:H:\microprocessor\project\MaicroTheremin\maths.s
-1FD9A maths_code CODE >52:H:\microprocessor\project\MaicroTheremin\maths.s
-1FD9C maths_code CODE >54:H:\microprocessor\project\MaicroTheremin\maths.s
-1FD9E maths_code CODE >55:H:\microprocessor\project\MaicroTheremin\maths.s
-1FDA0 maths_code CODE >56:H:\microprocessor\project\MaicroTheremin\maths.s
-1FDA2 maths_code CODE >57:H:\microprocessor\project\MaicroTheremin\maths.s
-1FDA4 maths_code CODE >58:H:\microprocessor\project\MaicroTheremin\maths.s
-1FDA6 maths_code CODE >59:H:\microprocessor\project\MaicroTheremin\maths.s
-1FDA8 maths_code CODE >61:H:\microprocessor\project\MaicroTheremin\maths.s
+1FCDA maths_code CODE >29:H:\microprocessor\project\MaicroTheremin\maths.s
+1FCDC maths_code CODE >30:H:\microprocessor\project\MaicroTheremin\maths.s
+1FCDE maths_code CODE >32:H:\microprocessor\project\MaicroTheremin\maths.s
+1FCE2 maths_code CODE >33:H:\microprocessor\project\MaicroTheremin\maths.s
+1FCE6 maths_code CODE >35:H:\microprocessor\project\MaicroTheremin\maths.s
+1FCE8 maths_code CODE >36:H:\microprocessor\project\MaicroTheremin\maths.s
+1FCEA maths_code CODE >38:H:\microprocessor\project\MaicroTheremin\maths.s
+1FCEE maths_code CODE >39:H:\microprocessor\project\MaicroTheremin\maths.s
+1FCF2 maths_code CODE >41:H:\microprocessor\project\MaicroTheremin\maths.s
+1FCF4 maths_code CODE >42:H:\microprocessor\project\MaicroTheremin\maths.s
+1FCF6 maths_code CODE >44:H:\microprocessor\project\MaicroTheremin\maths.s
+1FCF8 maths_code CODE >45:H:\microprocessor\project\MaicroTheremin\maths.s
+1FCFA maths_code CODE >46:H:\microprocessor\project\MaicroTheremin\maths.s
+1FCFC maths_code CODE >47:H:\microprocessor\project\MaicroTheremin\maths.s
+1FCFE maths_code CODE >48:H:\microprocessor\project\MaicroTheremin\maths.s
+1FD00 maths_code CODE >49:H:\microprocessor\project\MaicroTheremin\maths.s
+1FD02 maths_code CODE >51:H:\microprocessor\project\MaicroTheremin\maths.s
+1FD04 maths_code CODE >52:H:\microprocessor\project\MaicroTheremin\maths.s
+1FD06 maths_code CODE >54:H:\microprocessor\project\MaicroTheremin\maths.s
+1FD08 maths_code CODE >55:H:\microprocessor\project\MaicroTheremin\maths.s
+1FD0A maths_code CODE >56:H:\microprocessor\project\MaicroTheremin\maths.s
+1FD0C maths_code CODE >57:H:\microprocessor\project\MaicroTheremin\maths.s
+1FD0E maths_code CODE >58:H:\microprocessor\project\MaicroTheremin\maths.s
+1FD10 maths_code CODE >59:H:\microprocessor\project\MaicroTheremin\maths.s
+1FD12 maths_code CODE >61:H:\microprocessor\project\MaicroTheremin\maths.s
 $build/default/production/signal.o
-1FE66 sig_code CODE >19:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE68 sig_code CODE >20:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE6A sig_code CODE >21:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE6C sig_code CODE >33:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE6E sig_code CODE >34:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE70 sig_code CODE >40:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE72 sig_code CODE >41:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE76 sig_code CODE >44:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE78 sig_code CODE >45:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE7A sig_code CODE >51:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE7C sig_code CODE >52:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE80 sig_code CODE >55:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE82 sig_code CODE >56:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE84 sig_code CODE >59:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE86 sig_code CODE >60:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE88 sig_code CODE >62:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE8A sig_code CODE >63:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE8C sig_code CODE >66:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE8E sig_code CODE >67:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE90 sig_code CODE >69:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE94 sig_code CODE >70:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE98 sig_code CODE >73:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE9A sig_code CODE >77:H:\microprocessor\project\MaicroTheremin\signal.s
-1FE9E sig_code CODE >78:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEA0 sig_code CODE >82:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEA4 sig_code CODE >83:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEA8 sig_code CODE >85:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEAA sig_code CODE >86:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEAC sig_code CODE >87:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEAE sig_code CODE >88:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEB0 sig_code CODE >90:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEB4 sig_code CODE >91:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEB6 sig_code CODE >92:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEB8 sig_code CODE >94:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEBA sig_code CODE >95:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEBC sig_code CODE >97:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEBE sig_code CODE >102:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEC0 sig_code CODE >103:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEC2 sig_code CODE >106:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEC4 sig_code CODE >107:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEC6 sig_code CODE >109:H:\microprocessor\project\MaicroTheremin\signal.s
-1FECA sig_code CODE >110:H:\microprocessor\project\MaicroTheremin\signal.s
-1FECC sig_code CODE >111:H:\microprocessor\project\MaicroTheremin\signal.s
-1FED0 sig_code CODE >114:H:\microprocessor\project\MaicroTheremin\signal.s
-1FED2 sig_code CODE >115:H:\microprocessor\project\MaicroTheremin\signal.s
-1FED4 sig_code CODE >117:H:\microprocessor\project\MaicroTheremin\signal.s
-1FED8 sig_code CODE >118:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEDA sig_code CODE >119:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEDE sig_code CODE >122:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEE0 sig_code CODE >123:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEE2 sig_code CODE >125:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEE4 sig_code CODE >126:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEE6 sig_code CODE >127:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEE8 sig_code CODE >129:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEEA sig_code CODE >130:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEEC sig_code CODE >131:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEEE sig_code CODE >132:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEF0 sig_code CODE >134:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEF2 sig_code CODE >139:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEF6 sig_code CODE >142:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEF8 sig_code CODE >143:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEFC sig_code CODE >145:H:\microprocessor\project\MaicroTheremin\signal.s
-1FEFE sig_code CODE >146:H:\microprocessor\project\MaicroTheremin\signal.s
-1FF00 sig_code CODE >148:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEAE sig_code CODE >20:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEB0 sig_code CODE >21:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEB2 sig_code CODE >22:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEB4 sig_code CODE >23:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEB6 sig_code CODE >24:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEB8 sig_code CODE >25:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEBA sig_code CODE >27:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEBC sig_code CODE >28:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEBE sig_code CODE >29:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEC0 sig_code CODE >41:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEC2 sig_code CODE >42:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEC4 sig_code CODE >48:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEC6 sig_code CODE >49:H:\microprocessor\project\MaicroTheremin\signal.s
+1FECA sig_code CODE >52:H:\microprocessor\project\MaicroTheremin\signal.s
+1FECC sig_code CODE >53:H:\microprocessor\project\MaicroTheremin\signal.s
+1FECE sig_code CODE >59:H:\microprocessor\project\MaicroTheremin\signal.s
+1FED0 sig_code CODE >60:H:\microprocessor\project\MaicroTheremin\signal.s
+1FED4 sig_code CODE >63:H:\microprocessor\project\MaicroTheremin\signal.s
+1FED6 sig_code CODE >64:H:\microprocessor\project\MaicroTheremin\signal.s
+1FED8 sig_code CODE >67:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEDA sig_code CODE >68:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEDC sig_code CODE >70:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEDE sig_code CODE >71:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEE0 sig_code CODE >74:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEE2 sig_code CODE >75:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEE4 sig_code CODE >77:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEE8 sig_code CODE >78:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEEC sig_code CODE >81:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEEE sig_code CODE >86:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEF0 sig_code CODE >87:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEF2 sig_code CODE >88:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEF4 sig_code CODE >89:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEF6 sig_code CODE >91:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEF8 sig_code CODE >92:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEFA sig_code CODE >93:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEFC sig_code CODE >96:H:\microprocessor\project\MaicroTheremin\signal.s
+1FEFE sig_code CODE >97:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF00 sig_code CODE >98:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF02 sig_code CODE >99:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF04 sig_code CODE >101:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF06 sig_code CODE >102:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF08 sig_code CODE >103:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF0A sig_code CODE >106:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF0C sig_code CODE >107:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF0E sig_code CODE >108:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF10 sig_code CODE >109:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF12 sig_code CODE >111:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF14 sig_code CODE >112:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF16 sig_code CODE >113:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF18 sig_code CODE >116:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF1A sig_code CODE >117:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF1C sig_code CODE >118:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF1E sig_code CODE >119:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF20 sig_code CODE >121:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF22 sig_code CODE >122:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF24 sig_code CODE >123:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF26 sig_code CODE >126:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF28 sig_code CODE >127:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF2A sig_code CODE >128:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF2C sig_code CODE >129:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF2E sig_code CODE >131:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF30 sig_code CODE >132:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF32 sig_code CODE >133:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF34 sig_code CODE >136:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF36 sig_code CODE >137:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF38 sig_code CODE >138:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF3A sig_code CODE >139:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF3C sig_code CODE >141:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF3E sig_code CODE >142:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF40 sig_code CODE >143:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF42 sig_code CODE >146:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF44 sig_code CODE >147:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF46 sig_code CODE >148:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF48 sig_code CODE >149:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF4A sig_code CODE >151:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF4C sig_code CODE >152:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF4E sig_code CODE >153:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF50 sig_code CODE >156:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF52 sig_code CODE >157:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF54 sig_code CODE >158:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF56 sig_code CODE >159:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF58 sig_code CODE >161:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF5A sig_code CODE >162:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF5C sig_code CODE >163:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF5E sig_code CODE >166:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF60 sig_code CODE >167:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF62 sig_code CODE >168:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF64 sig_code CODE >169:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF66 sig_code CODE >171:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF68 sig_code CODE >172:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF6A sig_code CODE >173:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF6C sig_code CODE >176:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF6E sig_code CODE >177:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF70 sig_code CODE >178:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF72 sig_code CODE >179:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF74 sig_code CODE >181:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF76 sig_code CODE >182:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF78 sig_code CODE >183:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF7A sig_code CODE >186:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF7C sig_code CODE >187:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF7E sig_code CODE >188:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF80 sig_code CODE >189:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF82 sig_code CODE >192:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF84 sig_code CODE >196:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF86 sig_code CODE >197:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF88 sig_code CODE >199:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF8A sig_code CODE >203:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF8E sig_code CODE >204:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF92 sig_code CODE >206:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF94 sig_code CODE >207:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF96 sig_code CODE >208:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF98 sig_code CODE >209:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF9A sig_code CODE >211:H:\microprocessor\project\MaicroTheremin\signal.s
+1FF9E sig_code CODE >213:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFA2 sig_code CODE >214:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFA6 sig_code CODE >216:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFA8 sig_code CODE >217:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFAA sig_code CODE >219:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFAC sig_code CODE >220:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFAE sig_code CODE >222:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFB2 sig_code CODE >223:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFB6 sig_code CODE >225:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFBA sig_code CODE >227:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFBC sig_code CODE >231:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFC0 sig_code CODE >233:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFC2 sig_code CODE >234:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFC4 sig_code CODE >236:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFC8 sig_code CODE >237:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFCA sig_code CODE >238:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFCE sig_code CODE >241:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFD0 sig_code CODE >242:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFD2 sig_code CODE >244:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFD6 sig_code CODE >245:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFD8 sig_code CODE >246:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFDC sig_code CODE >249:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFDE sig_code CODE >250:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFE0 sig_code CODE >252:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFE2 sig_code CODE >253:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFE4 sig_code CODE >254:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFE6 sig_code CODE >256:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFE8 sig_code CODE >257:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFEA sig_code CODE >258:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFEC sig_code CODE >259:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFEE sig_code CODE >261:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFF0 sig_code CODE >266:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFF4 sig_code CODE >269:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFF6 sig_code CODE >270:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFFA sig_code CODE >272:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFFC sig_code CODE >273:H:\microprocessor\project\MaicroTheremin\signal.s
+1FFFE sig_code CODE >275:H:\microprocessor\project\MaicroTheremin\signal.s
 $build/default/production/main.o
-0 code CODE >13:H:\microprocessor\project\MaicroTheremin\main.s
-0 code CODE >14:H:\microprocessor\project\MaicroTheremin\main.s
-4 code CODE >16:H:\microprocessor\project\MaicroTheremin\main.s
-100 code CODE >20:H:\microprocessor\project\MaicroTheremin\main.s
-102 code CODE >21:H:\microprocessor\project\MaicroTheremin\main.s
-104 code CODE >24:H:\microprocessor\project\MaicroTheremin\main.s
-108 code CODE >25:H:\microprocessor\project\MaicroTheremin\main.s
-10C code CODE >27:H:\microprocessor\project\MaicroTheremin\main.s
-110 code CODE >33:H:\microprocessor\project\MaicroTheremin\main.s
-114 code CODE >40:H:\microprocessor\project\MaicroTheremin\main.s
-118 code CODE >41:H:\microprocessor\project\MaicroTheremin\main.s
-11C code CODE >43:H:\microprocessor\project\MaicroTheremin\main.s
-120 code CODE >47:H:\microprocessor\project\MaicroTheremin\main.s
-122 code CODE >48:H:\microprocessor\project\MaicroTheremin\main.s
+0 code CODE >11:H:\microprocessor\project\MaicroTheremin\main.s
+0 code CODE >12:H:\microprocessor\project\MaicroTheremin\main.s
+4 code CODE >14:H:\microprocessor\project\MaicroTheremin\main.s
+100 code CODE >18:H:\microprocessor\project\MaicroTheremin\main.s
+102 code CODE >19:H:\microprocessor\project\MaicroTheremin\main.s
+104 code CODE >22:H:\microprocessor\project\MaicroTheremin\main.s
+108 code CODE >23:H:\microprocessor\project\MaicroTheremin\main.s
+10C code CODE >25:H:\microprocessor\project\MaicroTheremin\main.s
+110 code CODE >28:H:\microprocessor\project\MaicroTheremin\main.s
+114 code CODE >35:H:\microprocessor\project\MaicroTheremin\main.s
+118 code CODE >37:H:\microprocessor\project\MaicroTheremin\main.s
+11C code CODE >39:H:\microprocessor\project\MaicroTheremin\main.s
+120 code CODE >43:H:\microprocessor\project\MaicroTheremin\main.s
+122 code CODE >44:H:\microprocessor\project\MaicroTheremin\main.s
 $build/default/production/lcd.o
-1FF02 lcd_code CODE >18:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF04 lcd_code CODE >19:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF06 lcd_code CODE >20:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF08 lcd_code CODE >21:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF0A lcd_code CODE >22:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF0E lcd_code CODE >23:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF10 lcd_code CODE >24:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF14 lcd_code CODE >25:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF16 lcd_code CODE >26:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF1A lcd_code CODE >27:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF1C lcd_code CODE >28:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF20 lcd_code CODE >29:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF22 lcd_code CODE >30:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF26 lcd_code CODE >31:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF28 lcd_code CODE >32:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF2C lcd_code CODE >33:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF2E lcd_code CODE >34:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF32 lcd_code CODE >35:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF34 lcd_code CODE >36:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF38 lcd_code CODE >37:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF3A lcd_code CODE >38:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF3E lcd_code CODE >39:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF40 lcd_code CODE >40:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF44 lcd_code CODE >41:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF46 lcd_code CODE >42:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF4A lcd_code CODE >43:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF4C lcd_code CODE >44:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF50 lcd_code CODE >45:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF52 lcd_code CODE >46:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF56 lcd_code CODE >47:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF58 lcd_code CODE >50:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF5C lcd_code CODE >51:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF5E lcd_code CODE >52:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF62 lcd_code CODE >53:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF64 lcd_code CODE >57:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF66 lcd_code CODE >59:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF68 lcd_code CODE >60:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF6C lcd_code CODE >61:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF6E lcd_code CODE >62:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF70 lcd_code CODE >63:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF72 lcd_code CODE >66:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF74 lcd_code CODE >67:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF76 lcd_code CODE >68:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF78 lcd_code CODE >69:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF7A lcd_code CODE >70:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF7C lcd_code CODE >71:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF80 lcd_code CODE >72:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF82 lcd_code CODE >73:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF84 lcd_code CODE >74:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF86 lcd_code CODE >75:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF88 lcd_code CODE >76:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF8C lcd_code CODE >77:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF8E lcd_code CODE >80:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF90 lcd_code CODE >81:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF92 lcd_code CODE >82:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF94 lcd_code CODE >83:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF96 lcd_code CODE >84:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF98 lcd_code CODE >85:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF9C lcd_code CODE >86:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FF9E lcd_code CODE >87:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFA0 lcd_code CODE >88:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFA2 lcd_code CODE >89:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFA4 lcd_code CODE >90:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFA8 lcd_code CODE >91:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFAA lcd_code CODE >92:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFAE lcd_code CODE >93:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFB0 lcd_code CODE >96:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFB2 lcd_code CODE >97:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFB4 lcd_code CODE >98:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFB6 lcd_code CODE >99:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFB8 lcd_code CODE >100:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFBA lcd_code CODE >101:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFBC lcd_code CODE >102:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFBE lcd_code CODE >103:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFC0 lcd_code CODE >104:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFC2 lcd_code CODE >105:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFC4 lcd_code CODE >106:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFC6 lcd_code CODE >107:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFC8 lcd_code CODE >108:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFCA lcd_code CODE >109:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFCC lcd_code CODE >110:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFCE lcd_code CODE >111:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFD0 lcd_code CODE >112:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFD2 lcd_code CODE >113:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFD4 lcd_code CODE >117:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFD6 lcd_code CODE >118:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFD8 lcd_code CODE >119:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFDC lcd_code CODE >120:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFDE lcd_code CODE >121:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFE0 lcd_code CODE >122:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFE2 lcd_code CODE >125:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFE4 lcd_code CODE >126:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFE6 lcd_code CODE >127:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFE8 lcd_code CODE >128:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFEA lcd_code CODE >129:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFEC lcd_code CODE >130:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFEE lcd_code CODE >131:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFF0 lcd_code CODE >132:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFF4 lcd_code CODE >133:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFF6 lcd_code CODE >136:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFF8 lcd_code CODE >137:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFFA lcd_code CODE >138:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFFC lcd_code CODE >139:H:\microprocessor\project\MaicroTheremin\lcd.s
-1FFFE lcd_code CODE >140:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDB0 lcd_code CODE >18:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDB2 lcd_code CODE >19:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDB4 lcd_code CODE >20:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDB6 lcd_code CODE >21:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDB8 lcd_code CODE >22:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDBC lcd_code CODE >23:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDBE lcd_code CODE >24:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDC2 lcd_code CODE >25:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDC4 lcd_code CODE >26:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDC8 lcd_code CODE >27:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDCA lcd_code CODE >28:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDCE lcd_code CODE >29:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDD0 lcd_code CODE >30:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDD4 lcd_code CODE >31:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDD6 lcd_code CODE >32:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDDA lcd_code CODE >33:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDDC lcd_code CODE >34:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDE0 lcd_code CODE >35:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDE2 lcd_code CODE >36:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDE6 lcd_code CODE >37:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDE8 lcd_code CODE >38:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDEC lcd_code CODE >39:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDEE lcd_code CODE >40:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDF2 lcd_code CODE >41:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDF4 lcd_code CODE >42:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDF8 lcd_code CODE >43:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDFA lcd_code CODE >44:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FDFE lcd_code CODE >45:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE00 lcd_code CODE >46:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE04 lcd_code CODE >47:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE06 lcd_code CODE >50:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE0A lcd_code CODE >51:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE0C lcd_code CODE >52:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE10 lcd_code CODE >53:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE12 lcd_code CODE >57:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE14 lcd_code CODE >59:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE16 lcd_code CODE >60:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE1A lcd_code CODE >61:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE1C lcd_code CODE >62:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE1E lcd_code CODE >63:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE20 lcd_code CODE >66:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE22 lcd_code CODE >67:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE24 lcd_code CODE >68:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE26 lcd_code CODE >69:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE28 lcd_code CODE >70:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE2A lcd_code CODE >71:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE2E lcd_code CODE >72:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE30 lcd_code CODE >73:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE32 lcd_code CODE >74:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE34 lcd_code CODE >75:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE36 lcd_code CODE >76:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE3A lcd_code CODE >77:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE3C lcd_code CODE >80:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE3E lcd_code CODE >81:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE40 lcd_code CODE >82:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE42 lcd_code CODE >83:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE44 lcd_code CODE >84:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE46 lcd_code CODE >85:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE4A lcd_code CODE >86:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE4C lcd_code CODE >87:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE4E lcd_code CODE >88:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE50 lcd_code CODE >89:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE52 lcd_code CODE >90:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE56 lcd_code CODE >91:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE58 lcd_code CODE >92:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE5C lcd_code CODE >93:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE5E lcd_code CODE >96:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE60 lcd_code CODE >97:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE62 lcd_code CODE >98:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE64 lcd_code CODE >99:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE66 lcd_code CODE >100:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE68 lcd_code CODE >101:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE6A lcd_code CODE >102:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE6C lcd_code CODE >103:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE6E lcd_code CODE >104:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE70 lcd_code CODE >105:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE72 lcd_code CODE >106:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE74 lcd_code CODE >107:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE76 lcd_code CODE >108:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE78 lcd_code CODE >109:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE7A lcd_code CODE >110:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE7C lcd_code CODE >111:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE7E lcd_code CODE >112:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE80 lcd_code CODE >113:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE82 lcd_code CODE >117:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE84 lcd_code CODE >118:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE86 lcd_code CODE >119:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE8A lcd_code CODE >120:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE8C lcd_code CODE >121:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE8E lcd_code CODE >122:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE90 lcd_code CODE >125:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE92 lcd_code CODE >126:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE94 lcd_code CODE >127:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE96 lcd_code CODE >128:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE98 lcd_code CODE >129:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE9A lcd_code CODE >130:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE9C lcd_code CODE >131:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FE9E lcd_code CODE >132:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FEA2 lcd_code CODE >133:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FEA4 lcd_code CODE >136:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FEA6 lcd_code CODE >137:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FEA8 lcd_code CODE >138:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FEAA lcd_code CODE >139:H:\microprocessor\project\MaicroTheremin\lcd.s
+1FEAC lcd_code CODE >140:H:\microprocessor\project\MaicroTheremin\lcd.s
 $build/default/production/delay.o
-1FDAA delay_code CODE >14:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDAC delay_code CODE >15:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDAE delay_code CODE >16:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDB0 delay_code CODE >17:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDB2 delay_code CODE >18:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDB4 delay_code CODE >19:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDB6 delay_code CODE >20:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDB8 delay_code CODE >21:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDBC delay_code CODE >22:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDBE delay_code CODE >27:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDC0 delay_code CODE >29:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDC2 delay_code CODE >30:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDC4 delay_code CODE >31:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDC6 delay_code CODE >32:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDC8 delay_code CODE >33:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDCA delay_code CODE >35:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDCC delay_code CODE >36:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDCE delay_code CODE >37:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDD0 delay_code CODE >38:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDD2 delay_code CODE >39:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDD4 delay_code CODE >41:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDD6 delay_code CODE >42:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDD8 delay_code CODE >43:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDDA delay_code CODE >45:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDDC delay_code CODE >46:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDDE delay_code CODE >47:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDE0 delay_code CODE >52:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDE2 delay_code CODE >53:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDE4 delay_code CODE >54:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDE6 delay_code CODE >55:H:\microprocessor\project\MaicroTheremin\delay.s
-1FDE8 delay_code CODE >56:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD14 delay_code CODE >14:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD16 delay_code CODE >15:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD18 delay_code CODE >16:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD1A delay_code CODE >17:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD1C delay_code CODE >18:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD1E delay_code CODE >19:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD20 delay_code CODE >20:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD22 delay_code CODE >21:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD26 delay_code CODE >22:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD28 delay_code CODE >27:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD2A delay_code CODE >29:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD2C delay_code CODE >30:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD2E delay_code CODE >31:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD30 delay_code CODE >32:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD32 delay_code CODE >33:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD34 delay_code CODE >35:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD36 delay_code CODE >36:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD38 delay_code CODE >37:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD3A delay_code CODE >38:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD3C delay_code CODE >39:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD3E delay_code CODE >41:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD40 delay_code CODE >42:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD42 delay_code CODE >43:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD44 delay_code CODE >45:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD46 delay_code CODE >46:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD48 delay_code CODE >47:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD4A delay_code CODE >52:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD4C delay_code CODE >53:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD4E delay_code CODE >54:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD50 delay_code CODE >55:H:\microprocessor\project\MaicroTheremin\delay.s
+1FD52 delay_code CODE >56:H:\microprocessor\project\MaicroTheremin\delay.s
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -386,11 +459,11 @@ $build/default/production/delay.o
 # was defined in a psect then <psect> will be "-". File-name
 # is the name of the object file in which the symbol was defined.
 %SYMTAB
-sensor_clock01 12 0 COMRAM 1 udata_acs build/default/production/transducer.o
-sensor_clock02 13 0 COMRAM 1 udata_acs build/default/production/transducer.o
+sensor_clock01 14 0 COMRAM 1 udata_acs build/default/production/transducer.o
+sensor_clock02 15 0 COMRAM 1 udata_acs build/default/production/transducer.o
 __Ltrans_code 0 0 ABS 0 trans_code -
 __Hspace_0 20000 0 ABS 0 - -
-__Hspace_1 16 0 ABS 0 - -
+__Hspace_1 18 0 ABS 0 - -
 __Hspace_3 0 0 ABS 0 - -
 __Hspace_4 60000E 0 ABS 0 - -
 __Hudata_bank0 0 0 ABS 0 udata_bank0 -
@@ -403,18 +476,19 @@ __Hudata_bank6 0 0 ABS 0 udata_bank6 -
 __Hudata_bank7 0 0 ABS 0 udata_bank7 -
 __Hudata_bank8 0 0 ABS 0 udata_bank8 -
 __Hudata_bank9 0 0 ABS 0 udata_bank9 -
-pwm 1FEBE 0 CODE 0 sig_code build/default/production/signal.o
+pwm 1FFBC 0 CODE 0 sig_code build/default/production/signal.o
 __Hlcd_code 0 0 ABS 0 lcd_code -
 ARG1H 0 0 COMRAM 1 udata_acs build/default/production/maths.o
 ARG1L 1 0 COMRAM 1 udata_acs build/default/production/maths.o
 ARG2H 2 0 COMRAM 1 udata_acs build/default/production/maths.o
 ARG2L 3 0 COMRAM 1 udata_acs build/default/production/maths.o
 __Hdelay_code 0 0 ABS 0 delay_code -
-trans_get 1FDF4 0 CODE 0 trans_code build/default/production/transducer.o
+trans_get 1FD5E 0 CODE 0 trans_code build/default/production/transducer.o
 __Ldelay_code 0 0 ABS 0 delay_code -
 __Lsig_code 0 0 ABS 0 sig_code -
-LCD_Send_Byte_D 1FF8E 0 CODE 0 lcd_code build/default/production/lcd.o
-microtone 1FE84 0 CODE 0 sig_code build/default/production/signal.o
+LCD_Send_Byte_D 1FE3C 0 CODE 0 lcd_code build/default/production/lcd.o
+pentatone 1FEEE 0 CODE 0 sig_code build/default/production/signal.o
+microtone 1FED8 0 CODE 0 sig_code build/default/production/signal.o
 __Hudata_bank10 0 0 ABS 0 udata_bank10 -
 __Hudata_bank11 0 0 ABS 0 udata_bank11 -
 __Hudata_bank12 0 0 ABS 0 udata_bank12 -
@@ -422,7 +496,7 @@ __Hudata_bank13 0 0 ABS 0 udata_bank13 -
 __Hudata_bank14 0 0 ABS 0 udata_bank14 -
 __Hudata_bank15 0 0 ABS 0 udata_bank15 -
 __Hsig_code 0 0 ABS 0 sig_code -
-LCD_Write_Instruction 1FF58 0 CODE 0 lcd_code build/default/production/lcd.o
+LCD_Write_Instruction 1FE06 0 CODE 0 lcd_code build/default/production/lcd.o
 isa$xinst 0 0 ABS 0 - build/default/production/main.o
 __Hedata 0 0 ABS 0 edata -
 __Hudata 0 0 ABS 0 udata -
@@ -438,7 +512,7 @@ RES1 6 0 COMRAM 1 udata_acs build/default/production/maths.o
 RES2 5 0 COMRAM 1 udata_acs build/default/production/maths.o
 RES3 4 0 COMRAM 1 udata_acs build/default/production/maths.o
 __S0 20000 0 ABS 0 - -
-__S1 16 0 ABS 0 - -
+__S1 18 0 ABS 0 - -
 __S3 0 0 ABS 0 - -
 __Ludata_bank10 0 0 ABS 0 udata_bank10 -
 __Ludata_bank11 0 0 ABS 0 udata_bank11 -
@@ -446,17 +520,17 @@ __Ludata_bank12 0 0 ABS 0 udata_bank12 -
 __Ludata_bank13 0 0 ABS 0 udata_bank13 -
 __Ludata_bank14 0 0 ABS 0 udata_bank14 -
 __Ludata_bank15 0 0 ABS 0 udata_bank15 -
-signal_setup 1FE66 0 CODE 0 sig_code build/default/production/signal.o
+signal_setup 1FEAE 0 CODE 0 sig_code build/default/production/signal.o
 __Lconfig 0 0 CONFIG 4 config -
-LCD_Write_Message 1FF64 0 CODE 0 lcd_code build/default/production/lcd.o
+LCD_Write_Message 1FE12 0 CODE 0 lcd_code build/default/production/lcd.o
 isa$std 1 0 ABS 0 - build/default/production/main.o
-LCD_Setup 1FF02 0 CODE 0 lcd_code build/default/production/lcd.o
+LCD_Setup 1FDB0 0 CODE 0 lcd_code build/default/production/lcd.o
 __Lspace_0 0 0 ABS 0 - -
 __Lspace_1 0 0 ABS 0 - -
 __Lspace_3 0 0 ABS 0 - -
 __Lspace_4 0 0 ABS 0 - -
-delay_x1us 1FDBE 0 CODE 0 delay_code build/default/production/delay.o
-delay_x4us 1FDAA 0 CODE 0 delay_code build/default/production/delay.o
+delay_x1us 1FD28 0 CODE 0 delay_code build/default/production/delay.o
+delay_x4us 1FD14 0 CODE 0 delay_code build/default/production/delay.o
 __Ludata_bank0 0 0 ABS 0 udata_bank0 -
 __Ludata_bank1 0 0 ABS 0 udata_bank1 -
 __Ludata_bank2 0 0 ABS 0 udata_bank2 -
@@ -467,12 +541,12 @@ __Ludata_bank6 0 0 ABS 0 udata_bank6 -
 __Ludata_bank7 0 0 ABS 0 udata_bank7 -
 __Ludata_bank8 0 0 ABS 0 udata_bank8 -
 __Ludata_bank9 0 0 ABS 0 udata_bank9 -
-MUL16x16 1FD70 0 CODE 0 maths_code build/default/production/maths.o
+MUL16x16 1FCDA 0 CODE 0 maths_code build/default/production/maths.o
 __Hmaths_code 0 0 ABS 0 maths_code -
-volume_update 1FE9A 0 CODE 0 sig_code build/default/production/signal.o
+volume_update 1FF84 0 CODE 0 sig_code build/default/production/signal.o
 __Llcd_code 0 0 ABS 0 lcd_code -
 __Lmaths_code 0 0 ABS 0 maths_code -
-transducer_setup 1FDEA 0 CODE 0 trans_code build/default/production/transducer.o
+transducer_setup 1FD54 0 CODE 0 trans_code build/default/production/transducer.o
 __Hudata_acs 0 0 ABS 0 udata_acs -
 __Htrans_code 0 0 ABS 0 trans_code -
 __Ludata_acs 0 0 ABS 0 udata_acs -
@@ -500,12 +574,12 @@ __Ludata_acs 0 0 ABS 0 udata_acs -
 # and size are in units of delta. The file address is in units of bytes.
 # All other numeric quantities are in decimal.
 %SEGMENTS
-sig_code 0 1FE66 1FE66 9C 1
-maths_code 0 1FD70 1FD70 3A 1
-trans_code 0 1FDEA 1FDEA 7C 1
-delay_code 0 1FDAA 1FDAA 40 1
-udata_acs 1 0 0 16 1
-lcd_code 0 1FF02 1FF02 FE 1
+sig_code 0 1FEAE 1FEAE 152 1
+maths_code 0 1FCDA 1FCDA 3A 1
+trans_code 0 1FD54 1FD54 5C 1
+delay_code 0 1FD14 1FD14 40 1
+udata_acs 1 0 0 18 1
+lcd_code 0 1FDB0 1FDB0 FE 1
 # %NOTES Section
 # This section contains data of all the note-psects.  The beginning of the section
 # is indicated by %NOTES. The first line indicates the name and decimal
