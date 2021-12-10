@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.s config.s lcd.s delay.s signal.s transducer.s
+SOURCEFILES_QUOTED_IF_SPACED=main.s config.s lcd.s delay.s signal.s transducer.s maths.s
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/config.o ${OBJECTDIR}/lcd.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/signal.o ${OBJECTDIR}/transducer.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/config.o.d ${OBJECTDIR}/lcd.o.d ${OBJECTDIR}/delay.o.d ${OBJECTDIR}/signal.o.d ${OBJECTDIR}/transducer.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/config.o ${OBJECTDIR}/lcd.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/signal.o ${OBJECTDIR}/transducer.o ${OBJECTDIR}/maths.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/config.o.d ${OBJECTDIR}/lcd.o.d ${OBJECTDIR}/delay.o.d ${OBJECTDIR}/signal.o.d ${OBJECTDIR}/transducer.o.d ${OBJECTDIR}/maths.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/config.o ${OBJECTDIR}/lcd.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/signal.o ${OBJECTDIR}/transducer.o
+OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/config.o ${OBJECTDIR}/lcd.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/signal.o ${OBJECTDIR}/transducer.o ${OBJECTDIR}/maths.o
 
 # Source Files
-SOURCEFILES=main.s config.s lcd.s delay.s signal.s transducer.s
+SOURCEFILES=main.s config.s lcd.s delay.s signal.s transducer.s maths.s
 
 
 
@@ -142,6 +142,14 @@ ${OBJECTDIR}/transducer.o: transducer.s  nbproject/Makefile-${CND_CONF}.mk
 	transducer.s \
 	 -misa=std -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -fmax-errors=20 -mwarn=0 -xassembler-with-cpp
 	
+${OBJECTDIR}/maths.o: maths.s  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/maths.o 
+	${MP_AS} -mcpu=PIC18F87K22 -c \
+	-o ${OBJECTDIR}/maths.o \
+	maths.s \
+	 -misa=std -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -fmax-errors=20 -mwarn=0 -xassembler-with-cpp
+	
 else
 ${OBJECTDIR}/main.o: main.s  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
@@ -189,6 +197,14 @@ ${OBJECTDIR}/transducer.o: transducer.s  nbproject/Makefile-${CND_CONF}.mk
 	${MP_AS} -mcpu=PIC18F87K22 -c \
 	-o ${OBJECTDIR}/transducer.o \
 	transducer.s \
+	 -misa=std -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -fmax-errors=20 -mwarn=0 -xassembler-with-cpp
+	
+${OBJECTDIR}/maths.o: maths.s  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/maths.o 
+	${MP_AS} -mcpu=PIC18F87K22 -c \
+	-o ${OBJECTDIR}/maths.o \
+	maths.s \
 	 -misa=std -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -fmax-errors=20 -mwarn=0 -xassembler-with-cpp
 	
 endif

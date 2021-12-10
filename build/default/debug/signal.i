@@ -10962,15 +10962,12 @@ ENDM
 global signal_setup, microtone, volume_update, pwm
 extrn delay_x4us, delay_x1us, sensor_clock01, sensor_clock02
 
-extrn MUL16x16, ARG1H, ARG1L, ARG2H, ARG2L, RES3, RES2, RES1, RES0
-
 
 psect udata_acs
 half_period_h: ds 1
 half_period_l: ds 1
 dummy_256: ds 1
 counter_length: ds 1
-count_256: ds 1
 
 psect sig_code, class = CODE
 
@@ -11038,28 +11035,18 @@ volume_update:
 
 
 cycle_count:
- movff half_period_h, ARG1H
- movff half_period_l, ARG1L
 
- movlw 0x2B
- movwf ARG2L
- movlw 0x00
- movwf ARG2H
 
- call MUL16x16
- movlw 0xAB
- addwf RES1, A
 
- movlw 0x01
- addwfc RES2, A
-
- return
 
 
 pwm:
 
  movlw 50
  movwf counter_length, A
+
+
+
 
 pwm_loop:
  movlw 0x01 ; time period for high
@@ -11077,21 +11064,10 @@ pwm_loop:
  movf half_period_l, W, A
  call delay_x1us
 
-
- decfsz RES1, A ; one beat length
- bra pwm_loop
-
- movlw 0x00
- cpfseq RES2
- return
-
- decf RES2, A
- movlw 256
- movwf RES1, A
+ decfsz counter_length, A ; one beat length
  bra pwm_loop
 
  return
-
 
 
 loop_256:
@@ -11105,7 +11081,5 @@ loop_256_inner:
  bra loop_256_inner
 
  return
-
-
 
 end

@@ -5,7 +5,7 @@ extrn	delay_x4us, delay_x1us
 extrn	signal_setup, microtone, volume_update, pwm
 extrn	transducer_setup, trans_get, sensor_clock01, sensor_clock02
     
- 
+    
 psect	code, abs
 main:
 	org	0x0
@@ -32,10 +32,9 @@ start:
 	;call	microtone ;update freq if capture flag triggered
 	
 	
-	
 	call	microtone
 	call	volume_update
-;;	movff	sensor_clock01, PORTB, A
+;;;	movff	sensor_clock01, PORTB, A
 	call	pwm	; waveform of choice
 
     

@@ -1,6 +1,6 @@
-# 1 "signal.s"
+# 1 "lcd.s"
 # 1 "<built-in>" 1
-# 1 "signal.s" 2
+# 1 "lcd.s" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 1 3
 
 
@@ -10956,156 +10956,147 @@ stk_offset SET 0
 auto_size SET 0
 ENDM
 # 5 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 2 3
-# 1 "signal.s" 2
+# 1 "lcd.s" 2
 
 
-global signal_setup, microtone, volume_update, pwm
-extrn delay_x4us, delay_x1us, sensor_clock01, sensor_clock02
+global LCD_Setup, LCD_Write_Message, LCD_Write_Instruction, LCD_Send_Byte_D
 
-extrn MUL16x16, ARG1H, ARG1L, ARG2H, ARG2L, RES3, RES2, RES1, RES0
+psect udata_acs ; named variables in access ram
+LCD_cnt_l: ds 1 ; reserve 1 byte for variable LCD_cnt_l
+LCD_cnt_h: ds 1 ; reserve 1 byte for variable LCD_cnt_h
+LCD_cnt_ms: ds 1 ; reserve 1 byte for ms counter
+LCD_tmp: ds 1 ; reserve 1 byte for temporary use
+LCD_counter: ds 1 ; reserve 1 byte for counting through nessage
 
+ LCD_E EQU 5 ; LCD enable bit
+     LCD_RS EQU 4 ; LCD register select bit
 
-psect udata_acs
-half_period_h: ds 1
-half_period_l: ds 1
-dummy_256: ds 1
-counter_length: ds 1
-count_256: ds 1
+psect lcd_code,class=CODE
 
-psect sig_code, class = CODE
-
-signal_setup:
- movlw 0x0
- movwf TRISD, A
+LCD_Setup:
+ clrf LATB, A
+ movlw 11000000B ; ((PORTB) and 0FFh), 0, a:5 all outputs
+ movwf TRISB, A
+ movlw 40
+ call LCD_delay_ms ; wait 40ms for LCD to start up properly
+ movlw 00110000B ; Function set 4-bit
+ call LCD_Send_Byte_I
+ movlw 10 ; wait 40us
+ call LCD_delay_x4us
+ movlw 00101000B ; 2 line display 5x8 dot characters
+ call LCD_Send_Byte_I
+ movlw 10 ; wait 40us
+ call LCD_delay_x4us
+ movlw 00101000B ; repeat, 2 line display 5x8 dot characters
+ call LCD_Send_Byte_I
+ movlw 10 ; wait 40us
+ call LCD_delay_x4us
+ movlw 00001111B ; display on, cursor on, blinking on
+ call LCD_Send_Byte_I
+ movlw 10 ; wait 40us
+ call LCD_delay_x4us
+ movlw 00000001B ; display clear
+ call LCD_Send_Byte_I
+ movlw 2 ; wait 2ms
+ call LCD_delay_ms
+ movlw 00000110B ; entry mode incr by 1 no shift
+ call LCD_Send_Byte_I
+ movlw 10 ; wait 40us
+ call LCD_delay_x4us
  return
 
-pwm_c4:
- ; =================== note =================
- ; C4
- ; 250 delay_x4us
- ; 228 delay_x4us
-
- ; C6
- ; 250 delay_x4us
- ; 228 delay_x4us
-
- movlw 0x01
- movwf PORTD, A
-
-; movlw 250 ; time period 250us for C4
-; call delay_x4us
-; movlw 228
-; call delay_x4us
- movlw 10
- call delay_x1us
-
-
- movlw 0x0
- movwf PORTD, A
-
-; movlw 250 ; time period 250us for C4
-; call delay_x4us
-; movlw 228
-; call delay_x4us
- movlw 10
- call delay_x1us
-
-
- bra pwm_c4
- return
-
-microtone:
- movlw 6
- mulwf sensor_clock01 ; PRODH: PRODL
-
- movlw 0xDE
- addwf PRODL, A
- ; add carry bit to PRODH
-
- movlw 0x01
- addwfc PRODH, A
-
- movff PRODH, half_period_h, A
- movff PRODL, half_period_l, A
-
-
- return
-
-volume_update:
-
- movff sensor_clock02, PORTH, A
+LCD_Write_Instruction: ; Message stored at W
+ call LCD_Send_Byte_I
+ movlw 2
+ call LCD_delay_ms
  return
 
 
-cycle_count:
- movff half_period_h, ARG1H
- movff half_period_l, ARG1L
-
- movlw 0x2B
- movwf ARG2L
- movlw 0x00
- movwf ARG2H
-
- call MUL16x16
- movlw 0xAB
- addwf RES1, A
-
- movlw 0x01
- addwfc RES2, A
-
+LCD_Write_Message: ; Message stored at FSR2, length stored in W
+ movwf LCD_counter, A
+LCD_Loop_message:
+ movf POSTINC2, W, A
+ call LCD_Send_Byte_D
+ decfsz LCD_counter, A
+ bra LCD_Loop_message
  return
 
-
-pwm:
-
- movlw 50
- movwf counter_length, A
-
-pwm_loop:
- movlw 0x01 ; time period for high
- movwf PORTD, A
-
- call loop_256
- movf half_period_l, W, A
- call delay_x1us
-
-
- movlw 0x00 ; time period for low
- movwf PORTD, A
-
- call loop_256
- movf half_period_l, W, A
- call delay_x1us
-
-
- decfsz RES1, A ; one beat length
- bra pwm_loop
-
- movlw 0x00
- cpfseq RES2
+LCD_Send_Byte_I: ; Transmits byte stored in W to instruction reg
+ movwf LCD_tmp, A
+ swapf LCD_tmp, W, A ; swap nibbles, high nibble goes first
+ andlw 0x0f ; select just low nibble
+ movwf LATB, A ; output data bits to LCD
+ bcf LATB, LCD_RS, A ; Instruction write clear RS bit
+ call LCD_Enable ; Pulse enable Bit
+ movf LCD_tmp, W, A ; swap nibbles, now do low nibble
+ andlw 0x0f ; select just low nibble
+ movwf LATB, A ; output data bits to LCD
+ bcf LATB, LCD_RS, A ; Instruction write clear RS bit
+        call LCD_Enable ; Pulse enable Bit
  return
 
- decf RES2, A
- movlw 256
- movwf RES1, A
- bra pwm_loop
-
+LCD_Send_Byte_D: ; Transmits byte stored in W to data reg
+ movwf LCD_tmp, A
+ swapf LCD_tmp, W, A ; swap nibbles, high nibble goes first
+ andlw 0x0f ; select just low nibble
+ movwf LATB, A ; output data bits to LCD
+ bsf LATB, LCD_RS, A ; Data write set RS bit
+ call LCD_Enable ; Pulse enable Bit
+ movf LCD_tmp, W, A ; swap nibbles, now do low nibble
+ andlw 0x0f ; select just low nibble
+ movwf LATB, A ; output data bits to LCD
+ bsf LATB, LCD_RS, A ; Data write set RS bit
+        call LCD_Enable ; Pulse enable Bit
+ movlw 10 ; delay 40us
+ call LCD_delay_x4us
  return
 
-
-
-loop_256:
- movff half_period_h, dummy_256, A
-
-loop_256_inner:
- movlw 64
- call delay_x4us
-
- decfsz dummy_256, A
- bra loop_256_inner
-
+LCD_Enable: ; pulse enable bit LCD_E for 500ns
+ nop
+ nop
+ nop
+ nop
+ nop
+ nop
+ nop
+ nop
+ bsf LATB, LCD_E, A ; Take enable high
+ nop
+ nop
+ nop
+ nop
+ nop
+ nop
+ nop
+ bcf LATB, LCD_E, A ; Writes data to LCD
  return
 
+; ** a few delay routines below here as LCD timing can be quite critical ****
+LCD_delay_ms: ; delay given in ms in W
+ movwf LCD_cnt_ms, A
+lcdlp2: movlw 250 ; 1 ms delay
+ call LCD_delay_x4us
+ decfsz LCD_cnt_ms, A
+ bra lcdlp2
+ return
+
+LCD_delay_x4us: ; delay given in chunks of 4 microsecond in W
+ movwf LCD_cnt_l, A ; now need to multiply by 16
+ swapf LCD_cnt_l, F, A ; swap nibbles
+ movlw 0x0f
+ andwf LCD_cnt_l, W, A ; move low nibble to W
+ movwf LCD_cnt_h, A ; then to LCD_cnt_h
+ movlw 0xf0
+ andwf LCD_cnt_l, F, A ; keep high nibble in LCD_cnt_l
+ call LCD_delay
+ return
+
+LCD_delay: ; delay routine 4 instruction loop == 250ns
+ movlw 0x00 ; W=0
+lcdlp1: decf LCD_cnt_l, F, A ; no carry when 0x00 -> 0xff
+ subwfb LCD_cnt_h, F, A ; no carry when 0x00 -> 0xff
+ bc lcdlp1 ; carry, then loop again
+ return ; carry reset so return
 
 
-end
+    end

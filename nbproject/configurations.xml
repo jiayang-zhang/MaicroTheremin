@@ -18,6 +18,7 @@
       <itemPath>delay.s</itemPath>
       <itemPath>signal.s</itemPath>
       <itemPath>transducer.s</itemPath>
+      <itemPath>maths.s</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

@@ -1,6 +1,6 @@
-# 1 "signal.s"
+# 1 "maths.s"
 # 1 "<built-in>" 1
-# 1 "signal.s" 2
+# 1 "maths.s" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 1 3
 
 
@@ -10956,156 +10956,66 @@ stk_offset SET 0
 auto_size SET 0
 ENDM
 # 5 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 2 3
-# 1 "signal.s" 2
+# 2 "maths.s" 2
 
-
-global signal_setup, microtone, volume_update, pwm
-extrn delay_x4us, delay_x1us, sensor_clock01, sensor_clock02
-
-extrn MUL16x16, ARG1H, ARG1L, ARG2H, ARG2L, RES3, RES2, RES1, RES0
-
+global MUL16x16
+global ARG1H, ARG1L, ARG2H, ARG2L
+global RES3, RES2, RES1, RES0
 
 psect udata_acs
-half_period_h: ds 1
-half_period_l: ds 1
-dummy_256: ds 1
-counter_length: ds 1
-count_256: ds 1
+ARG1H: ds 1 ; kH
+ARG1L: ds 1 ; kL
 
-psect sig_code, class = CODE
+ARG2H: ds 1 ; voltage H
+ARG2L: ds 1 ; voltage L
 
-signal_setup:
- movlw 0x0
- movwf TRISD, A
- return
-
-pwm_c4:
- ; =================== note =================
- ; C4
- ; 250 delay_x4us
- ; 228 delay_x4us
-
- ; C6
- ; 250 delay_x4us
- ; 228 delay_x4us
-
- movlw 0x01
- movwf PORTD, A
-
-; movlw 250 ; time period 250us for C4
-; call delay_x4us
-; movlw 228
-; call delay_x4us
- movlw 10
- call delay_x1us
+RES3: ds 1 ; final output 3
+RES2: ds 1 ; final output 2
+RES1: ds 1 ; final output 1
+RES0: ds 1 ; final output 0
 
 
- movlw 0x0
- movwf PORTD, A
 
-; movlw 250 ; time period 250us for C4
-; call delay_x4us
-; movlw 228
-; call delay_x4us
- movlw 10
- call delay_x1us
+psect maths_code, class = CODE
 
+MUL16x16:
+ ; multiplication
+ ; X = ARG2H: ARG2L
+ ; Y = ARG1H: ARG1L
+ ; Output = X*Y = RES3 RES2 RES1 RES0
 
- bra pwm_c4
- return
-
-microtone:
- movlw 6
- mulwf sensor_clock01 ; PRODH: PRODL
-
- movlw 0xDE
- addwf PRODL, A
- ; add carry bit to PRODH
-
- movlw 0x01
- addwfc PRODH, A
-
- movff PRODH, half_period_h, A
- movff PRODL, half_period_l, A
-
+ MOVF ARG1L, W
+ MULWF ARG2L ; ARG1L * ARG2L->
+   ; PRODH:PRODL
+ MOVFF PRODH, RES1 ;
+ MOVFF PRODL, RES0 ;
+    ;
+ MOVF ARG1H, W
+ MULWF ARG2H ; ARG1H * ARG2H->
+      ; PRODH:PRODL
+ MOVFF PRODH, RES3 ;
+ MOVFF PRODL, RES2 ;
+    ;
+ MOVF ARG1L, W
+ MULWF ARG2H ; ARG1L * ARG2H->
+      ; PRODH:PRODL
+ MOVF PRODL, W ;
+ ADDWF RES1, F ; Add cross
+ MOVF PRODH, W ; products
+ ADDWFC RES2, F ;
+ CLRF WREG ;
+ ADDWFC RES3, F ;
+    ;
+ MOVF ARG1H, W ;
+ MULWF ARG2L ; ARG1H * ARG2L->
+      ; PRODH:PRODL
+ MOVF PRODL, W ;
+ ADDWF RES1, F ; Add cross
+ MOVF PRODH, W ; products
+ ADDWFC RES2, F ;
+ CLRF WREG ;
+ ADDWFC RES3, F ;
 
  return
-
-volume_update:
-
- movff sensor_clock02, PORTH, A
- return
-
-
-cycle_count:
- movff half_period_h, ARG1H
- movff half_period_l, ARG1L
-
- movlw 0x2B
- movwf ARG2L
- movlw 0x00
- movwf ARG2H
-
- call MUL16x16
- movlw 0xAB
- addwf RES1, A
-
- movlw 0x01
- addwfc RES2, A
-
- return
-
-
-pwm:
-
- movlw 50
- movwf counter_length, A
-
-pwm_loop:
- movlw 0x01 ; time period for high
- movwf PORTD, A
-
- call loop_256
- movf half_period_l, W, A
- call delay_x1us
-
-
- movlw 0x00 ; time period for low
- movwf PORTD, A
-
- call loop_256
- movf half_period_l, W, A
- call delay_x1us
-
-
- decfsz RES1, A ; one beat length
- bra pwm_loop
-
- movlw 0x00
- cpfseq RES2
- return
-
- decf RES2, A
- movlw 256
- movwf RES1, A
- bra pwm_loop
-
- return
-
-
-
-loop_256:
- movff half_period_h, dummy_256, A
-
-loop_256_inner:
- movlw 64
- call delay_x4us
-
- decfsz dummy_256, A
- bra loop_256_inner
-
- return
-
-
 
 end

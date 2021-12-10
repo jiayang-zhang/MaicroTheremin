@@ -1,6 +1,6 @@
-# 1 "signal.s"
+# 1 "transducer.s"
 # 1 "<built-in>" 1
-# 1 "signal.s" 2
+# 1 "transducer.s" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 1 3
 
 
@@ -10956,156 +10956,123 @@ stk_offset SET 0
 auto_size SET 0
 ENDM
 # 5 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 2 3
-# 1 "signal.s" 2
+# 1 "transducer.s" 2
 
 
-global signal_setup, microtone, volume_update, pwm
-extrn delay_x4us, delay_x1us, sensor_clock01, sensor_clock02
 
-extrn MUL16x16, ARG1H, ARG1L, ARG2H, ARG2L, RES3, RES2, RES1, RES0
+global transducer_setup, trans_get
+global sensor_clock01, sensor_clock02
 
+
+extrn delay_x4us, delay_x1us
 
 psect udata_acs
-half_period_h: ds 1
-half_period_l: ds 1
-dummy_256: ds 1
-counter_length: ds 1
-count_256: ds 1
-
-psect sig_code, class = CODE
-
-signal_setup:
- movlw 0x0
- movwf TRISD, A
- return
-
-pwm_c4:
- ; =================== note =================
- ; C4
- ; 250 delay_x4us
- ; 228 delay_x4us
-
- ; C6
- ; 250 delay_x4us
- ; 228 delay_x4us
-
- movlw 0x01
- movwf PORTD, A
-
-; movlw 250 ; time period 250us for C4
-; call delay_x4us
-; movlw 228
-; call delay_x4us
- movlw 10
- call delay_x1us
+sensor_clock01: ds 1
+sensor_clock02: ds 1
 
 
- movlw 0x0
- movwf PORTD, A
+psect trans_code, class = CODE
+; ======================== note =========================
+; PORTE for sensor01 I/O
+; PORTJ for sensor02 I/O
+; PORTF for sensor01 reading
+; PORTH for sensor02 reading
 
-; movlw 250 ; time period 250us for C4
-; call delay_x4us
-; movlw 228
-; call delay_x4us
- movlw 10
- call delay_x1us
-
-
- bra pwm_c4
- return
-
-microtone:
- movlw 6
- mulwf sensor_clock01 ; PRODH: PRODL
-
- movlw 0xDE
- addwf PRODL, A
- ; add carry bit to PRODH
-
- movlw 0x01
- addwfc PRODH, A
-
- movff PRODH, half_period_h, A
- movff PRODL, half_period_l, A
-
-
- return
-
-volume_update:
-
- movff sensor_clock02, PORTH, A
+transducer_setup:
+     movlw 0
+ movwf TRISF, A ; output
+ movlw 0
+ movwf TRISH, A ; output
  return
 
 
-cycle_count:
- movff half_period_h, ARG1H
- movff half_period_l, ARG1L
+;trans_capture_pitch:
+;
+; movlw b'00000100'
+; movwf CCP1CON ;Capture Mode, every falling edge on ((PORTC) and 0FFh), 2, a
+; movlw b'00110100'
+; movwf T1CON ;Capture Mode, every falling edge on ((PORTC) and 0FFh), 2, a
+; bsf STATUS,RP0 ;Bank 1
+; bsf TRISC,2 ;Make ((PORTC) and 0FFh), 2, a input
+; clrf TRISB ;Make PORTB output
+;; bcf STATUS,RP0 ;Bank 0
+;; bsf T1CON,((T1CON) and 0FFh), 0, a
+; return
+;
 
- movlw 0x2B
- movwf ARG2L
- movlw 0x00
- movwf ARG2H
 
- call MUL16x16
- movlw 0xAB
- addwf RES1, A
+trans_get:
+ ; set port as output ; output=0 input=1
+ movlw 0 ; high - 4us
+ movwf TRISE, A
+ ; output 1 - to sensor
+ movlw 1
+ movwf PORTE, A
+ movlw 1 ; output signal - 4us
+ call delay_x4us
+ ; output 0 - to sensor
+ movlw 0 ; for delay and reading the input
+ movwf PORTE, A
+ ; set port as input - read position
+ movlw 1
+ movwf TRISE, A
+ movlw 188 ; output signal - 4us
+ call delay_x4us
+ ; start the countdown
+ call count_loop_init_1
 
- movlw 0x01
- addwfc RES2, A
+
+ movlw 0
+ movwf TRISJ, A
+ movlw 1
+ movwf PORTJ, A
+ movlw 1 ; output signal - 4us
+ call delay_x4us
+ movlw 0
+ movwf PORTJ, A
+ movlw 1
+ movwf TRISJ, A
+ movlw 188 ; output signal - 4us
+ call delay_x4us
+ call count_loop_init_2
+
 
  return
 
 
-pwm:
-
- movlw 50
- movwf counter_length, A
-
-pwm_loop:
- movlw 0x01 ; time period for high
- movwf PORTD, A
-
- call loop_256
- movf half_period_l, W, A
- call delay_x1us
-
-
- movlw 0x00 ; time period for low
- movwf PORTD, A
-
- call loop_256
- movf half_period_l, W, A
- call delay_x1us
-
-
- decfsz RES1, A ; one beat length
- bra pwm_loop
-
- movlw 0x00
- cpfseq RES2
+; ===================== countdown function ==================================
+count_loop_init_1:
+     movlw 256 ; 8-bits: count from 0 to 255
+ movwf sensor_clock01, A
+count_loop_1:
+ movff sensor_clock01, PORTF, A ; check update frequency
+ dcfsnz sensor_clock01, A ; increment clock
  return
 
- decf RES2, A
- movlw 256
- movwf RES1, A
- bra pwm_loop
-
- return
-
-
-
-loop_256:
- movff half_period_h, dummy_256, A
-
-loop_256_inner:
- movlw 64
+ movlw 2 ; delay 24us
  call delay_x4us
 
- decfsz dummy_256, A
- bra loop_256_inner
-
+ movlw 0
+ cpfseq PORTE, A ; compare PORTE with w, skip if equals
+ bra count_loop_1
  return
 
 
+count_loop_init_2:
+     movlw 256 ; 8-bits: count from 0 to 255
+ movwf sensor_clock02, A
+count_loop_2:
+; movff sensor_clock02, PORTH, A ; check update frequency
+ dcfsnz sensor_clock02, A ; increment clock
+ return
+
+ movlw 2
+ call delay_x4us
+
+ movlw 0
+ cpfseq PORTJ, A
+ bra count_loop_2
+
+ return
 
 end
