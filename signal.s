@@ -1,6 +1,7 @@
 #include <xc.inc>
 
-global	signal_setup, microtone, pentatone, volume_update, pwm
+global	signal_setup, microtone, pentatone, volume_update, pwm, convert_half_full
+
 extrn	delay_x4us, delay_x1us, pitch_count, volume_count
 
 extrn	MUL16x16, ARG1H, ARG1L, ARG2H, ARG2L, RES3, RES2, RES1, RES0
@@ -9,6 +10,8 @@ extrn	MUL16x16, ARG1H, ARG1L, ARG2H, ARG2L, RES3, RES2, RES1, RES0
 psect	udata_acs
 half_period_h:	    ds  1
 half_period_l:	    ds  1
+full_period_h:	    ds	1  
+full_period_l:	    ds	1   
 dummy_256:	    ds  1
 counter_ref_high:   ds  1
 counter_ref_low:    ds  1
@@ -26,6 +29,7 @@ signal_setup:
 	
 	movlw	0x0
 	movwf	TRISB, A
+
 	return
 
 pwm_c4:	
@@ -279,6 +283,23 @@ pentatone:
 	
 
 	return	
+
+	
+convert_half_full:
+    
+	movff	half_period_h, full_period_h, A
+	movff	half_period_l, full_period_l, A
+	
+	bcf	3, 0
+	rlcf	full_period_l, A
+	rlncf	full_period_h, A
+	movlw	0x0
+	addwfc	full_period_h, A	
+	
+	movff	full_period_l, CCPR4L, A
+	movff	full_period_h, CCPR4H, A
+	
+	return
 	
 end
 	
