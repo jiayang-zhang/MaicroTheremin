@@ -1,39 +1,43 @@
 #include <xc.inc>
 
+global	pitch_interrupt_start    
     
+    
+psect	interrupt_code, class = CODE
+ 
 
-    
-itrans_start:
-    
-    
-    
-        bsf	TRISE, CCP8, A ; configure CCP1 pin for input
+pitch_interrupt_start:
 	
-	bcf	PIE1, CCP1IE,A ; disable CCP1 capture interrupt
-	movlw	0x81 ; enable Timer1, prescaler set to 1,
-	movwf	T1CON,A ; 16-bit, y use instruction cycle clock
-	movlw	0x05 ; set CCP1 to capture on every rising edge
-	movwf	CCP1CON,A ; "
-	bcf	PIR1,CCP1IF,A
-    
-    
-    
-    
-	; setup ccp6con capture interrupt configuration
-	movlw	B'00000100'
-	movwf	CCP8CON, A
-	bsf	IPR4, 3, A
-	bsf	PIE4, 3, A
+	movlw	00000100B	    ; set CCP7
+	movwf	CCP7CON, A 
+	bcf	PIE4, 4, A	    ; disable CCP7 capture interrupt
+	bcf	PIR4, 4, A	    ; clear ccp7 interrupt flag
+	bsf	IPR4, 4, A	    ; set interrupt as high priority
+
+	bcf	C7TSEL1		    ; match CCP7 to TMR1
+	bcf	C7TSEL0		    ; match CCP7 to TMR1
+
+        bsf	TRISE, 5, A	    ; set PORTE's RE5 as input
 	
-	; setup t1con timer1 configuration and start clock
+	; setup t1con timer1 configuration and start clock 
 	
-	movlw	B'00110011'
+	;bit 76 = clock source
+	;bit 54 = prescaler
+	;bit 3 = oscillator module enable
+	;bit 2 = symch to external clock
+	;bit 1 = 16bit or 8 bit operation clock
+	;bit 0 = on/off timer
+	bcf	T1CON, 0, A	    ; disable timer
+	clrf	TMR1H
+	clrf	TMR1L
+    	movlw	01010111B	    ; enable timer 
 	movwf	T1CON, A
 	
 	
-	
-	
-	bsf	GIE
-	bsf	PEIE
+	bsf	PIE4, 4, A	    ; enable CCP7 capture interrupt
+	bsf	GIE		    ; enable global interrupt
+	bsf	PEIE		    ; enable peripheral interrupt 
 	return
 
+	
+end
