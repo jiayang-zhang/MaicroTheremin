@@ -4,7 +4,13 @@
 extrn	delay_x4us, delay_x1us
 extrn	signal_setup, microtone, pentatone, volume_update, pwm
 extrn	transducer_setup, trans_get, pitch_count, volume_count
+extrn	convert_half_full
+extrn	pwm_compare_start, compare_int
+
     
+psect	udata_acs
+interrupt_count:    ds  1
+
     
 psect	code, abs
 
@@ -29,26 +35,23 @@ setup:
 	movlw	0x00
 	movwf	TRISF, A
 	bsf	TRISE, 5, A	    ; set PORTE's RE5 as input
+	call	pwm_compare_start
 
 	goto	start	
 	
 start:
-	clrf	PORTF
 	call	trans_get
-	
-	movlw	200
-	call	delay_x4us
-	movlw	200
-	call	delay_x4us
-	movlw	200
-	call	delay_x4us
-	movlw	200
-	call	delay_x4us
 ;	call	microtone
-;	call	pentatone
+	call	pentatone
+	call	convert_half_full
+
 ;	call	volume_update
-;;;	movff	pitch_count, PORTB, A
 ;	call	pwm	; waveform of choice
+
+
+;	movlw	250
+;	call	delay_x4us
+	
 
     
  
@@ -66,14 +69,25 @@ start:
 ;	return 
 ;	
 
-interrupt:
-	org	0x08
-	btfss	PIR4, 4 ; check if ccp7 capture interrupt
-	retfie ; return if not ccp7 interrupt
-	movff	TMR1H, pitch_count, A ; store captured clock into variable
-	movlw	0xff
-	movwf	PORTF, A ; store captured clock into variable
-	bcf	PIR4, 4 ; clear the interrupt flag
-	retfie
+interrupt:	
+	   org	0x0008	; high vector, no low vector
+
+	   goto	compare_int
+	   
+	
+	
+;interrupt:
+;	org	0x08
+;	btfss	PIR4, 4			; check if ccp7 capture interrupt
+;	retfie				; return if not ccp7 interrupt
+;	movff	TMR1H, pitch_count, A	; store captured clock into variable
+;	movlw	0xff
+;	movwf	PORTF, A		; store captured clock into variable
+;	
+;	incf	interrupt_count
+;	movff	interrupt_count, PORTF, A	; store captured clock into variable
+;
+;	bcf	PIR4, 4			; clear the interrupt flag
+;	retfie
 	
     end
