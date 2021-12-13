@@ -1,6 +1,6 @@
 #include <xc.inc>
 
-global	pitch_interrupt_start    
+global	pitch_interrupt_start, pwm_compare_start, compare_int
     
     
 psect	interrupt_code, class = CODE
@@ -39,5 +39,56 @@ pitch_interrupt_start:
 	bsf	PEIE		    ; enable peripheral interrupt 
 	return
 
+	
+compare_int:
+	btfss	CCP4IF		; check that this is ccp timer 4 interrupt
+	retfie	f		; if not then return
+	bcf	CCP4IF	        ; clear the CCP4IF flag
+	
+	movlw	0x01
+	xorwf	PORTD, A
+	
+	retfie	f
+	
+	
+pwm_compare_start:
+    
+;	movlw	00110001B
+;	movwf	T3CON
+;	
+;	bsf	C4TSEL1	    ;set ccp4 to timer3
+;	bcf	C4TSEL0	    ;set ccp4 to timer3
+;
+;	movlw	000000010B
+;	movwf	CCPTMRS1
+;	movlw	00001011B		
+;	movwf	CCP4CON         	
+;	movlw	0xff
+;	movwf	CCPR4L
+;	movlw	0x00
+;	movwf	CCPR4H
+;	
+;	bsf	CCP4IE	
+;	bsf	GIE
+;	bsf	PEIE
+	
+	movlw	00110001B
+	movwf	T1CON
+	
+	bcf	C4TSEL1
+	//movlw	000000001B
+	//movwf	CCPTMRS1
+	movlw	00001011B		
+	movwf	CCP4CON         	
+	movlw	0xe0
+	movwf	CCPR4L
+	movlw	0x08
+	movwf	CCPR4H
+	
+	bsf	CCP4IE	
+	bsf	GIE
+	bsf	PEIE
+	
+	return
 	
 end
