@@ -39,38 +39,36 @@ trans_get:
 	; output 1 - to sensor
 	movlw	1		    
 	movwf	PORTE, A
-;	movlw	1		    ; output signal - 4us
-;	call	delay_x4us	
+	movlw	1		    ; output signal - 4us
+	call	delay_x4us	
 	; output 0 - to sensor
 	movlw	0		    ; for delay and reading the input
 	movwf	PORTE, A	
 	
-	call	pitch_interrupt_start
+;	call	pitch_interrupt_start
+	
+	; set port as input - read position
+	movlw	1
+	movwf	TRISE, A
+	movlw	188		    ; output signal - 4us
+	call	delay_x4us
+	; start the countdown
+	call	count_loop_init_1
 	
 	
-;	
-;	; set port as input - read position
-;	movlw	1
-;	movwf	TRISE, A
-;	movlw	188		    ; output signal - 4us
-;	call	delay_x4us
-;	; start the countdown
-;	call	count_loop_init_1
-;	
-;	
-;	movlw	0
-;	movwf	TRISJ, A
-;	movlw	1
-;	movwf	PORTJ, A	
-;	movlw	1		    ; output signal - 4us
-;	call	delay_x4us	
-;	movlw	0
-;	movwf	PORTJ, A
-;	movlw	1
-;	movwf	TRISJ, A
-;	movlw	188		    ; output signal - 4us
-;	call	delay_x4us
-;	call	count_loop_init_2
+	movlw	0
+	movwf	TRISJ, A
+	movlw	1
+	movwf	PORTJ, A	
+	movlw	1		    ; output signal - 4us
+	call	delay_x4us	
+	movlw	0
+	movwf	PORTJ, A
+	movlw	1
+	movwf	TRISJ, A
+	movlw	188		    ; output signal - 4us
+	call	delay_x4us
+	call	count_loop_init_2
 
 	
 	return
@@ -85,8 +83,8 @@ count_loop_1:
 	dcfsnz	pitch_count, A		    ; increment clock
 	return
 	
-;	movlw	2				    ; delay 24us
-;	call	delay_x4us
+	movlw	2				    ; delay 24us
+	call	delay_x4us
 ;	
 	movlw	0
 	cpfseq	PORTE, A		    ; compare PORTE with w, skip if equals
