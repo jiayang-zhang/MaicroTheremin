@@ -3,18 +3,13 @@
 ;extrn	LCD_Setup, LCD_Write_Message, LCD_Write_Instruction, LCD_Send_Byte_D
 extrn	delay_x4us, delay_x1us
 extrn	signal_setup, microtone, pentatone, volume_update, pwm
-extrn	transducer_setup, trans_get, sensor_clock01, sensor_clock02
+extrn	transducer_setup, trans_get, pitch_count, volume_count
     
     
 psect	code, abs
 
 rst:	org	0x0
 	bra	setup
-	
-interrupt:
-	
-	org	0x8
-	
 	
 main:
 	org	0x0
@@ -31,21 +26,29 @@ setup:
 	call	signal_setup
 	call	transducer_setup
 	
+	movlw	0x00
+	movwf	TRISF, A
+	bsf	TRISE, 5, A	    ; set PORTE's RE5 as input
+
 	goto	start	
 	
 start:
+	clrf	PORTF
 	call	trans_get
 	
-	;call	trans_capture_pitch
-	;btfss	PIR1, CCP1IF
-	;call	microtone ;update freq if capture flag triggered
-	
-	
-	call	microtone
-	call	pentatone
+	movlw	200
+	call	delay_x4us
+	movlw	200
+	call	delay_x4us
+	movlw	200
+	call	delay_x4us
+	movlw	200
+	call	delay_x4us
+;	call	microtone
+;	call	pentatone
 ;	call	volume_update
-;;;	movff	sensor_clock01, PORTB, A
-	call	pwm	; waveform of choice
+;;;	movff	pitch_count, PORTB, A
+;	call	pwm	; waveform of choice
 
     
  
@@ -63,4 +66,14 @@ start:
 ;	return 
 ;	
 
+interrupt:
+	org	0x08
+	btfss	PIR4, 4 ; check if ccp7 capture interrupt
+	retfie ; return if not ccp7 interrupt
+	movff	TMR1H, pitch_count, A ; store captured clock into variable
+	movlw	0xff
+	movwf	PORTF, A ; store captured clock into variable
+	bcf	PIR4, 4 ; clear the interrupt flag
+	retfie
+	
     end
