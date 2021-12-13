@@ -1,7 +1,7 @@
 #include <xc.inc>
 
 global	signal_setup, microtone, pentatone, volume_update, pwm
-extrn	delay_x4us, delay_x1us, sensor_clock01, sensor_clock02
+extrn	delay_x4us, delay_x1us, pitch_count, volume_count
 
 extrn	MUL16x16, ARG1H, ARG1L, ARG2H, ARG2L, RES3, RES2, RES1, RES0
     
@@ -20,9 +20,9 @@ signal_setup:
 	movlw	0x0
 	movwf	TRISD, A
 	movlw	0x00
-	movwf	counter_ref_high
+	movwf	counter_ref_high, A
 	movlw	0x00
-	movwf	counter_ref_low
+	movwf	counter_ref_low, A
 	
 	movlw	0x0
 	movwf	TRISB, A
@@ -65,7 +65,7 @@ pwm_c4:
 	
 microtone:	
 	movlw	6
-	mulwf	sensor_clock01 ; PRODH: PRODL
+	mulwf	pitch_count ; PRODH: PRODL
 	
 	movlw	0xDE 
 	addwf	PRODL, A
@@ -86,7 +86,7 @@ microtone:
 volume_update:
 ;	movlw	0xff
 ;	movwf	PORTH, A
-	movff	sensor_clock02, PORTH, A
+	movff	volume_count, PORTH, A
 	return
 
 	
@@ -121,7 +121,7 @@ cycle_count:
 pwm:	
 	call	cycle_count
 	movlw	30 
-	movwf	counter_ref_low
+	movwf	counter_ref_low, A
 	
 pwm_loop:
 	movlw	0x01		     ; time period for high
@@ -177,8 +177,8 @@ pentatone:
 	movlw	0x77
 	movwf	half_period_l, A
 	
-	movlw	233		    ; C4   if   sensor_clock01 = 256 to 235
-	cpfslt	sensor_clock01 
+	movlw	233		    ; C4   if   pitch_count = 256 to 235
+	cpfslt	pitch_count 
 	return
 	
 	
@@ -187,8 +187,8 @@ pentatone:
 	movlw	0xA7
 	movwf	half_period_l, A
 	
-	movlw	210		    ; D4   if   sensor_clock01 = 235 to 214
-	cpfslt	sensor_clock01 
+	movlw	210		    ; D4   if   pitch_count = 235 to 214
+	cpfslt	pitch_count 
 	return
 	
 	
@@ -198,7 +198,7 @@ pentatone:
 	movwf	half_period_l, A
 	
 	movlw	187		    
-	cpfslt	sensor_clock01 
+	cpfslt	pitch_count 
 	return
 	
 	
@@ -208,7 +208,7 @@ pentatone:
 	movwf	half_period_l, A
 	
 	movlw	164		    
-	cpfslt	sensor_clock01 
+	cpfslt	pitch_count 
 	return
 	
 	
@@ -218,7 +218,7 @@ pentatone:
 	movwf	half_period_l, A
 	
 	movlw	141		    
-	cpfslt	sensor_clock01 
+	cpfslt	pitch_count 
 	return
 	
 	
@@ -228,7 +228,7 @@ pentatone:
 	movwf	half_period_l, A
 	
 	movlw	118		    
-	cpfslt	sensor_clock01 
+	cpfslt	pitch_count 
 	return
 	
 	
@@ -238,7 +238,7 @@ pentatone:
 	movwf	half_period_l, A
 	
 	movlw	95		    
-	cpfslt	sensor_clock01 
+	cpfslt	pitch_count 
 	return
 	
 	
@@ -248,7 +248,7 @@ pentatone:
 	movwf	half_period_l, A
 	
 	movlw	72		    
-	cpfslt	sensor_clock01 
+	cpfslt	pitch_count 
 	return
 	
 	
@@ -258,7 +258,7 @@ pentatone:
 	movwf	half_period_l, A
 	
 	movlw	49		    
-	cpfslt	sensor_clock01 
+	cpfslt	pitch_count 
 	return
 	
 	
@@ -268,7 +268,7 @@ pentatone:
 	movwf	half_period_l, A
 	
 	movlw	26		    
-	cpfslt	sensor_clock01 
+	cpfslt	pitch_count 
 	return
 	
 	
