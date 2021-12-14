@@ -1,9 +1,8 @@
 #include <xc.inc>
 
-global	signal_setup, microtone, pentatone, volume_update, pwm, convert_half_full
+global	signal_setup, convert_half_full, tone_toggle
 
 extrn	delay_x4us, delay_x1us, pitch_count, volume_count
-
 extrn	MUL16x16, ARG1H, ARG1L, ARG2H, ARG2L, RES3, RES2, RES1, RES0
     
 
@@ -17,6 +16,32 @@ counter_ref_high:   ds  1
 counter_ref_low:    ds  1
 dummy_cr_high:	    ds	1   
 dummy_cr_low:	    ds	1
+    
+octave_count:	    ds	1
+    
+    
+    
+psect data
+cmajorTable:	
+    	db	0x01, 0xDE
+	db	0x01, 0xFA
+	db	0x02, 0x38
+	db	0x02, 0x7E
+	db	0x02, 0xCC
+	db	0x02, 0xF6
+	db	0x03, 0x53
+	db	0x03, 0xBC
+	db	0x03, 0xF4
+	db	0x04, 0x70
+	db	0x04, 0xFC
+	db	0x05, 0x98
+	db	0x05, 0xED
+	db	0x06, 0xA7
+	db	0x07, 0x77
+	db	0x07, 0x77
+	align	2
+	
+    
 psect	sig_code, class = CODE
 
 signal_setup:
@@ -29,44 +54,27 @@ signal_setup:
 	
 	movlw	0x0
 	movwf	TRISB, A
+	
+	movlw	00000011B    ; for tone toggle  ; pin01 of PORTC
+	movwf	TRISC
 
 	return
 
-pwm_c4:	
-	; =================== note  =================
-	; C4
-	; 250  delay_x4us
-	; 228  delay_x4us
 	
-	; C6
-	; 250  delay_x4us
-	; 228  delay_x4us 
-	
-	movlw	0x01
-	movwf	PORTD, A
-	
-;	movlw	250		    ; time period 250us for C4
-;	call	delay_x4us
-;	movlw	228  
-;	call	delay_x4us
-	movlw	10
-	call	delay_x1us
-
-	
-	movlw	0x0
-	movwf	PORTD, A
-	
-;	movlw	250		    ; time period 250us for C4
-;	call	delay_x4us
-;	movlw	228	    
-;	call	delay_x4us
-	movlw	10
-	call	delay_x1us
-
-	
-	bra pwm_c4
+tone_toggle:
+	btfss	PORTC, 0, A	; skip if 1
+	call	microtone	; low , call penta
+	btfss	PORTC, 0, A
 	return
 	
+	btfss	PORTC, 1, A
+	call	cmajor
+	btfss	PORTC, 1, A
+	return
+	
+	call	pentatone
+	return
+
 microtone:	
 	movlw	6
 	mulwf	pitch_count ; PRODH: PRODL
@@ -84,95 +92,38 @@ microtone:
 	
 	return 
 
-
-
 	
-volume_update:
-;	movlw	0xff
-;	movwf	PORTH, A
-	movff	volume_count, PORTH, A
+cmajorTable_read:
+ 	movlw	low highword(cmajorTable)	; address of data in PM
+	movwf	TBLPTRU, A			; load upper bits to TBLPTRU
+	movlw	high(cmajorTable)		; address of data in PM
+	movwf	TBLPTRH, A			; load high byte to TBLPTRH
+	movlw	low(cmajorTable)		; address of data in PM
+	movwf	TBLPTRL, A			; load low byte to TBLPTRL
 	return
 
+cmajor:
+	call	cmajorTable_read
 	
-cycle_count:
-;	movff	half_period_h, ARG1H
-;	movff	half_period_l, ARG1L
-;	
-;	movlw	0x1B
-;	movwf	ARG2L
-;	movlw	0x00
-;	movwf	ARG2H
-;	
-;	call	MUL16x16
-;	
-;	movff	counter_ref_low, dummy_cr_low
-;	movff	counter_ref_high, dummy_cr_high
-;	
-;	movf	RES1, W, A
-;	subwf	dummy_cr_low, A
-;	
-;	movf	RES2, W, A
-;	subwfb	dummy_cr_high, A
+	swapf	pitch_count, f, A
+	movlw	0x0f
+	andwf	pitch_count, A
 	
-	movff	counter_ref_high, RES2, A
-	movff	counter_ref_low, RES1, A
-	
-;	movff	dummy_cr_low, PORTB, A
-	
-	return
-	
-	
-pwm:	
-	call	cycle_count
-	movlw	30 
-	movwf	counter_ref_low, A
-	
-pwm_loop:
-	movlw	0x01		     ; time period for high
-	movwf	PORTD, A
-	
-	call	loop_256
-	movf	half_period_l, W, A
-	call	delay_x1us
-	
-	
-	movlw	0x00		    ; time period for low
-	movwf	PORTD, A
-	
-	call	loop_256
-	movf	half_period_l, W, A
-	call	delay_x1us
-	
-	decfsz	counter_ref_low, A
-	bra	pwm_loop
-	return
-
-	decfsz	RES1, A		; one beat length
-	bra	pwm_loop
-	
+	; Multiply by two and add to TBLPTR
+	rlncf	pitch_count, W, A
+	addwf	TBLPTRL, F
 	movlw	0x0
-	cpfseq	RES2
-	return
+	addwfc	TBLPTRH, F
+	addwfc	TBLPTRU, F
 	
-	decf	RES2, A
-	movlw	128
-	movwf	RES1, A
-	bra	pwm_loop
+	; Write the new frequency into CCP compare registers
+	tblrd*+
+	movff	TABLAT, half_period_h
+	tblrd*
+	movff	TABLAT, half_period_l
+	
+	return
 		
-	
-	
-loop_256:
-	movff	half_period_h, dummy_256, A
-    
-loop_256_inner:
-	movlw	64	    
-	call	delay_x4us
-	
-	decfsz	dummy_256, A
-	bra	loop_256_inner	
-	
-	return
-
 	
 pentatone:
 	; compare number counts 
