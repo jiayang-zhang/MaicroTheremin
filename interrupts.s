@@ -2,6 +2,8 @@
 
 global	pitch_interrupt_start, pwm_compare_start, compare_int
     
+extrn	volume_count
+    
     
 psect	interrupt_code, class = CODE
  
@@ -45,10 +47,20 @@ compare_int:
 	retfie	f		; if not then return
 	bcf	CCP4IF	        ; clear the CCP4IF flag
 	
-	movlw	0x01
+	
+	movlw	200
 	xorwf	PORTD, A
+;	cpfseq	PORTD, A
+;	call	clear_volume 
+;	movff	volume_count, PORTD, A
 	
 	retfie	f
+;
+;clear_volume:
+;
+;	clrf	PORTD, A
+;	retfie	f
+	
 	
 	
 pwm_compare_start:
