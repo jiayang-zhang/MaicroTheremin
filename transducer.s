@@ -11,6 +11,8 @@ extrn	delay_x4us, delay_x1us
 psect	udata_acs
 pitch_count:	ds  1
 volume_count:	ds  1
+pitch_temp:	ds  1	
+volume_temp:	ds  1
     
     
 psect	trans_code, class = CODE
@@ -27,25 +29,22 @@ transducer_setup:
 	movwf	TRISJ, A	    ; output
 	movlw	0
 	movwf	TRISH, A	    ; output
-	movlw	200
-	movwf	PORTH, A
-	return
+;	movlw	200
+;	movwf	PORTH, A
+;	return
 
 
 trans_get:
-	; set port as output	    ; output=0 input=1
+;	 set port as output	    ; output=0 input=1
 	movlw	0		    ; high - 4us
 	movwf	TRISE, A
-	; output 1 - to sensor
-	movlw	1		    
+	movlw	1		    ; output 1 - to sensor    
 	movwf	PORTE, A
 	movlw	1		    ; output signal - 4us
 	call	delay_x4us	
-	; output 0 - to sensor
-	movlw	0		    ; for delay and reading the input
-	movwf	PORTE, A	
 	
-;	call	pitch_interrupt_start
+	movlw	0		    ; output 0 - to sensor ; for delay and reading the input
+	movwf	PORTE, A	
 	
 	; set port as input - read position
 	movlw	1
@@ -54,7 +53,7 @@ trans_get:
 	call	delay_x4us
 	; start the countdown
 	call	count_loop_init_1
-	
+	movff	pitch_temp, pitch_count, A
 	
 	movlw	0
 	movwf	TRISJ, A
@@ -69,6 +68,7 @@ trans_get:
 	movlw	188		    ; output signal - 4us
 	call	delay_x4us
 	call	count_loop_init_2
+	movff	volume_temp, volume_count, A
 
 	
 	return
@@ -77,38 +77,38 @@ trans_get:
 ; ===================== countdown function ==================================
 count_loop_init_1:
     	movlw	256			    ; 8-bits: count from 0 to 255
-	movwf	pitch_count, A
+	movwf	pitch_temp, A
 count_loop_1:
-	movff	pitch_count, PORTF, A	    ; check update frequency
-	dcfsnz	pitch_count, A		    ; increment clock
+	movff	pitch_temp, PORTF, A	    ; check update frequency
+	dcfsnz	pitch_temp, A		    ; increment clock
 	return
 	
 	movlw	2				    ; delay 24us
 	call	delay_x4us
-;	
-	movlw	0
-	cpfseq	PORTE, A		    ; compare PORTE with w, skip if equals
+	
+	btfsc	PORTE, 0,  A		    ; compare PORTE with w, skip if equals
 	bra	count_loop_1
 	return
 
 	
 count_loop_init_2:	
     	movlw	256		    ; 8-bits: count from 0 to 255
-	movwf	volume_count, A
+	movwf	volume_temp, A
 count_loop_2:
-	movff	volume_count, PORTH, A	    ; check update frequency
-	dcfsnz	volume_count, A		    ; increment clock
+	dcfsnz	volume_temp, A		    ; increment clock
 	return
 	
-	movlw	2		    
+	movlw	2 
 	call	delay_x4us
 	
-	movlw	0
-	cpfseq	PORTJ, A	
+	btfsc	PORTJ, 0, A	
 	bra	count_loop_2
 	
 	return
 	
 end
+
+
+
 
 
