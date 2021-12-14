@@ -2,9 +2,8 @@
  
 ;extrn	LCD_Setup, LCD_Write_Message, LCD_Write_Instruction, LCD_Send_Byte_D
 extrn	delay_x4us, delay_x1us
-extrn	signal_setup, microtone, pentatone, volume_update, pwm
+extrn	signal_setup, convert_half_full, tone_toggle    
 extrn	transducer_setup, trans_get, pitch_count, volume_count
-extrn	convert_half_full
 extrn	pwm_compare_start, compare_int
 
     
@@ -36,21 +35,25 @@ setup:
 	movwf	TRISF, A
 	bsf	TRISE, 5, A	    ; set PORTE's RE5 as input
 	call	pwm_compare_start
-
+	
 	goto	start	
 	
 start:
 	call	trans_get
-;	call	microtone
-	call	pentatone
-	call	convert_half_full
+	call	tone_toggle
 
-;	call	volume_update
+	call	convert_half_full
+	
+	movlw	50
+	call	delay_x4us
+	movff	volume_count, PORTH, A	    ; check update frequency
+
+
 ;	call	pwm	; waveform of choice
 
 
-;	movlw	250
-;	call	delay_x4us
+	movlw	250
+	call	delay_x4us
 	
 
     
