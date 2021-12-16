@@ -92,9 +92,10 @@ count_loop_1:
 
 	
 count_loop_init_2:	
-    	movlw	256		    ; 8-bits: count from 0 to 255
+    	movlw	80		    ; 8-bits: count from 0 to 255
 	movwf	volume_temp, A
 count_loop_2:
+	movff	volume_temp, PORTH, A	    ; check update frequency
 	dcfsnz	volume_temp, A		    ; increment clock
 	return
 	

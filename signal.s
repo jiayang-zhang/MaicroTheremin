@@ -57,7 +57,11 @@ signal_setup:
 	
 	movlw	00000011B    ; for tone toggle  ; pin01 of PORTC
 	movwf	TRISC
-
+	
+	movlw	255
+	movwf	pitch_count
+	movwf	volume_count
+	
 	return
 
 	

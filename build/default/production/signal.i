@@ -10959,72 +10959,88 @@ ENDM
 # 1 "signal.s" 2
 
 
-global signal_setup, microtone, pentatone, volume_update, pwm
-extrn delay_x4us, delay_x1us, sensor_clock01, sensor_clock02
+global signal_setup, convert_half_full, tone_toggle
 
+extrn delay_x4us, delay_x1us, pitch_count, volume_count
 extrn MUL16x16, ARG1H, ARG1L, ARG2H, ARG2L, RES3, RES2, RES1, RES0
 
 
 psect udata_acs
 half_period_h: ds 1
 half_period_l: ds 1
+full_period_h: ds 1
+full_period_l: ds 1
 dummy_256: ds 1
 counter_ref_high: ds 1
 counter_ref_low: ds 1
 dummy_cr_high: ds 1
 dummy_cr_low: ds 1
+
+octave_count: ds 1
+
+
+
+psect data
+cmajorTable:
+     db 0x01, 0xDE
+ db 0x01, 0xFA
+ db 0x02, 0x38
+ db 0x02, 0x7E
+ db 0x02, 0xCC
+ db 0x02, 0xF6
+ db 0x03, 0x53
+ db 0x03, 0xBC
+ db 0x03, 0xF4
+ db 0x04, 0x70
+ db 0x04, 0xFC
+ db 0x05, 0x98
+ db 0x05, 0xED
+ db 0x06, 0xA7
+ db 0x07, 0x77
+ db 0x07, 0x77
+ align 2
+
+
 psect sig_code, class = CODE
 
 signal_setup:
  movlw 0x0
  movwf TRISD, A
  movlw 0x00
- movwf counter_ref_high
+ movwf counter_ref_high, A
  movlw 0x00
- movwf counter_ref_low
+ movwf counter_ref_low, A
 
  movlw 0x0
  movwf TRISB, A
+
+ movlw 00000011B ; for tone toggle ; pin01 of PORTC
+ movwf TRISC
+
+ movlw 255
+ movwf pitch_count
+ movwf volume_count
+
  return
 
-pwm_c4:
- ; =================== note =================
- ; C4
- ; 250 delay_x4us
- ; 228 delay_x4us
 
- ; C6
- ; 250 delay_x4us
- ; 228 delay_x4us
+tone_toggle:
+ btfss PORTC, 0, A ; skip if 1
+ call microtone ; low , call penta
+ btfss PORTC, 0, A
+ return
 
- movlw 0x01
- movwf PORTD, A
+ btfss PORTC, 1, A
+ call cmajor
+ btfss PORTC, 1, A
+ return
 
-; movlw 250 ; time period 250us for C4
-; call delay_x4us
-; movlw 228
-; call delay_x4us
- movlw 10
- call delay_x1us
-
-
- movlw 0x0
- movwf PORTD, A
-
-; movlw 250 ; time period 250us for C4
-; call delay_x4us
-; movlw 228
-; call delay_x4us
- movlw 10
- call delay_x1us
-
-
- bra pwm_c4
+ call pentatone
  return
 
 microtone:
  movlw 6
- mulwf sensor_clock01 ; PRODH: PRODL
+ mulwf pitch_count ; PRODH: PRODL
 
  movlw 0xDE
  addwf PRODL, A
@@ -11040,91 +11056,34 @@ microtone:
  return
 
 
-
-
-volume_update:
-; movlw 0xff
-; movwf PORTH, A
- movff sensor_clock02, PORTH, A
+cmajorTable_read:
+  movlw low highword(cmajorTable) ; address of data in PM
+ movwf TBLPTRU, A ; load upper bits to TBLPTRU
+ movlw high(cmajorTable) ; address of data in PM
+ movwf TBLPTRH, A ; load high byte to TBLPTRH
+ movlw low(cmajorTable) ; address of data in PM
+ movwf TBLPTRL, A ; load low byte to TBLPTRL
  return
 
+cmajor:
+ call cmajorTable_read
 
-cycle_count:
-; movff half_period_h, ARG1H
-; movff half_period_l, ARG1L
-;
-; movlw 0x1B
-; movwf ARG2L
-; movlw 0x00
-; movwf ARG2H
-;
-; call MUL16x16
-;
-; movff counter_ref_low, dummy_cr_low
-; movff counter_ref_high, dummy_cr_high
-;
-; movf RES1, W, A
-; subwf dummy_cr_low, A
-;
-; movf RES2, W, A
-; subwfb dummy_cr_high, A
+ swapf pitch_count, f, A
+ movlw 0x0f
+ andwf pitch_count, A
 
- movff counter_ref_high, RES2, A
- movff counter_ref_low, RES1, A
-
-; movff dummy_cr_low, PORTB, A
-
- return
-
-
-pwm:
- call cycle_count
- movlw 30
- movwf counter_ref_low
-
-pwm_loop:
- movlw 0x01 ; time period for high
- movwf PORTD, A
-
- call loop_256
- movf half_period_l, W, A
- call delay_x1us
-
-
- movlw 0x00 ; time period for low
- movwf PORTD, A
-
- call loop_256
- movf half_period_l, W, A
- call delay_x1us
-
- decfsz counter_ref_low, A
- bra pwm_loop
- return
-
- decfsz RES1, A ; one beat length
- bra pwm_loop
-
+ ; Multiply by two and add to TBLPTR
+ rlncf pitch_count, W, A
+ addwf TBLPTRL, F
  movlw 0x0
- cpfseq RES2
- return
+ addwfc TBLPTRH, F
+ addwfc TBLPTRU, F
 
- decf RES2, A
- movlw 128
- movwf RES1, A
- bra pwm_loop
-
-
-
-loop_256:
- movff half_period_h, dummy_256, A
-
-loop_256_inner:
- movlw 64
- call delay_x4us
-
- decfsz dummy_256, A
- bra loop_256_inner
+ ; Write the new frequency into CCP compare registers
+ tblrd*+
+ movff TABLAT, half_period_h
+ tblrd*
+ movff TABLAT, half_period_l
 
  return
 
@@ -11136,8 +11095,8 @@ pentatone:
  movlw 0x77
  movwf half_period_l, A
 
- movlw 233 ; C4 if sensor_clock01 = 256 to 235
- cpfslt sensor_clock01
+ movlw 233 ; C4 if pitch_count = 256 to 235
+ cpfslt pitch_count
  return
 
 
@@ -11146,8 +11105,8 @@ pentatone:
  movlw 0xA7
  movwf half_period_l, A
 
- movlw 210 ; D4 if sensor_clock01 = 235 to 214
- cpfslt sensor_clock01
+ movlw 210 ; D4 if pitch_count = 235 to 214
+ cpfslt pitch_count
  return
 
 
@@ -11157,7 +11116,7 @@ pentatone:
  movwf half_period_l, A
 
  movlw 187
- cpfslt sensor_clock01
+ cpfslt pitch_count
  return
 
 
@@ -11167,7 +11126,7 @@ pentatone:
  movwf half_period_l, A
 
  movlw 164
- cpfslt sensor_clock01
+ cpfslt pitch_count
  return
 
 
@@ -11177,7 +11136,7 @@ pentatone:
  movwf half_period_l, A
 
  movlw 141
- cpfslt sensor_clock01
+ cpfslt pitch_count
  return
 
 
@@ -11187,7 +11146,7 @@ pentatone:
  movwf half_period_l, A
 
  movlw 118
- cpfslt sensor_clock01
+ cpfslt pitch_count
  return
 
 
@@ -11197,7 +11156,7 @@ pentatone:
  movwf half_period_l, A
 
  movlw 95
- cpfslt sensor_clock01
+ cpfslt pitch_count
  return
 
 
@@ -11207,7 +11166,7 @@ pentatone:
  movwf half_period_l, A
 
  movlw 72
- cpfslt sensor_clock01
+ cpfslt pitch_count
  return
 
 
@@ -11217,7 +11176,7 @@ pentatone:
  movwf half_period_l, A
 
  movlw 49
- cpfslt sensor_clock01
+ cpfslt pitch_count
  return
 
 
@@ -11227,7 +11186,7 @@ pentatone:
  movwf half_period_l, A
 
  movlw 26
- cpfslt sensor_clock01
+ cpfslt pitch_count
  return
 
 
@@ -11236,6 +11195,23 @@ pentatone:
  movlw 0xDE
  movwf half_period_l, A
 
+
+ return
+
+
+convert_half_full:
+
+ movff half_period_h, full_period_h, A
+ movff half_period_l, full_period_l, A
+
+ bcf 3, 0
+ rlcf full_period_l, A
+ rlncf full_period_h, A
+ movlw 0x0
+ addwfc full_period_h, A
+
+ movff full_period_l, CCPR4L, A
+ movff full_period_h, CCPR4H, A
 
  return
 

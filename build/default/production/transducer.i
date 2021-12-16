@@ -10961,14 +10961,17 @@ ENDM
 
 
 global transducer_setup, trans_get
-global sensor_clock01, sensor_clock02
+global pitch_count, volume_count
 
 
+extrn pitch_interrupt_start
 extrn delay_x4us, delay_x1us
 
 psect udata_acs
-sensor_clock01: ds 1
-sensor_clock02: ds 1
+pitch_count: ds 1
+volume_count: ds 1
+pitch_temp: ds 1
+volume_temp: ds 1
 
 
 psect trans_code, class = CODE
@@ -10982,37 +10985,26 @@ transducer_setup:
      movlw 0
  movwf TRISF, A ; output
  movlw 0
+ movwf TRISJ, A ; output
+ movlw 0
  movwf TRISH, A ; output
- return
-
-
-;trans_capture_pitch:
-;
-; movlw b'00000100'
-; movwf CCP1CON ;Capture Mode, every falling edge on ((PORTC) and 0FFh), 2, a
-; movlw b'00110100'
-; movwf T1CON ;Capture Mode, every falling edge on ((PORTC) and 0FFh), 2, a
-; bsf STATUS,RP0 ;Bank 1
-; bsf TRISC,2 ;Make ((PORTC) and 0FFh), 2, a input
-; clrf TRISB ;Make PORTB output
-;; bcf STATUS,RP0 ;Bank 0
-;; bsf T1CON,((T1CON) and 0FFh), 0, a
+; movlw 200
+; movwf PORTH, A
 ; return
-;
 
 
 trans_get:
- ; set port as output ; output=0 input=1
+; set port as output ; output=0 input=1
  movlw 0 ; high - 4us
  movwf TRISE, A
- ; output 1 - to sensor
- movlw 1
+ movlw 1 ; output 1 - to sensor
  movwf PORTE, A
  movlw 1 ; output signal - 4us
  call delay_x4us
- ; output 0 - to sensor
- movlw 0 ; for delay and reading the input
+
+ movlw 0 ; output 0 - to sensor ; for delay and reading the input
  movwf PORTE, A
+
  ; set port as input - read position
  movlw 1
  movwf TRISE, A
@@ -11020,7 +11012,7 @@ trans_get:
  call delay_x4us
  ; start the countdown
  call count_loop_init_1
-
+ movff pitch_temp, pitch_count, A
 
  movlw 0
  movwf TRISJ, A
@@ -11035,6 +11027,7 @@ trans_get:
  movlw 188 ; output signal - 4us
  call delay_x4us
  call count_loop_init_2
+ movff volume_temp, volume_count, A
 
 
  return
@@ -11043,34 +11036,32 @@ trans_get:
 ; ===================== countdown function ==================================
 count_loop_init_1:
      movlw 256 ; 8-bits: count from 0 to 255
- movwf sensor_clock01, A
+ movwf pitch_temp, A
 count_loop_1:
- movff sensor_clock01, PORTF, A ; check update frequency
- dcfsnz sensor_clock01, A ; increment clock
+ movff pitch_temp, PORTF, A ; check update frequency
+ dcfsnz pitch_temp, A ; increment clock
  return
 
  movlw 2 ; delay 24us
  call delay_x4us
 
- movlw 0
- cpfseq PORTE, A ; compare PORTE with w, skip if equals
+ btfsc PORTE, 0, A ; compare PORTE with w, skip if equals
  bra count_loop_1
  return
 
 
 count_loop_init_2:
-     movlw 256 ; 8-bits: count from 0 to 255
- movwf sensor_clock02, A
+     movlw 80 ; 8-bits: count from 0 to 255
+ movwf volume_temp, A
 count_loop_2:
- movff sensor_clock02, PORTH, A ; check update frequency
- dcfsnz sensor_clock02, A ; increment clock
+ movff volume_temp, PORTH, A ; check update frequency
+ dcfsnz volume_temp, A ; increment clock
  return
 
  movlw 2
  call delay_x4us
 
- movlw 0
- cpfseq PORTJ, A
+ btfsc PORTJ, 0, A
  bra count_loop_2
 
  return

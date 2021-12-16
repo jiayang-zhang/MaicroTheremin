@@ -12,25 +12,30 @@
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
 $build/default/production/transducer.o
-trans_code CODE 0 1FD50 1FD50 80 1
-udata_acs COMRAM 1 14 14 2 1
+trans_code CODE 0 1FD4E 1FD4E 86 1
+udata_acs COMRAM 1 17 17 4 1
 $build/default/production/maths.o
-maths_code CODE 0 1FCD6 1FCD6 3A 1
-udata_acs COMRAM 1 0 0 8 1
+maths_code CODE 0 1FC7A 1FC7A 3A 1
+udata_acs COMRAM 1 A A 8 1
+$build/default/production/interrupts.o
+interrupt_code CODE 0 1FCF4 1FCF4 5A 1
+udata_acs COMRAM 1 1D 1D 1 1
 $build/default/production/signal.o
-sig_code CODE 0 1FECE 1FECE 132 1
-udata_acs COMRAM 1 8 8 7 1
+sig_code CODE 0 1FED2 1FED2 12E 1
+data CONST 0 1FC5A 1FC5A 20 1
+udata_acs COMRAM 1 0 0 A 1
 $build/default/production/main.o
-code CODE 0 0 0 124 1
+code CODE 0 0 0 12A 1
+udata_acs COMRAM 1 1E 1E 1 1
 config CONFIG 4 300000 300000 E 1
 $build/default/production/config.o
 config CONFIG 4 300000 300000 E 1
 $build/default/production/lcd.o
-udata_acs COMRAM 1 F F 5 1
-lcd_code CODE 0 1FDD0 1FDD0 FE 1
+udata_acs COMRAM 1 12 12 5 1
+lcd_code CODE 0 1FDD4 1FDD4 FE 1
 $build/default/production/delay.o
-delay_code CODE 0 1FD10 1FD10 40 1
-udata_acs COMRAM 1 16 16 2 1
+delay_code CODE 0 1FCB4 1FCB4 40 1
+udata_acs COMRAM 1 1B 1B 2 1
 # %UNUSED Section
 # This section enumerates the unused ranges of each CLASS. Each entry
 # is described on a single line as follows:
@@ -49,21 +54,21 @@ BANK6 600-6FF 1
 BANK7 700-7FF 1
 BANK8 800-8FF 1
 BANK9 900-9FF 1
-CONST 124-1FCD5 1
+CONST 12A-1FC59 1
 IDLOC 200000-200007 1
-SMALLCONST 1000-1FCD5 1
-CODE 124-1FCD5 1
+SMALLCONST 1000-1FC59 1
+CODE 12A-1FC59 1
 BANK10 A00-AFF 1
 BANK11 B00-BFF 1
 BANK12 C00-CFF 1
 BANK13 D00-DFF 1
 BANK14 E00-EFF 1
 BANK15 F00-F15 1
-BIGRAM 124-F15 1
-COMRAM 18-5F 1
+BIGRAM 12A-F15 1
+COMRAM 1F-5F 1
 EEDATA F00000-F003FF 1
 MEDIUMCONST 1000-FFFF 1
-MEDIUMCONST 11000-1FCD5 1
+MEDIUMCONST 11000-1FC59 1
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
 # The beginning of the section is indicated by %LINETAB.
@@ -78,378 +83,430 @@ MEDIUMCONST 11000-1FCD5 1
 # All other numeric values are in decimal.
 %LINETAB
 $build/default/production/transducer.o
-1FD50 trans_code CODE >23:H:\Desktop\MaicroTheremin\transducer.s
-1FD52 trans_code CODE >24:H:\Desktop\MaicroTheremin\transducer.s
-1FD54 trans_code CODE >25:H:\Desktop\MaicroTheremin\transducer.s
-1FD56 trans_code CODE >26:H:\Desktop\MaicroTheremin\transducer.s
-1FD58 trans_code CODE >27:H:\Desktop\MaicroTheremin\transducer.s
-1FD5A trans_code CODE >47:H:\Desktop\MaicroTheremin\transducer.s
-1FD5C trans_code CODE >48:H:\Desktop\MaicroTheremin\transducer.s
-1FD5E trans_code CODE >50:H:\Desktop\MaicroTheremin\transducer.s
-1FD60 trans_code CODE >51:H:\Desktop\MaicroTheremin\transducer.s
-1FD62 trans_code CODE >52:H:\Desktop\MaicroTheremin\transducer.s
-1FD64 trans_code CODE >53:H:\Desktop\MaicroTheremin\transducer.s
-1FD68 trans_code CODE >55:H:\Desktop\MaicroTheremin\transducer.s
-1FD6A trans_code CODE >56:H:\Desktop\MaicroTheremin\transducer.s
-1FD6C trans_code CODE >58:H:\Desktop\MaicroTheremin\transducer.s
-1FD6E trans_code CODE >59:H:\Desktop\MaicroTheremin\transducer.s
-1FD70 trans_code CODE >60:H:\Desktop\MaicroTheremin\transducer.s
-1FD72 trans_code CODE >61:H:\Desktop\MaicroTheremin\transducer.s
-1FD76 trans_code CODE >63:H:\Desktop\MaicroTheremin\transducer.s
-1FD7A trans_code CODE >66:H:\Desktop\MaicroTheremin\transducer.s
-1FD7C trans_code CODE >67:H:\Desktop\MaicroTheremin\transducer.s
-1FD7E trans_code CODE >68:H:\Desktop\MaicroTheremin\transducer.s
-1FD80 trans_code CODE >69:H:\Desktop\MaicroTheremin\transducer.s
-1FD82 trans_code CODE >70:H:\Desktop\MaicroTheremin\transducer.s
-1FD84 trans_code CODE >71:H:\Desktop\MaicroTheremin\transducer.s
-1FD88 trans_code CODE >72:H:\Desktop\MaicroTheremin\transducer.s
-1FD8A trans_code CODE >73:H:\Desktop\MaicroTheremin\transducer.s
-1FD8C trans_code CODE >74:H:\Desktop\MaicroTheremin\transducer.s
-1FD8E trans_code CODE >75:H:\Desktop\MaicroTheremin\transducer.s
-1FD90 trans_code CODE >76:H:\Desktop\MaicroTheremin\transducer.s
-1FD92 trans_code CODE >77:H:\Desktop\MaicroTheremin\transducer.s
-1FD96 trans_code CODE >78:H:\Desktop\MaicroTheremin\transducer.s
-1FD9A trans_code CODE >81:H:\Desktop\MaicroTheremin\transducer.s
-1FD9C trans_code CODE >86:H:\Desktop\MaicroTheremin\transducer.s
-1FD9E trans_code CODE >87:H:\Desktop\MaicroTheremin\transducer.s
-1FDA0 trans_code CODE >89:H:\Desktop\MaicroTheremin\transducer.s
-1FDA4 trans_code CODE >90:H:\Desktop\MaicroTheremin\transducer.s
-1FDA6 trans_code CODE >91:H:\Desktop\MaicroTheremin\transducer.s
-1FDA8 trans_code CODE >93:H:\Desktop\MaicroTheremin\transducer.s
-1FDAA trans_code CODE >94:H:\Desktop\MaicroTheremin\transducer.s
-1FDAE trans_code CODE >96:H:\Desktop\MaicroTheremin\transducer.s
-1FDB0 trans_code CODE >97:H:\Desktop\MaicroTheremin\transducer.s
-1FDB2 trans_code CODE >98:H:\Desktop\MaicroTheremin\transducer.s
-1FDB4 trans_code CODE >99:H:\Desktop\MaicroTheremin\transducer.s
-1FDB6 trans_code CODE >103:H:\Desktop\MaicroTheremin\transducer.s
-1FDB8 trans_code CODE >104:H:\Desktop\MaicroTheremin\transducer.s
-1FDBA trans_code CODE >106:H:\Desktop\MaicroTheremin\transducer.s
-1FDBE trans_code CODE >107:H:\Desktop\MaicroTheremin\transducer.s
-1FDC0 trans_code CODE >108:H:\Desktop\MaicroTheremin\transducer.s
-1FDC2 trans_code CODE >110:H:\Desktop\MaicroTheremin\transducer.s
-1FDC4 trans_code CODE >111:H:\Desktop\MaicroTheremin\transducer.s
-1FDC8 trans_code CODE >113:H:\Desktop\MaicroTheremin\transducer.s
-1FDCA trans_code CODE >114:H:\Desktop\MaicroTheremin\transducer.s
-1FDCC trans_code CODE >115:H:\Desktop\MaicroTheremin\transducer.s
-1FDCE trans_code CODE >117:H:\Desktop\MaicroTheremin\transducer.s
+1FD4E trans_code CODE >26:H:\Desktop\MaicroTheremin\transducer.s
+1FD50 trans_code CODE >27:H:\Desktop\MaicroTheremin\transducer.s
+1FD52 trans_code CODE >28:H:\Desktop\MaicroTheremin\transducer.s
+1FD54 trans_code CODE >29:H:\Desktop\MaicroTheremin\transducer.s
+1FD56 trans_code CODE >30:H:\Desktop\MaicroTheremin\transducer.s
+1FD58 trans_code CODE >31:H:\Desktop\MaicroTheremin\transducer.s
+1FD5A trans_code CODE >39:H:\Desktop\MaicroTheremin\transducer.s
+1FD5C trans_code CODE >40:H:\Desktop\MaicroTheremin\transducer.s
+1FD5E trans_code CODE >41:H:\Desktop\MaicroTheremin\transducer.s
+1FD60 trans_code CODE >42:H:\Desktop\MaicroTheremin\transducer.s
+1FD62 trans_code CODE >43:H:\Desktop\MaicroTheremin\transducer.s
+1FD64 trans_code CODE >44:H:\Desktop\MaicroTheremin\transducer.s
+1FD68 trans_code CODE >46:H:\Desktop\MaicroTheremin\transducer.s
+1FD6A trans_code CODE >47:H:\Desktop\MaicroTheremin\transducer.s
+1FD6C trans_code CODE >50:H:\Desktop\MaicroTheremin\transducer.s
+1FD6E trans_code CODE >51:H:\Desktop\MaicroTheremin\transducer.s
+1FD70 trans_code CODE >52:H:\Desktop\MaicroTheremin\transducer.s
+1FD72 trans_code CODE >53:H:\Desktop\MaicroTheremin\transducer.s
+1FD76 trans_code CODE >55:H:\Desktop\MaicroTheremin\transducer.s
+1FD7A trans_code CODE >56:H:\Desktop\MaicroTheremin\transducer.s
+1FD7E trans_code CODE >58:H:\Desktop\MaicroTheremin\transducer.s
+1FD80 trans_code CODE >59:H:\Desktop\MaicroTheremin\transducer.s
+1FD82 trans_code CODE >60:H:\Desktop\MaicroTheremin\transducer.s
+1FD84 trans_code CODE >61:H:\Desktop\MaicroTheremin\transducer.s
+1FD86 trans_code CODE >62:H:\Desktop\MaicroTheremin\transducer.s
+1FD88 trans_code CODE >63:H:\Desktop\MaicroTheremin\transducer.s
+1FD8C trans_code CODE >64:H:\Desktop\MaicroTheremin\transducer.s
+1FD8E trans_code CODE >65:H:\Desktop\MaicroTheremin\transducer.s
+1FD90 trans_code CODE >66:H:\Desktop\MaicroTheremin\transducer.s
+1FD92 trans_code CODE >67:H:\Desktop\MaicroTheremin\transducer.s
+1FD94 trans_code CODE >68:H:\Desktop\MaicroTheremin\transducer.s
+1FD96 trans_code CODE >69:H:\Desktop\MaicroTheremin\transducer.s
+1FD9A trans_code CODE >70:H:\Desktop\MaicroTheremin\transducer.s
+1FD9E trans_code CODE >71:H:\Desktop\MaicroTheremin\transducer.s
+1FDA2 trans_code CODE >74:H:\Desktop\MaicroTheremin\transducer.s
+1FDA4 trans_code CODE >79:H:\Desktop\MaicroTheremin\transducer.s
+1FDA6 trans_code CODE >80:H:\Desktop\MaicroTheremin\transducer.s
+1FDA8 trans_code CODE >82:H:\Desktop\MaicroTheremin\transducer.s
+1FDAC trans_code CODE >83:H:\Desktop\MaicroTheremin\transducer.s
+1FDAE trans_code CODE >84:H:\Desktop\MaicroTheremin\transducer.s
+1FDB0 trans_code CODE >86:H:\Desktop\MaicroTheremin\transducer.s
+1FDB2 trans_code CODE >87:H:\Desktop\MaicroTheremin\transducer.s
+1FDB6 trans_code CODE >89:H:\Desktop\MaicroTheremin\transducer.s
+1FDB8 trans_code CODE >90:H:\Desktop\MaicroTheremin\transducer.s
+1FDBA trans_code CODE >91:H:\Desktop\MaicroTheremin\transducer.s
+1FDBC trans_code CODE >95:H:\Desktop\MaicroTheremin\transducer.s
+1FDBE trans_code CODE >96:H:\Desktop\MaicroTheremin\transducer.s
+1FDC0 trans_code CODE >98:H:\Desktop\MaicroTheremin\transducer.s
+1FDC4 trans_code CODE >99:H:\Desktop\MaicroTheremin\transducer.s
+1FDC6 trans_code CODE >100:H:\Desktop\MaicroTheremin\transducer.s
+1FDC8 trans_code CODE >102:H:\Desktop\MaicroTheremin\transducer.s
+1FDCA trans_code CODE >103:H:\Desktop\MaicroTheremin\transducer.s
+1FDCE trans_code CODE >105:H:\Desktop\MaicroTheremin\transducer.s
+1FDD0 trans_code CODE >106:H:\Desktop\MaicroTheremin\transducer.s
+1FDD2 trans_code CODE >108:H:\Desktop\MaicroTheremin\transducer.s
 $build/default/production/maths.o
-1FCD6 maths_code CODE >29:H:\Desktop\MaicroTheremin\maths.s
-1FCD8 maths_code CODE >30:H:\Desktop\MaicroTheremin\maths.s
-1FCDA maths_code CODE >32:H:\Desktop\MaicroTheremin\maths.s
-1FCDE maths_code CODE >33:H:\Desktop\MaicroTheremin\maths.s
-1FCE2 maths_code CODE >35:H:\Desktop\MaicroTheremin\maths.s
-1FCE4 maths_code CODE >36:H:\Desktop\MaicroTheremin\maths.s
-1FCE6 maths_code CODE >38:H:\Desktop\MaicroTheremin\maths.s
-1FCEA maths_code CODE >39:H:\Desktop\MaicroTheremin\maths.s
-1FCEE maths_code CODE >41:H:\Desktop\MaicroTheremin\maths.s
-1FCF0 maths_code CODE >42:H:\Desktop\MaicroTheremin\maths.s
-1FCF2 maths_code CODE >44:H:\Desktop\MaicroTheremin\maths.s
-1FCF4 maths_code CODE >45:H:\Desktop\MaicroTheremin\maths.s
-1FCF6 maths_code CODE >46:H:\Desktop\MaicroTheremin\maths.s
-1FCF8 maths_code CODE >47:H:\Desktop\MaicroTheremin\maths.s
-1FCFA maths_code CODE >48:H:\Desktop\MaicroTheremin\maths.s
-1FCFC maths_code CODE >49:H:\Desktop\MaicroTheremin\maths.s
-1FCFE maths_code CODE >51:H:\Desktop\MaicroTheremin\maths.s
-1FD00 maths_code CODE >52:H:\Desktop\MaicroTheremin\maths.s
-1FD02 maths_code CODE >54:H:\Desktop\MaicroTheremin\maths.s
-1FD04 maths_code CODE >55:H:\Desktop\MaicroTheremin\maths.s
-1FD06 maths_code CODE >56:H:\Desktop\MaicroTheremin\maths.s
-1FD08 maths_code CODE >57:H:\Desktop\MaicroTheremin\maths.s
-1FD0A maths_code CODE >58:H:\Desktop\MaicroTheremin\maths.s
-1FD0C maths_code CODE >59:H:\Desktop\MaicroTheremin\maths.s
-1FD0E maths_code CODE >61:H:\Desktop\MaicroTheremin\maths.s
+1FC7A maths_code CODE >29:H:\Desktop\MaicroTheremin\maths.s
+1FC7C maths_code CODE >30:H:\Desktop\MaicroTheremin\maths.s
+1FC7E maths_code CODE >32:H:\Desktop\MaicroTheremin\maths.s
+1FC82 maths_code CODE >33:H:\Desktop\MaicroTheremin\maths.s
+1FC86 maths_code CODE >35:H:\Desktop\MaicroTheremin\maths.s
+1FC88 maths_code CODE >36:H:\Desktop\MaicroTheremin\maths.s
+1FC8A maths_code CODE >38:H:\Desktop\MaicroTheremin\maths.s
+1FC8E maths_code CODE >39:H:\Desktop\MaicroTheremin\maths.s
+1FC92 maths_code CODE >41:H:\Desktop\MaicroTheremin\maths.s
+1FC94 maths_code CODE >42:H:\Desktop\MaicroTheremin\maths.s
+1FC96 maths_code CODE >44:H:\Desktop\MaicroTheremin\maths.s
+1FC98 maths_code CODE >45:H:\Desktop\MaicroTheremin\maths.s
+1FC9A maths_code CODE >46:H:\Desktop\MaicroTheremin\maths.s
+1FC9C maths_code CODE >47:H:\Desktop\MaicroTheremin\maths.s
+1FC9E maths_code CODE >48:H:\Desktop\MaicroTheremin\maths.s
+1FCA0 maths_code CODE >49:H:\Desktop\MaicroTheremin\maths.s
+1FCA2 maths_code CODE >51:H:\Desktop\MaicroTheremin\maths.s
+1FCA4 maths_code CODE >52:H:\Desktop\MaicroTheremin\maths.s
+1FCA6 maths_code CODE >54:H:\Desktop\MaicroTheremin\maths.s
+1FCA8 maths_code CODE >55:H:\Desktop\MaicroTheremin\maths.s
+1FCAA maths_code CODE >56:H:\Desktop\MaicroTheremin\maths.s
+1FCAC maths_code CODE >57:H:\Desktop\MaicroTheremin\maths.s
+1FCAE maths_code CODE >58:H:\Desktop\MaicroTheremin\maths.s
+1FCB0 maths_code CODE >59:H:\Desktop\MaicroTheremin\maths.s
+1FCB2 maths_code CODE >61:H:\Desktop\MaicroTheremin\maths.s
+$build/default/production/interrupts.o
+1FCF4 interrupt_code CODE >16:H:\Desktop\MaicroTheremin\interrupts.s
+1FCF6 interrupt_code CODE >17:H:\Desktop\MaicroTheremin\interrupts.s
+1FCF8 interrupt_code CODE >18:H:\Desktop\MaicroTheremin\interrupts.s
+1FCFA interrupt_code CODE >19:H:\Desktop\MaicroTheremin\interrupts.s
+1FCFC interrupt_code CODE >20:H:\Desktop\MaicroTheremin\interrupts.s
+1FCFE interrupt_code CODE >22:H:\Desktop\MaicroTheremin\interrupts.s
+1FD00 interrupt_code CODE >23:H:\Desktop\MaicroTheremin\interrupts.s
+1FD02 interrupt_code CODE >25:H:\Desktop\MaicroTheremin\interrupts.s
+1FD04 interrupt_code CODE >35:H:\Desktop\MaicroTheremin\interrupts.s
+1FD06 interrupt_code CODE >36:H:\Desktop\MaicroTheremin\interrupts.s
+1FD08 interrupt_code CODE >37:H:\Desktop\MaicroTheremin\interrupts.s
+1FD0A interrupt_code CODE >38:H:\Desktop\MaicroTheremin\interrupts.s
+1FD0C interrupt_code CODE >39:H:\Desktop\MaicroTheremin\interrupts.s
+1FD0E interrupt_code CODE >42:H:\Desktop\MaicroTheremin\interrupts.s
+1FD10 interrupt_code CODE >43:H:\Desktop\MaicroTheremin\interrupts.s
+1FD12 interrupt_code CODE >44:H:\Desktop\MaicroTheremin\interrupts.s
+1FD14 interrupt_code CODE >45:H:\Desktop\MaicroTheremin\interrupts.s
+1FD16 interrupt_code CODE >49:H:\Desktop\MaicroTheremin\interrupts.s
+1FD18 interrupt_code CODE >50:H:\Desktop\MaicroTheremin\interrupts.s
+1FD1A interrupt_code CODE >51:H:\Desktop\MaicroTheremin\interrupts.s
+1FD1C interrupt_code CODE >53:H:\Desktop\MaicroTheremin\interrupts.s
+1FD1E interrupt_code CODE >54:H:\Desktop\MaicroTheremin\interrupts.s
+1FD20 interrupt_code CODE >55:H:\Desktop\MaicroTheremin\interrupts.s
+1FD24 interrupt_code CODE >57:H:\Desktop\MaicroTheremin\interrupts.s
+1FD26 interrupt_code CODE >58:H:\Desktop\MaicroTheremin\interrupts.s
+1FD28 interrupt_code CODE >59:H:\Desktop\MaicroTheremin\interrupts.s
+1FD2A interrupt_code CODE >60:H:\Desktop\MaicroTheremin\interrupts.s
+1FD2C interrupt_code CODE >61:H:\Desktop\MaicroTheremin\interrupts.s
+1FD2E interrupt_code CODE >62:H:\Desktop\MaicroTheremin\interrupts.s
+1FD32 interrupt_code CODE >64:H:\Desktop\MaicroTheremin\interrupts.s
+1FD34 interrupt_code CODE >89:H:\Desktop\MaicroTheremin\interrupts.s
+1FD36 interrupt_code CODE >90:H:\Desktop\MaicroTheremin\interrupts.s
+1FD38 interrupt_code CODE >92:H:\Desktop\MaicroTheremin\interrupts.s
+1FD3A interrupt_code CODE >95:H:\Desktop\MaicroTheremin\interrupts.s
+1FD3C interrupt_code CODE >96:H:\Desktop\MaicroTheremin\interrupts.s
+1FD3E interrupt_code CODE >97:H:\Desktop\MaicroTheremin\interrupts.s
+1FD40 interrupt_code CODE >98:H:\Desktop\MaicroTheremin\interrupts.s
+1FD42 interrupt_code CODE >99:H:\Desktop\MaicroTheremin\interrupts.s
+1FD44 interrupt_code CODE >100:H:\Desktop\MaicroTheremin\interrupts.s
+1FD46 interrupt_code CODE >102:H:\Desktop\MaicroTheremin\interrupts.s
+1FD48 interrupt_code CODE >103:H:\Desktop\MaicroTheremin\interrupts.s
+1FD4A interrupt_code CODE >104:H:\Desktop\MaicroTheremin\interrupts.s
+1FD4C interrupt_code CODE >106:H:\Desktop\MaicroTheremin\interrupts.s
 $build/default/production/signal.o
-1FECE sig_code CODE >20:H:\Desktop\MaicroTheremin\signal.s
-1FED0 sig_code CODE >21:H:\Desktop\MaicroTheremin\signal.s
-1FED2 sig_code CODE >22:H:\Desktop\MaicroTheremin\signal.s
-1FED4 sig_code CODE >23:H:\Desktop\MaicroTheremin\signal.s
-1FED6 sig_code CODE >24:H:\Desktop\MaicroTheremin\signal.s
-1FED8 sig_code CODE >25:H:\Desktop\MaicroTheremin\signal.s
-1FEDA sig_code CODE >27:H:\Desktop\MaicroTheremin\signal.s
-1FEDC sig_code CODE >28:H:\Desktop\MaicroTheremin\signal.s
-1FEDE sig_code CODE >29:H:\Desktop\MaicroTheremin\signal.s
-1FEE0 sig_code CODE >41:H:\Desktop\MaicroTheremin\signal.s
-1FEE2 sig_code CODE >42:H:\Desktop\MaicroTheremin\signal.s
-1FEE4 sig_code CODE >48:H:\Desktop\MaicroTheremin\signal.s
-1FEE6 sig_code CODE >49:H:\Desktop\MaicroTheremin\signal.s
-1FEEA sig_code CODE >52:H:\Desktop\MaicroTheremin\signal.s
-1FEEC sig_code CODE >53:H:\Desktop\MaicroTheremin\signal.s
-1FEEE sig_code CODE >59:H:\Desktop\MaicroTheremin\signal.s
-1FEF0 sig_code CODE >60:H:\Desktop\MaicroTheremin\signal.s
-1FEF4 sig_code CODE >63:H:\Desktop\MaicroTheremin\signal.s
-1FEF6 sig_code CODE >64:H:\Desktop\MaicroTheremin\signal.s
-1FEF8 sig_code CODE >67:H:\Desktop\MaicroTheremin\signal.s
-1FEFA sig_code CODE >68:H:\Desktop\MaicroTheremin\signal.s
-1FEFC sig_code CODE >70:H:\Desktop\MaicroTheremin\signal.s
-1FEFE sig_code CODE >71:H:\Desktop\MaicroTheremin\signal.s
-1FF00 sig_code CODE >74:H:\Desktop\MaicroTheremin\signal.s
-1FF02 sig_code CODE >75:H:\Desktop\MaicroTheremin\signal.s
-1FF04 sig_code CODE >77:H:\Desktop\MaicroTheremin\signal.s
-1FF08 sig_code CODE >78:H:\Desktop\MaicroTheremin\signal.s
-1FF0C sig_code CODE >81:H:\Desktop\MaicroTheremin\signal.s
-1FF0E sig_code CODE >89:H:\Desktop\MaicroTheremin\signal.s
-1FF12 sig_code CODE >90:H:\Desktop\MaicroTheremin\signal.s
-1FF14 sig_code CODE >113:H:\Desktop\MaicroTheremin\signal.s
-1FF18 sig_code CODE >114:H:\Desktop\MaicroTheremin\signal.s
-1FF1C sig_code CODE >118:H:\Desktop\MaicroTheremin\signal.s
-1FF1E sig_code CODE >122:H:\Desktop\MaicroTheremin\signal.s
-1FF22 sig_code CODE >123:H:\Desktop\MaicroTheremin\signal.s
-1FF24 sig_code CODE >124:H:\Desktop\MaicroTheremin\signal.s
-1FF26 sig_code CODE >127:H:\Desktop\MaicroTheremin\signal.s
-1FF28 sig_code CODE >128:H:\Desktop\MaicroTheremin\signal.s
-1FF2A sig_code CODE >130:H:\Desktop\MaicroTheremin\signal.s
-1FF2E sig_code CODE >131:H:\Desktop\MaicroTheremin\signal.s
-1FF30 sig_code CODE >132:H:\Desktop\MaicroTheremin\signal.s
-1FF34 sig_code CODE >135:H:\Desktop\MaicroTheremin\signal.s
-1FF36 sig_code CODE >136:H:\Desktop\MaicroTheremin\signal.s
-1FF38 sig_code CODE >138:H:\Desktop\MaicroTheremin\signal.s
-1FF3C sig_code CODE >139:H:\Desktop\MaicroTheremin\signal.s
-1FF3E sig_code CODE >140:H:\Desktop\MaicroTheremin\signal.s
-1FF42 sig_code CODE >142:H:\Desktop\MaicroTheremin\signal.s
-1FF44 sig_code CODE >143:H:\Desktop\MaicroTheremin\signal.s
-1FF46 sig_code CODE >144:H:\Desktop\MaicroTheremin\signal.s
-1FF48 sig_code CODE >146:H:\Desktop\MaicroTheremin\signal.s
-1FF4A sig_code CODE >147:H:\Desktop\MaicroTheremin\signal.s
-1FF4C sig_code CODE >149:H:\Desktop\MaicroTheremin\signal.s
-1FF4E sig_code CODE >150:H:\Desktop\MaicroTheremin\signal.s
-1FF50 sig_code CODE >151:H:\Desktop\MaicroTheremin\signal.s
-1FF52 sig_code CODE >153:H:\Desktop\MaicroTheremin\signal.s
-1FF54 sig_code CODE >154:H:\Desktop\MaicroTheremin\signal.s
-1FF56 sig_code CODE >155:H:\Desktop\MaicroTheremin\signal.s
-1FF58 sig_code CODE >156:H:\Desktop\MaicroTheremin\signal.s
-1FF5A sig_code CODE >161:H:\Desktop\MaicroTheremin\signal.s
-1FF5E sig_code CODE >164:H:\Desktop\MaicroTheremin\signal.s
-1FF60 sig_code CODE >165:H:\Desktop\MaicroTheremin\signal.s
-1FF64 sig_code CODE >167:H:\Desktop\MaicroTheremin\signal.s
-1FF66 sig_code CODE >168:H:\Desktop\MaicroTheremin\signal.s
-1FF68 sig_code CODE >170:H:\Desktop\MaicroTheremin\signal.s
-1FF6A sig_code CODE >175:H:\Desktop\MaicroTheremin\signal.s
-1FF6C sig_code CODE >176:H:\Desktop\MaicroTheremin\signal.s
-1FF6E sig_code CODE >177:H:\Desktop\MaicroTheremin\signal.s
-1FF70 sig_code CODE >178:H:\Desktop\MaicroTheremin\signal.s
-1FF72 sig_code CODE >180:H:\Desktop\MaicroTheremin\signal.s
-1FF74 sig_code CODE >181:H:\Desktop\MaicroTheremin\signal.s
-1FF76 sig_code CODE >182:H:\Desktop\MaicroTheremin\signal.s
-1FF78 sig_code CODE >185:H:\Desktop\MaicroTheremin\signal.s
-1FF7A sig_code CODE >186:H:\Desktop\MaicroTheremin\signal.s
-1FF7C sig_code CODE >187:H:\Desktop\MaicroTheremin\signal.s
-1FF7E sig_code CODE >188:H:\Desktop\MaicroTheremin\signal.s
-1FF80 sig_code CODE >190:H:\Desktop\MaicroTheremin\signal.s
-1FF82 sig_code CODE >191:H:\Desktop\MaicroTheremin\signal.s
-1FF84 sig_code CODE >192:H:\Desktop\MaicroTheremin\signal.s
-1FF86 sig_code CODE >195:H:\Desktop\MaicroTheremin\signal.s
-1FF88 sig_code CODE >196:H:\Desktop\MaicroTheremin\signal.s
-1FF8A sig_code CODE >197:H:\Desktop\MaicroTheremin\signal.s
-1FF8C sig_code CODE >198:H:\Desktop\MaicroTheremin\signal.s
-1FF8E sig_code CODE >200:H:\Desktop\MaicroTheremin\signal.s
-1FF90 sig_code CODE >201:H:\Desktop\MaicroTheremin\signal.s
-1FF92 sig_code CODE >202:H:\Desktop\MaicroTheremin\signal.s
-1FF94 sig_code CODE >205:H:\Desktop\MaicroTheremin\signal.s
-1FF96 sig_code CODE >206:H:\Desktop\MaicroTheremin\signal.s
-1FF98 sig_code CODE >207:H:\Desktop\MaicroTheremin\signal.s
-1FF9A sig_code CODE >208:H:\Desktop\MaicroTheremin\signal.s
-1FF9C sig_code CODE >210:H:\Desktop\MaicroTheremin\signal.s
-1FF9E sig_code CODE >211:H:\Desktop\MaicroTheremin\signal.s
-1FFA0 sig_code CODE >212:H:\Desktop\MaicroTheremin\signal.s
-1FFA2 sig_code CODE >215:H:\Desktop\MaicroTheremin\signal.s
-1FFA4 sig_code CODE >216:H:\Desktop\MaicroTheremin\signal.s
-1FFA6 sig_code CODE >217:H:\Desktop\MaicroTheremin\signal.s
-1FFA8 sig_code CODE >218:H:\Desktop\MaicroTheremin\signal.s
-1FFAA sig_code CODE >220:H:\Desktop\MaicroTheremin\signal.s
-1FFAC sig_code CODE >221:H:\Desktop\MaicroTheremin\signal.s
-1FFAE sig_code CODE >222:H:\Desktop\MaicroTheremin\signal.s
-1FFB0 sig_code CODE >225:H:\Desktop\MaicroTheremin\signal.s
-1FFB2 sig_code CODE >226:H:\Desktop\MaicroTheremin\signal.s
-1FFB4 sig_code CODE >227:H:\Desktop\MaicroTheremin\signal.s
-1FFB6 sig_code CODE >228:H:\Desktop\MaicroTheremin\signal.s
-1FFB8 sig_code CODE >230:H:\Desktop\MaicroTheremin\signal.s
-1FFBA sig_code CODE >231:H:\Desktop\MaicroTheremin\signal.s
-1FFBC sig_code CODE >232:H:\Desktop\MaicroTheremin\signal.s
-1FFBE sig_code CODE >235:H:\Desktop\MaicroTheremin\signal.s
-1FFC0 sig_code CODE >236:H:\Desktop\MaicroTheremin\signal.s
-1FFC2 sig_code CODE >237:H:\Desktop\MaicroTheremin\signal.s
-1FFC4 sig_code CODE >238:H:\Desktop\MaicroTheremin\signal.s
-1FFC6 sig_code CODE >240:H:\Desktop\MaicroTheremin\signal.s
-1FFC8 sig_code CODE >241:H:\Desktop\MaicroTheremin\signal.s
-1FFCA sig_code CODE >242:H:\Desktop\MaicroTheremin\signal.s
-1FFCC sig_code CODE >245:H:\Desktop\MaicroTheremin\signal.s
-1FFCE sig_code CODE >246:H:\Desktop\MaicroTheremin\signal.s
-1FFD0 sig_code CODE >247:H:\Desktop\MaicroTheremin\signal.s
-1FFD2 sig_code CODE >248:H:\Desktop\MaicroTheremin\signal.s
-1FFD4 sig_code CODE >250:H:\Desktop\MaicroTheremin\signal.s
-1FFD6 sig_code CODE >251:H:\Desktop\MaicroTheremin\signal.s
-1FFD8 sig_code CODE >252:H:\Desktop\MaicroTheremin\signal.s
-1FFDA sig_code CODE >255:H:\Desktop\MaicroTheremin\signal.s
-1FFDC sig_code CODE >256:H:\Desktop\MaicroTheremin\signal.s
-1FFDE sig_code CODE >257:H:\Desktop\MaicroTheremin\signal.s
-1FFE0 sig_code CODE >258:H:\Desktop\MaicroTheremin\signal.s
-1FFE2 sig_code CODE >260:H:\Desktop\MaicroTheremin\signal.s
-1FFE4 sig_code CODE >261:H:\Desktop\MaicroTheremin\signal.s
-1FFE6 sig_code CODE >262:H:\Desktop\MaicroTheremin\signal.s
-1FFE8 sig_code CODE >265:H:\Desktop\MaicroTheremin\signal.s
-1FFEA sig_code CODE >266:H:\Desktop\MaicroTheremin\signal.s
-1FFEC sig_code CODE >267:H:\Desktop\MaicroTheremin\signal.s
-1FFEE sig_code CODE >268:H:\Desktop\MaicroTheremin\signal.s
-1FFF0 sig_code CODE >270:H:\Desktop\MaicroTheremin\signal.s
-1FFF2 sig_code CODE >271:H:\Desktop\MaicroTheremin\signal.s
-1FFF4 sig_code CODE >272:H:\Desktop\MaicroTheremin\signal.s
-1FFF6 sig_code CODE >275:H:\Desktop\MaicroTheremin\signal.s
-1FFF8 sig_code CODE >276:H:\Desktop\MaicroTheremin\signal.s
-1FFFA sig_code CODE >277:H:\Desktop\MaicroTheremin\signal.s
-1FFFC sig_code CODE >278:H:\Desktop\MaicroTheremin\signal.s
-1FFFE sig_code CODE >281:H:\Desktop\MaicroTheremin\signal.s
+1FED2 sig_code CODE >48:H:\Desktop\MaicroTheremin\signal.s
+1FED4 sig_code CODE >49:H:\Desktop\MaicroTheremin\signal.s
+1FED6 sig_code CODE >50:H:\Desktop\MaicroTheremin\signal.s
+1FED8 sig_code CODE >51:H:\Desktop\MaicroTheremin\signal.s
+1FEDA sig_code CODE >52:H:\Desktop\MaicroTheremin\signal.s
+1FEDC sig_code CODE >53:H:\Desktop\MaicroTheremin\signal.s
+1FEDE sig_code CODE >55:H:\Desktop\MaicroTheremin\signal.s
+1FEE0 sig_code CODE >56:H:\Desktop\MaicroTheremin\signal.s
+1FEE2 sig_code CODE >58:H:\Desktop\MaicroTheremin\signal.s
+1FEE4 sig_code CODE >59:H:\Desktop\MaicroTheremin\signal.s
+1FEE6 sig_code CODE >61:H:\Desktop\MaicroTheremin\signal.s
+1FEE8 sig_code CODE >62:H:\Desktop\MaicroTheremin\signal.s
+1FEEA sig_code CODE >63:H:\Desktop\MaicroTheremin\signal.s
+1FEEC sig_code CODE >65:H:\Desktop\MaicroTheremin\signal.s
+1FEEE sig_code CODE >69:H:\Desktop\MaicroTheremin\signal.s
+1FEF0 sig_code CODE >70:H:\Desktop\MaicroTheremin\signal.s
+1FEF4 sig_code CODE >71:H:\Desktop\MaicroTheremin\signal.s
+1FEF6 sig_code CODE >72:H:\Desktop\MaicroTheremin\signal.s
+1FEF8 sig_code CODE >74:H:\Desktop\MaicroTheremin\signal.s
+1FEFA sig_code CODE >75:H:\Desktop\MaicroTheremin\signal.s
+1FEFE sig_code CODE >76:H:\Desktop\MaicroTheremin\signal.s
+1FF00 sig_code CODE >77:H:\Desktop\MaicroTheremin\signal.s
+1FF02 sig_code CODE >79:H:\Desktop\MaicroTheremin\signal.s
+1FF06 sig_code CODE >80:H:\Desktop\MaicroTheremin\signal.s
+1FF08 sig_code CODE >83:H:\Desktop\MaicroTheremin\signal.s
+1FF0A sig_code CODE >84:H:\Desktop\MaicroTheremin\signal.s
+1FF0C sig_code CODE >86:H:\Desktop\MaicroTheremin\signal.s
+1FF0E sig_code CODE >87:H:\Desktop\MaicroTheremin\signal.s
+1FF10 sig_code CODE >90:H:\Desktop\MaicroTheremin\signal.s
+1FF12 sig_code CODE >91:H:\Desktop\MaicroTheremin\signal.s
+1FF14 sig_code CODE >93:H:\Desktop\MaicroTheremin\signal.s
+1FF18 sig_code CODE >94:H:\Desktop\MaicroTheremin\signal.s
+1FF1C sig_code CODE >97:H:\Desktop\MaicroTheremin\signal.s
+1FF1E sig_code CODE >101:H:\Desktop\MaicroTheremin\signal.s
+1FF20 sig_code CODE >102:H:\Desktop\MaicroTheremin\signal.s
+1FF22 sig_code CODE >103:H:\Desktop\MaicroTheremin\signal.s
+1FF24 sig_code CODE >104:H:\Desktop\MaicroTheremin\signal.s
+1FF26 sig_code CODE >105:H:\Desktop\MaicroTheremin\signal.s
+1FF28 sig_code CODE >106:H:\Desktop\MaicroTheremin\signal.s
+1FF2A sig_code CODE >107:H:\Desktop\MaicroTheremin\signal.s
+1FF2C sig_code CODE >110:H:\Desktop\MaicroTheremin\signal.s
+1FF30 sig_code CODE >112:H:\Desktop\MaicroTheremin\signal.s
+1FF32 sig_code CODE >113:H:\Desktop\MaicroTheremin\signal.s
+1FF34 sig_code CODE >114:H:\Desktop\MaicroTheremin\signal.s
+1FF36 sig_code CODE >117:H:\Desktop\MaicroTheremin\signal.s
+1FF38 sig_code CODE >118:H:\Desktop\MaicroTheremin\signal.s
+1FF3A sig_code CODE >119:H:\Desktop\MaicroTheremin\signal.s
+1FF3C sig_code CODE >120:H:\Desktop\MaicroTheremin\signal.s
+1FF3E sig_code CODE >121:H:\Desktop\MaicroTheremin\signal.s
+1FF40 sig_code CODE >124:H:\Desktop\MaicroTheremin\signal.s
+1FF42 sig_code CODE >125:H:\Desktop\MaicroTheremin\signal.s
+1FF46 sig_code CODE >126:H:\Desktop\MaicroTheremin\signal.s
+1FF48 sig_code CODE >127:H:\Desktop\MaicroTheremin\signal.s
+1FF4C sig_code CODE >129:H:\Desktop\MaicroTheremin\signal.s
+1FF4E sig_code CODE >134:H:\Desktop\MaicroTheremin\signal.s
+1FF50 sig_code CODE >135:H:\Desktop\MaicroTheremin\signal.s
+1FF52 sig_code CODE >136:H:\Desktop\MaicroTheremin\signal.s
+1FF54 sig_code CODE >137:H:\Desktop\MaicroTheremin\signal.s
+1FF56 sig_code CODE >139:H:\Desktop\MaicroTheremin\signal.s
+1FF58 sig_code CODE >140:H:\Desktop\MaicroTheremin\signal.s
+1FF5A sig_code CODE >141:H:\Desktop\MaicroTheremin\signal.s
+1FF5C sig_code CODE >144:H:\Desktop\MaicroTheremin\signal.s
+1FF5E sig_code CODE >145:H:\Desktop\MaicroTheremin\signal.s
+1FF60 sig_code CODE >146:H:\Desktop\MaicroTheremin\signal.s
+1FF62 sig_code CODE >147:H:\Desktop\MaicroTheremin\signal.s
+1FF64 sig_code CODE >149:H:\Desktop\MaicroTheremin\signal.s
+1FF66 sig_code CODE >150:H:\Desktop\MaicroTheremin\signal.s
+1FF68 sig_code CODE >151:H:\Desktop\MaicroTheremin\signal.s
+1FF6A sig_code CODE >154:H:\Desktop\MaicroTheremin\signal.s
+1FF6C sig_code CODE >155:H:\Desktop\MaicroTheremin\signal.s
+1FF6E sig_code CODE >156:H:\Desktop\MaicroTheremin\signal.s
+1FF70 sig_code CODE >157:H:\Desktop\MaicroTheremin\signal.s
+1FF72 sig_code CODE >159:H:\Desktop\MaicroTheremin\signal.s
+1FF74 sig_code CODE >160:H:\Desktop\MaicroTheremin\signal.s
+1FF76 sig_code CODE >161:H:\Desktop\MaicroTheremin\signal.s
+1FF78 sig_code CODE >164:H:\Desktop\MaicroTheremin\signal.s
+1FF7A sig_code CODE >165:H:\Desktop\MaicroTheremin\signal.s
+1FF7C sig_code CODE >166:H:\Desktop\MaicroTheremin\signal.s
+1FF7E sig_code CODE >167:H:\Desktop\MaicroTheremin\signal.s
+1FF80 sig_code CODE >169:H:\Desktop\MaicroTheremin\signal.s
+1FF82 sig_code CODE >170:H:\Desktop\MaicroTheremin\signal.s
+1FF84 sig_code CODE >171:H:\Desktop\MaicroTheremin\signal.s
+1FF86 sig_code CODE >174:H:\Desktop\MaicroTheremin\signal.s
+1FF88 sig_code CODE >175:H:\Desktop\MaicroTheremin\signal.s
+1FF8A sig_code CODE >176:H:\Desktop\MaicroTheremin\signal.s
+1FF8C sig_code CODE >177:H:\Desktop\MaicroTheremin\signal.s
+1FF8E sig_code CODE >179:H:\Desktop\MaicroTheremin\signal.s
+1FF90 sig_code CODE >180:H:\Desktop\MaicroTheremin\signal.s
+1FF92 sig_code CODE >181:H:\Desktop\MaicroTheremin\signal.s
+1FF94 sig_code CODE >184:H:\Desktop\MaicroTheremin\signal.s
+1FF96 sig_code CODE >185:H:\Desktop\MaicroTheremin\signal.s
+1FF98 sig_code CODE >186:H:\Desktop\MaicroTheremin\signal.s
+1FF9A sig_code CODE >187:H:\Desktop\MaicroTheremin\signal.s
+1FF9C sig_code CODE >189:H:\Desktop\MaicroTheremin\signal.s
+1FF9E sig_code CODE >190:H:\Desktop\MaicroTheremin\signal.s
+1FFA0 sig_code CODE >191:H:\Desktop\MaicroTheremin\signal.s
+1FFA2 sig_code CODE >194:H:\Desktop\MaicroTheremin\signal.s
+1FFA4 sig_code CODE >195:H:\Desktop\MaicroTheremin\signal.s
+1FFA6 sig_code CODE >196:H:\Desktop\MaicroTheremin\signal.s
+1FFA8 sig_code CODE >197:H:\Desktop\MaicroTheremin\signal.s
+1FFAA sig_code CODE >199:H:\Desktop\MaicroTheremin\signal.s
+1FFAC sig_code CODE >200:H:\Desktop\MaicroTheremin\signal.s
+1FFAE sig_code CODE >201:H:\Desktop\MaicroTheremin\signal.s
+1FFB0 sig_code CODE >204:H:\Desktop\MaicroTheremin\signal.s
+1FFB2 sig_code CODE >205:H:\Desktop\MaicroTheremin\signal.s
+1FFB4 sig_code CODE >206:H:\Desktop\MaicroTheremin\signal.s
+1FFB6 sig_code CODE >207:H:\Desktop\MaicroTheremin\signal.s
+1FFB8 sig_code CODE >209:H:\Desktop\MaicroTheremin\signal.s
+1FFBA sig_code CODE >210:H:\Desktop\MaicroTheremin\signal.s
+1FFBC sig_code CODE >211:H:\Desktop\MaicroTheremin\signal.s
+1FFBE sig_code CODE >214:H:\Desktop\MaicroTheremin\signal.s
+1FFC0 sig_code CODE >215:H:\Desktop\MaicroTheremin\signal.s
+1FFC2 sig_code CODE >216:H:\Desktop\MaicroTheremin\signal.s
+1FFC4 sig_code CODE >217:H:\Desktop\MaicroTheremin\signal.s
+1FFC6 sig_code CODE >219:H:\Desktop\MaicroTheremin\signal.s
+1FFC8 sig_code CODE >220:H:\Desktop\MaicroTheremin\signal.s
+1FFCA sig_code CODE >221:H:\Desktop\MaicroTheremin\signal.s
+1FFCC sig_code CODE >224:H:\Desktop\MaicroTheremin\signal.s
+1FFCE sig_code CODE >225:H:\Desktop\MaicroTheremin\signal.s
+1FFD0 sig_code CODE >226:H:\Desktop\MaicroTheremin\signal.s
+1FFD2 sig_code CODE >227:H:\Desktop\MaicroTheremin\signal.s
+1FFD4 sig_code CODE >229:H:\Desktop\MaicroTheremin\signal.s
+1FFD6 sig_code CODE >230:H:\Desktop\MaicroTheremin\signal.s
+1FFD8 sig_code CODE >231:H:\Desktop\MaicroTheremin\signal.s
+1FFDA sig_code CODE >234:H:\Desktop\MaicroTheremin\signal.s
+1FFDC sig_code CODE >235:H:\Desktop\MaicroTheremin\signal.s
+1FFDE sig_code CODE >236:H:\Desktop\MaicroTheremin\signal.s
+1FFE0 sig_code CODE >237:H:\Desktop\MaicroTheremin\signal.s
+1FFE2 sig_code CODE >240:H:\Desktop\MaicroTheremin\signal.s
+1FFE4 sig_code CODE >245:H:\Desktop\MaicroTheremin\signal.s
+1FFE8 sig_code CODE >246:H:\Desktop\MaicroTheremin\signal.s
+1FFEC sig_code CODE >248:H:\Desktop\MaicroTheremin\signal.s
+1FFEE sig_code CODE >249:H:\Desktop\MaicroTheremin\signal.s
+1FFF0 sig_code CODE >250:H:\Desktop\MaicroTheremin\signal.s
+1FFF2 sig_code CODE >251:H:\Desktop\MaicroTheremin\signal.s
+1FFF4 sig_code CODE >252:H:\Desktop\MaicroTheremin\signal.s
+1FFF6 sig_code CODE >254:H:\Desktop\MaicroTheremin\signal.s
+1FFFA sig_code CODE >255:H:\Desktop\MaicroTheremin\signal.s
+1FFFE sig_code CODE >257:H:\Desktop\MaicroTheremin\signal.s
 $build/default/production/main.o
-0 code CODE >11:H:\Desktop\MaicroTheremin\main.s
-0 code CODE >12:H:\Desktop\MaicroTheremin\main.s
-4 code CODE >14:H:\Desktop\MaicroTheremin\main.s
-100 code CODE >18:H:\Desktop\MaicroTheremin\main.s
-102 code CODE >19:H:\Desktop\MaicroTheremin\main.s
-104 code CODE >22:H:\Desktop\MaicroTheremin\main.s
-108 code CODE >23:H:\Desktop\MaicroTheremin\main.s
-10C code CODE >25:H:\Desktop\MaicroTheremin\main.s
-110 code CODE >28:H:\Desktop\MaicroTheremin\main.s
-114 code CODE >35:H:\Desktop\MaicroTheremin\main.s
-118 code CODE >36:H:\Desktop\MaicroTheremin\main.s
-11C code CODE >39:H:\Desktop\MaicroTheremin\main.s
-120 code CODE >43:H:\Desktop\MaicroTheremin\main.s
-122 code CODE >44:H:\Desktop\MaicroTheremin\main.s
+0 code CODE >16:H:\Desktop\MaicroTheremin\main.s
+0 code CODE >17:H:\Desktop\MaicroTheremin\main.s
+0 code CODE >21:H:\Desktop\MaicroTheremin\main.s
+2 code CODE >20:H:\Desktop\MaicroTheremin\main.s
+4 code CODE >23:H:\Desktop\MaicroTheremin\main.s
+8 code CODE >77:H:\Desktop\MaicroTheremin\main.s
+100 code CODE >27:H:\Desktop\MaicroTheremin\main.s
+102 code CODE >28:H:\Desktop\MaicroTheremin\main.s
+104 code CODE >31:H:\Desktop\MaicroTheremin\main.s
+108 code CODE >32:H:\Desktop\MaicroTheremin\main.s
+10C code CODE >34:H:\Desktop\MaicroTheremin\main.s
+10E code CODE >35:H:\Desktop\MaicroTheremin\main.s
+110 code CODE >36:H:\Desktop\MaicroTheremin\main.s
+112 code CODE >37:H:\Desktop\MaicroTheremin\main.s
+116 code CODE >39:H:\Desktop\MaicroTheremin\main.s
+11A code CODE >43:H:\Desktop\MaicroTheremin\main.s
+11E code CODE >44:H:\Desktop\MaicroTheremin\main.s
+122 code CODE >46:H:\Desktop\MaicroTheremin\main.s
+126 code CODE >60:H:\Desktop\MaicroTheremin\main.s
+128 code CODE >61:H:\Desktop\MaicroTheremin\main.s
+12A code CODE >75:H:\Desktop\MaicroTheremin\main.s
 $build/default/production/lcd.o
-1FDD0 lcd_code CODE >18:H:\Desktop\MaicroTheremin\lcd.s
-1FDD2 lcd_code CODE >19:H:\Desktop\MaicroTheremin\lcd.s
-1FDD4 lcd_code CODE >20:H:\Desktop\MaicroTheremin\lcd.s
-1FDD6 lcd_code CODE >21:H:\Desktop\MaicroTheremin\lcd.s
-1FDD8 lcd_code CODE >22:H:\Desktop\MaicroTheremin\lcd.s
-1FDDC lcd_code CODE >23:H:\Desktop\MaicroTheremin\lcd.s
-1FDDE lcd_code CODE >24:H:\Desktop\MaicroTheremin\lcd.s
-1FDE2 lcd_code CODE >25:H:\Desktop\MaicroTheremin\lcd.s
-1FDE4 lcd_code CODE >26:H:\Desktop\MaicroTheremin\lcd.s
-1FDE8 lcd_code CODE >27:H:\Desktop\MaicroTheremin\lcd.s
-1FDEA lcd_code CODE >28:H:\Desktop\MaicroTheremin\lcd.s
-1FDEE lcd_code CODE >29:H:\Desktop\MaicroTheremin\lcd.s
-1FDF0 lcd_code CODE >30:H:\Desktop\MaicroTheremin\lcd.s
-1FDF4 lcd_code CODE >31:H:\Desktop\MaicroTheremin\lcd.s
-1FDF6 lcd_code CODE >32:H:\Desktop\MaicroTheremin\lcd.s
-1FDFA lcd_code CODE >33:H:\Desktop\MaicroTheremin\lcd.s
-1FDFC lcd_code CODE >34:H:\Desktop\MaicroTheremin\lcd.s
-1FE00 lcd_code CODE >35:H:\Desktop\MaicroTheremin\lcd.s
-1FE02 lcd_code CODE >36:H:\Desktop\MaicroTheremin\lcd.s
-1FE06 lcd_code CODE >37:H:\Desktop\MaicroTheremin\lcd.s
-1FE08 lcd_code CODE >38:H:\Desktop\MaicroTheremin\lcd.s
-1FE0C lcd_code CODE >39:H:\Desktop\MaicroTheremin\lcd.s
-1FE0E lcd_code CODE >40:H:\Desktop\MaicroTheremin\lcd.s
-1FE12 lcd_code CODE >41:H:\Desktop\MaicroTheremin\lcd.s
-1FE14 lcd_code CODE >42:H:\Desktop\MaicroTheremin\lcd.s
-1FE18 lcd_code CODE >43:H:\Desktop\MaicroTheremin\lcd.s
-1FE1A lcd_code CODE >44:H:\Desktop\MaicroTheremin\lcd.s
-1FE1E lcd_code CODE >45:H:\Desktop\MaicroTheremin\lcd.s
-1FE20 lcd_code CODE >46:H:\Desktop\MaicroTheremin\lcd.s
-1FE24 lcd_code CODE >47:H:\Desktop\MaicroTheremin\lcd.s
-1FE26 lcd_code CODE >50:H:\Desktop\MaicroTheremin\lcd.s
-1FE2A lcd_code CODE >51:H:\Desktop\MaicroTheremin\lcd.s
-1FE2C lcd_code CODE >52:H:\Desktop\MaicroTheremin\lcd.s
-1FE30 lcd_code CODE >53:H:\Desktop\MaicroTheremin\lcd.s
-1FE32 lcd_code CODE >57:H:\Desktop\MaicroTheremin\lcd.s
-1FE34 lcd_code CODE >59:H:\Desktop\MaicroTheremin\lcd.s
-1FE36 lcd_code CODE >60:H:\Desktop\MaicroTheremin\lcd.s
-1FE3A lcd_code CODE >61:H:\Desktop\MaicroTheremin\lcd.s
-1FE3C lcd_code CODE >62:H:\Desktop\MaicroTheremin\lcd.s
-1FE3E lcd_code CODE >63:H:\Desktop\MaicroTheremin\lcd.s
-1FE40 lcd_code CODE >66:H:\Desktop\MaicroTheremin\lcd.s
-1FE42 lcd_code CODE >67:H:\Desktop\MaicroTheremin\lcd.s
-1FE44 lcd_code CODE >68:H:\Desktop\MaicroTheremin\lcd.s
-1FE46 lcd_code CODE >69:H:\Desktop\MaicroTheremin\lcd.s
-1FE48 lcd_code CODE >70:H:\Desktop\MaicroTheremin\lcd.s
-1FE4A lcd_code CODE >71:H:\Desktop\MaicroTheremin\lcd.s
-1FE4E lcd_code CODE >72:H:\Desktop\MaicroTheremin\lcd.s
-1FE50 lcd_code CODE >73:H:\Desktop\MaicroTheremin\lcd.s
-1FE52 lcd_code CODE >74:H:\Desktop\MaicroTheremin\lcd.s
-1FE54 lcd_code CODE >75:H:\Desktop\MaicroTheremin\lcd.s
-1FE56 lcd_code CODE >76:H:\Desktop\MaicroTheremin\lcd.s
-1FE5A lcd_code CODE >77:H:\Desktop\MaicroTheremin\lcd.s
-1FE5C lcd_code CODE >80:H:\Desktop\MaicroTheremin\lcd.s
-1FE5E lcd_code CODE >81:H:\Desktop\MaicroTheremin\lcd.s
-1FE60 lcd_code CODE >82:H:\Desktop\MaicroTheremin\lcd.s
-1FE62 lcd_code CODE >83:H:\Desktop\MaicroTheremin\lcd.s
-1FE64 lcd_code CODE >84:H:\Desktop\MaicroTheremin\lcd.s
-1FE66 lcd_code CODE >85:H:\Desktop\MaicroTheremin\lcd.s
-1FE6A lcd_code CODE >86:H:\Desktop\MaicroTheremin\lcd.s
-1FE6C lcd_code CODE >87:H:\Desktop\MaicroTheremin\lcd.s
-1FE6E lcd_code CODE >88:H:\Desktop\MaicroTheremin\lcd.s
-1FE70 lcd_code CODE >89:H:\Desktop\MaicroTheremin\lcd.s
-1FE72 lcd_code CODE >90:H:\Desktop\MaicroTheremin\lcd.s
-1FE76 lcd_code CODE >91:H:\Desktop\MaicroTheremin\lcd.s
-1FE78 lcd_code CODE >92:H:\Desktop\MaicroTheremin\lcd.s
-1FE7C lcd_code CODE >93:H:\Desktop\MaicroTheremin\lcd.s
-1FE7E lcd_code CODE >96:H:\Desktop\MaicroTheremin\lcd.s
-1FE80 lcd_code CODE >97:H:\Desktop\MaicroTheremin\lcd.s
-1FE82 lcd_code CODE >98:H:\Desktop\MaicroTheremin\lcd.s
-1FE84 lcd_code CODE >99:H:\Desktop\MaicroTheremin\lcd.s
-1FE86 lcd_code CODE >100:H:\Desktop\MaicroTheremin\lcd.s
-1FE88 lcd_code CODE >101:H:\Desktop\MaicroTheremin\lcd.s
-1FE8A lcd_code CODE >102:H:\Desktop\MaicroTheremin\lcd.s
-1FE8C lcd_code CODE >103:H:\Desktop\MaicroTheremin\lcd.s
-1FE8E lcd_code CODE >104:H:\Desktop\MaicroTheremin\lcd.s
-1FE90 lcd_code CODE >105:H:\Desktop\MaicroTheremin\lcd.s
-1FE92 lcd_code CODE >106:H:\Desktop\MaicroTheremin\lcd.s
-1FE94 lcd_code CODE >107:H:\Desktop\MaicroTheremin\lcd.s
-1FE96 lcd_code CODE >108:H:\Desktop\MaicroTheremin\lcd.s
-1FE98 lcd_code CODE >109:H:\Desktop\MaicroTheremin\lcd.s
-1FE9A lcd_code CODE >110:H:\Desktop\MaicroTheremin\lcd.s
-1FE9C lcd_code CODE >111:H:\Desktop\MaicroTheremin\lcd.s
-1FE9E lcd_code CODE >112:H:\Desktop\MaicroTheremin\lcd.s
-1FEA0 lcd_code CODE >113:H:\Desktop\MaicroTheremin\lcd.s
-1FEA2 lcd_code CODE >117:H:\Desktop\MaicroTheremin\lcd.s
-1FEA4 lcd_code CODE >118:H:\Desktop\MaicroTheremin\lcd.s
-1FEA6 lcd_code CODE >119:H:\Desktop\MaicroTheremin\lcd.s
-1FEAA lcd_code CODE >120:H:\Desktop\MaicroTheremin\lcd.s
-1FEAC lcd_code CODE >121:H:\Desktop\MaicroTheremin\lcd.s
-1FEAE lcd_code CODE >122:H:\Desktop\MaicroTheremin\lcd.s
-1FEB0 lcd_code CODE >125:H:\Desktop\MaicroTheremin\lcd.s
-1FEB2 lcd_code CODE >126:H:\Desktop\MaicroTheremin\lcd.s
-1FEB4 lcd_code CODE >127:H:\Desktop\MaicroTheremin\lcd.s
-1FEB6 lcd_code CODE >128:H:\Desktop\MaicroTheremin\lcd.s
-1FEB8 lcd_code CODE >129:H:\Desktop\MaicroTheremin\lcd.s
-1FEBA lcd_code CODE >130:H:\Desktop\MaicroTheremin\lcd.s
-1FEBC lcd_code CODE >131:H:\Desktop\MaicroTheremin\lcd.s
-1FEBE lcd_code CODE >132:H:\Desktop\MaicroTheremin\lcd.s
-1FEC2 lcd_code CODE >133:H:\Desktop\MaicroTheremin\lcd.s
-1FEC4 lcd_code CODE >136:H:\Desktop\MaicroTheremin\lcd.s
-1FEC6 lcd_code CODE >137:H:\Desktop\MaicroTheremin\lcd.s
-1FEC8 lcd_code CODE >138:H:\Desktop\MaicroTheremin\lcd.s
-1FECA lcd_code CODE >139:H:\Desktop\MaicroTheremin\lcd.s
-1FECC lcd_code CODE >140:H:\Desktop\MaicroTheremin\lcd.s
+1FDD4 lcd_code CODE >18:H:\Desktop\MaicroTheremin\lcd.s
+1FDD6 lcd_code CODE >19:H:\Desktop\MaicroTheremin\lcd.s
+1FDD8 lcd_code CODE >20:H:\Desktop\MaicroTheremin\lcd.s
+1FDDA lcd_code CODE >21:H:\Desktop\MaicroTheremin\lcd.s
+1FDDC lcd_code CODE >22:H:\Desktop\MaicroTheremin\lcd.s
+1FDE0 lcd_code CODE >23:H:\Desktop\MaicroTheremin\lcd.s
+1FDE2 lcd_code CODE >24:H:\Desktop\MaicroTheremin\lcd.s
+1FDE6 lcd_code CODE >25:H:\Desktop\MaicroTheremin\lcd.s
+1FDE8 lcd_code CODE >26:H:\Desktop\MaicroTheremin\lcd.s
+1FDEC lcd_code CODE >27:H:\Desktop\MaicroTheremin\lcd.s
+1FDEE lcd_code CODE >28:H:\Desktop\MaicroTheremin\lcd.s
+1FDF2 lcd_code CODE >29:H:\Desktop\MaicroTheremin\lcd.s
+1FDF4 lcd_code CODE >30:H:\Desktop\MaicroTheremin\lcd.s
+1FDF8 lcd_code CODE >31:H:\Desktop\MaicroTheremin\lcd.s
+1FDFA lcd_code CODE >32:H:\Desktop\MaicroTheremin\lcd.s
+1FDFE lcd_code CODE >33:H:\Desktop\MaicroTheremin\lcd.s
+1FE00 lcd_code CODE >34:H:\Desktop\MaicroTheremin\lcd.s
+1FE04 lcd_code CODE >35:H:\Desktop\MaicroTheremin\lcd.s
+1FE06 lcd_code CODE >36:H:\Desktop\MaicroTheremin\lcd.s
+1FE0A lcd_code CODE >37:H:\Desktop\MaicroTheremin\lcd.s
+1FE0C lcd_code CODE >38:H:\Desktop\MaicroTheremin\lcd.s
+1FE10 lcd_code CODE >39:H:\Desktop\MaicroTheremin\lcd.s
+1FE12 lcd_code CODE >40:H:\Desktop\MaicroTheremin\lcd.s
+1FE16 lcd_code CODE >41:H:\Desktop\MaicroTheremin\lcd.s
+1FE18 lcd_code CODE >42:H:\Desktop\MaicroTheremin\lcd.s
+1FE1C lcd_code CODE >43:H:\Desktop\MaicroTheremin\lcd.s
+1FE1E lcd_code CODE >44:H:\Desktop\MaicroTheremin\lcd.s
+1FE22 lcd_code CODE >45:H:\Desktop\MaicroTheremin\lcd.s
+1FE24 lcd_code CODE >46:H:\Desktop\MaicroTheremin\lcd.s
+1FE28 lcd_code CODE >47:H:\Desktop\MaicroTheremin\lcd.s
+1FE2A lcd_code CODE >50:H:\Desktop\MaicroTheremin\lcd.s
+1FE2E lcd_code CODE >51:H:\Desktop\MaicroTheremin\lcd.s
+1FE30 lcd_code CODE >52:H:\Desktop\MaicroTheremin\lcd.s
+1FE34 lcd_code CODE >53:H:\Desktop\MaicroTheremin\lcd.s
+1FE36 lcd_code CODE >57:H:\Desktop\MaicroTheremin\lcd.s
+1FE38 lcd_code CODE >59:H:\Desktop\MaicroTheremin\lcd.s
+1FE3A lcd_code CODE >60:H:\Desktop\MaicroTheremin\lcd.s
+1FE3E lcd_code CODE >61:H:\Desktop\MaicroTheremin\lcd.s
+1FE40 lcd_code CODE >62:H:\Desktop\MaicroTheremin\lcd.s
+1FE42 lcd_code CODE >63:H:\Desktop\MaicroTheremin\lcd.s
+1FE44 lcd_code CODE >66:H:\Desktop\MaicroTheremin\lcd.s
+1FE46 lcd_code CODE >67:H:\Desktop\MaicroTheremin\lcd.s
+1FE48 lcd_code CODE >68:H:\Desktop\MaicroTheremin\lcd.s
+1FE4A lcd_code CODE >69:H:\Desktop\MaicroTheremin\lcd.s
+1FE4C lcd_code CODE >70:H:\Desktop\MaicroTheremin\lcd.s
+1FE4E lcd_code CODE >71:H:\Desktop\MaicroTheremin\lcd.s
+1FE52 lcd_code CODE >72:H:\Desktop\MaicroTheremin\lcd.s
+1FE54 lcd_code CODE >73:H:\Desktop\MaicroTheremin\lcd.s
+1FE56 lcd_code CODE >74:H:\Desktop\MaicroTheremin\lcd.s
+1FE58 lcd_code CODE >75:H:\Desktop\MaicroTheremin\lcd.s
+1FE5A lcd_code CODE >76:H:\Desktop\MaicroTheremin\lcd.s
+1FE5E lcd_code CODE >77:H:\Desktop\MaicroTheremin\lcd.s
+1FE60 lcd_code CODE >80:H:\Desktop\MaicroTheremin\lcd.s
+1FE62 lcd_code CODE >81:H:\Desktop\MaicroTheremin\lcd.s
+1FE64 lcd_code CODE >82:H:\Desktop\MaicroTheremin\lcd.s
+1FE66 lcd_code CODE >83:H:\Desktop\MaicroTheremin\lcd.s
+1FE68 lcd_code CODE >84:H:\Desktop\MaicroTheremin\lcd.s
+1FE6A lcd_code CODE >85:H:\Desktop\MaicroTheremin\lcd.s
+1FE6E lcd_code CODE >86:H:\Desktop\MaicroTheremin\lcd.s
+1FE70 lcd_code CODE >87:H:\Desktop\MaicroTheremin\lcd.s
+1FE72 lcd_code CODE >88:H:\Desktop\MaicroTheremin\lcd.s
+1FE74 lcd_code CODE >89:H:\Desktop\MaicroTheremin\lcd.s
+1FE76 lcd_code CODE >90:H:\Desktop\MaicroTheremin\lcd.s
+1FE7A lcd_code CODE >91:H:\Desktop\MaicroTheremin\lcd.s
+1FE7C lcd_code CODE >92:H:\Desktop\MaicroTheremin\lcd.s
+1FE80 lcd_code CODE >93:H:\Desktop\MaicroTheremin\lcd.s
+1FE82 lcd_code CODE >96:H:\Desktop\MaicroTheremin\lcd.s
+1FE84 lcd_code CODE >97:H:\Desktop\MaicroTheremin\lcd.s
+1FE86 lcd_code CODE >98:H:\Desktop\MaicroTheremin\lcd.s
+1FE88 lcd_code CODE >99:H:\Desktop\MaicroTheremin\lcd.s
+1FE8A lcd_code CODE >100:H:\Desktop\MaicroTheremin\lcd.s
+1FE8C lcd_code CODE >101:H:\Desktop\MaicroTheremin\lcd.s
+1FE8E lcd_code CODE >102:H:\Desktop\MaicroTheremin\lcd.s
+1FE90 lcd_code CODE >103:H:\Desktop\MaicroTheremin\lcd.s
+1FE92 lcd_code CODE >104:H:\Desktop\MaicroTheremin\lcd.s
+1FE94 lcd_code CODE >105:H:\Desktop\MaicroTheremin\lcd.s
+1FE96 lcd_code CODE >106:H:\Desktop\MaicroTheremin\lcd.s
+1FE98 lcd_code CODE >107:H:\Desktop\MaicroTheremin\lcd.s
+1FE9A lcd_code CODE >108:H:\Desktop\MaicroTheremin\lcd.s
+1FE9C lcd_code CODE >109:H:\Desktop\MaicroTheremin\lcd.s
+1FE9E lcd_code CODE >110:H:\Desktop\MaicroTheremin\lcd.s
+1FEA0 lcd_code CODE >111:H:\Desktop\MaicroTheremin\lcd.s
+1FEA2 lcd_code CODE >112:H:\Desktop\MaicroTheremin\lcd.s
+1FEA4 lcd_code CODE >113:H:\Desktop\MaicroTheremin\lcd.s
+1FEA6 lcd_code CODE >117:H:\Desktop\MaicroTheremin\lcd.s
+1FEA8 lcd_code CODE >118:H:\Desktop\MaicroTheremin\lcd.s
+1FEAA lcd_code CODE >119:H:\Desktop\MaicroTheremin\lcd.s
+1FEAE lcd_code CODE >120:H:\Desktop\MaicroTheremin\lcd.s
+1FEB0 lcd_code CODE >121:H:\Desktop\MaicroTheremin\lcd.s
+1FEB2 lcd_code CODE >122:H:\Desktop\MaicroTheremin\lcd.s
+1FEB4 lcd_code CODE >125:H:\Desktop\MaicroTheremin\lcd.s
+1FEB6 lcd_code CODE >126:H:\Desktop\MaicroTheremin\lcd.s
+1FEB8 lcd_code CODE >127:H:\Desktop\MaicroTheremin\lcd.s
+1FEBA lcd_code CODE >128:H:\Desktop\MaicroTheremin\lcd.s
+1FEBC lcd_code CODE >129:H:\Desktop\MaicroTheremin\lcd.s
+1FEBE lcd_code CODE >130:H:\Desktop\MaicroTheremin\lcd.s
+1FEC0 lcd_code CODE >131:H:\Desktop\MaicroTheremin\lcd.s
+1FEC2 lcd_code CODE >132:H:\Desktop\MaicroTheremin\lcd.s
+1FEC6 lcd_code CODE >133:H:\Desktop\MaicroTheremin\lcd.s
+1FEC8 lcd_code CODE >136:H:\Desktop\MaicroTheremin\lcd.s
+1FECA lcd_code CODE >137:H:\Desktop\MaicroTheremin\lcd.s
+1FECC lcd_code CODE >138:H:\Desktop\MaicroTheremin\lcd.s
+1FECE lcd_code CODE >139:H:\Desktop\MaicroTheremin\lcd.s
+1FED0 lcd_code CODE >140:H:\Desktop\MaicroTheremin\lcd.s
 $build/default/production/delay.o
-1FD10 delay_code CODE >14:H:\Desktop\MaicroTheremin\delay.s
-1FD12 delay_code CODE >15:H:\Desktop\MaicroTheremin\delay.s
-1FD14 delay_code CODE >16:H:\Desktop\MaicroTheremin\delay.s
-1FD16 delay_code CODE >17:H:\Desktop\MaicroTheremin\delay.s
-1FD18 delay_code CODE >18:H:\Desktop\MaicroTheremin\delay.s
-1FD1A delay_code CODE >19:H:\Desktop\MaicroTheremin\delay.s
-1FD1C delay_code CODE >20:H:\Desktop\MaicroTheremin\delay.s
-1FD1E delay_code CODE >21:H:\Desktop\MaicroTheremin\delay.s
-1FD22 delay_code CODE >22:H:\Desktop\MaicroTheremin\delay.s
-1FD24 delay_code CODE >27:H:\Desktop\MaicroTheremin\delay.s
-1FD26 delay_code CODE >29:H:\Desktop\MaicroTheremin\delay.s
-1FD28 delay_code CODE >30:H:\Desktop\MaicroTheremin\delay.s
-1FD2A delay_code CODE >31:H:\Desktop\MaicroTheremin\delay.s
-1FD2C delay_code CODE >32:H:\Desktop\MaicroTheremin\delay.s
-1FD2E delay_code CODE >33:H:\Desktop\MaicroTheremin\delay.s
-1FD30 delay_code CODE >35:H:\Desktop\MaicroTheremin\delay.s
-1FD32 delay_code CODE >36:H:\Desktop\MaicroTheremin\delay.s
-1FD34 delay_code CODE >37:H:\Desktop\MaicroTheremin\delay.s
-1FD36 delay_code CODE >38:H:\Desktop\MaicroTheremin\delay.s
-1FD38 delay_code CODE >39:H:\Desktop\MaicroTheremin\delay.s
-1FD3A delay_code CODE >41:H:\Desktop\MaicroTheremin\delay.s
-1FD3C delay_code CODE >42:H:\Desktop\MaicroTheremin\delay.s
-1FD3E delay_code CODE >43:H:\Desktop\MaicroTheremin\delay.s
-1FD40 delay_code CODE >45:H:\Desktop\MaicroTheremin\delay.s
-1FD42 delay_code CODE >46:H:\Desktop\MaicroTheremin\delay.s
-1FD44 delay_code CODE >47:H:\Desktop\MaicroTheremin\delay.s
-1FD46 delay_code CODE >52:H:\Desktop\MaicroTheremin\delay.s
-1FD48 delay_code CODE >53:H:\Desktop\MaicroTheremin\delay.s
-1FD4A delay_code CODE >54:H:\Desktop\MaicroTheremin\delay.s
-1FD4C delay_code CODE >55:H:\Desktop\MaicroTheremin\delay.s
-1FD4E delay_code CODE >56:H:\Desktop\MaicroTheremin\delay.s
+1FCB4 delay_code CODE >14:H:\Desktop\MaicroTheremin\delay.s
+1FCB6 delay_code CODE >15:H:\Desktop\MaicroTheremin\delay.s
+1FCB8 delay_code CODE >16:H:\Desktop\MaicroTheremin\delay.s
+1FCBA delay_code CODE >17:H:\Desktop\MaicroTheremin\delay.s
+1FCBC delay_code CODE >18:H:\Desktop\MaicroTheremin\delay.s
+1FCBE delay_code CODE >19:H:\Desktop\MaicroTheremin\delay.s
+1FCC0 delay_code CODE >20:H:\Desktop\MaicroTheremin\delay.s
+1FCC2 delay_code CODE >21:H:\Desktop\MaicroTheremin\delay.s
+1FCC6 delay_code CODE >22:H:\Desktop\MaicroTheremin\delay.s
+1FCC8 delay_code CODE >27:H:\Desktop\MaicroTheremin\delay.s
+1FCCA delay_code CODE >29:H:\Desktop\MaicroTheremin\delay.s
+1FCCC delay_code CODE >30:H:\Desktop\MaicroTheremin\delay.s
+1FCCE delay_code CODE >31:H:\Desktop\MaicroTheremin\delay.s
+1FCD0 delay_code CODE >32:H:\Desktop\MaicroTheremin\delay.s
+1FCD2 delay_code CODE >33:H:\Desktop\MaicroTheremin\delay.s
+1FCD4 delay_code CODE >35:H:\Desktop\MaicroTheremin\delay.s
+1FCD6 delay_code CODE >36:H:\Desktop\MaicroTheremin\delay.s
+1FCD8 delay_code CODE >37:H:\Desktop\MaicroTheremin\delay.s
+1FCDA delay_code CODE >38:H:\Desktop\MaicroTheremin\delay.s
+1FCDC delay_code CODE >39:H:\Desktop\MaicroTheremin\delay.s
+1FCDE delay_code CODE >41:H:\Desktop\MaicroTheremin\delay.s
+1FCE0 delay_code CODE >42:H:\Desktop\MaicroTheremin\delay.s
+1FCE2 delay_code CODE >43:H:\Desktop\MaicroTheremin\delay.s
+1FCE4 delay_code CODE >45:H:\Desktop\MaicroTheremin\delay.s
+1FCE6 delay_code CODE >46:H:\Desktop\MaicroTheremin\delay.s
+1FCE8 delay_code CODE >47:H:\Desktop\MaicroTheremin\delay.s
+1FCEA delay_code CODE >52:H:\Desktop\MaicroTheremin\delay.s
+1FCEC delay_code CODE >53:H:\Desktop\MaicroTheremin\delay.s
+1FCEE delay_code CODE >54:H:\Desktop\MaicroTheremin\delay.s
+1FCF0 delay_code CODE >55:H:\Desktop\MaicroTheremin\delay.s
+1FCF2 delay_code CODE >56:H:\Desktop\MaicroTheremin\delay.s
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -462,13 +519,13 @@ $build/default/production/delay.o
 # was defined in a psect then <psect> will be "-". File-name
 # is the name of the object file in which the symbol was defined.
 %SYMTAB
-sensor_clock01 14 0 COMRAM 1 udata_acs build/default/production/transducer.o
-sensor_clock02 15 0 COMRAM 1 udata_acs build/default/production/transducer.o
 __Ltrans_code 0 0 ABS 0 trans_code -
 __Hspace_0 20000 0 ABS 0 - -
-__Hspace_1 18 0 ABS 0 - -
+__Hspace_1 1F 0 ABS 0 - -
 __Hspace_3 0 0 ABS 0 - -
 __Hspace_4 60000E 0 ABS 0 - -
+tone_toggle 1FEEE 0 CODE 0 sig_code build/default/production/signal.o
+__Hinterrupt_code 0 0 ABS 0 interrupt_code -
 __Hudata_bank0 0 0 ABS 0 udata_bank0 -
 __Hudata_bank1 0 0 ABS 0 udata_bank1 -
 __Hudata_bank2 0 0 ABS 0 udata_bank2 -
@@ -479,43 +536,44 @@ __Hudata_bank6 0 0 ABS 0 udata_bank6 -
 __Hudata_bank7 0 0 ABS 0 udata_bank7 -
 __Hudata_bank8 0 0 ABS 0 udata_bank8 -
 __Hudata_bank9 0 0 ABS 0 udata_bank9 -
-pwm 1FF1E 0 CODE 0 sig_code build/default/production/signal.o
 __Hlcd_code 0 0 ABS 0 lcd_code -
-ARG1H 0 0 COMRAM 1 udata_acs build/default/production/maths.o
-ARG1L 1 0 COMRAM 1 udata_acs build/default/production/maths.o
-ARG2H 2 0 COMRAM 1 udata_acs build/default/production/maths.o
-ARG2L 3 0 COMRAM 1 udata_acs build/default/production/maths.o
+ARG1H A 0 COMRAM 1 udata_acs build/default/production/maths.o
+ARG1L B 0 COMRAM 1 udata_acs build/default/production/maths.o
+ARG2H C 0 COMRAM 1 udata_acs build/default/production/maths.o
+ARG2L D 0 COMRAM 1 udata_acs build/default/production/maths.o
 __Hdelay_code 0 0 ABS 0 delay_code -
 trans_get 1FD5A 0 CODE 0 trans_code build/default/production/transducer.o
 __Ldelay_code 0 0 ABS 0 delay_code -
 __Lsig_code 0 0 ABS 0 sig_code -
-LCD_Send_Byte_D 1FE5C 0 CODE 0 lcd_code build/default/production/lcd.o
-pentatone 1FF6A 0 CODE 0 sig_code build/default/production/signal.o
-microtone 1FEF8 0 CODE 0 sig_code build/default/production/signal.o
+LCD_Send_Byte_D 1FE60 0 CODE 0 lcd_code build/default/production/lcd.o
+pitch_count 17 0 COMRAM 1 udata_acs build/default/production/transducer.o
+pitch_interrupt_start 1FCF4 0 CODE 0 interrupt_code build/default/production/interrupts.o
 __Hudata_bank10 0 0 ABS 0 udata_bank10 -
 __Hudata_bank11 0 0 ABS 0 udata_bank11 -
 __Hudata_bank12 0 0 ABS 0 udata_bank12 -
 __Hudata_bank13 0 0 ABS 0 udata_bank13 -
 __Hudata_bank14 0 0 ABS 0 udata_bank14 -
 __Hudata_bank15 0 0 ABS 0 udata_bank15 -
+convert_half_full 1FFE4 0 CODE 0 sig_code build/default/production/signal.o
 __Hsig_code 0 0 ABS 0 sig_code -
-LCD_Write_Instruction 1FE26 0 CODE 0 lcd_code build/default/production/lcd.o
+LCD_Write_Instruction 1FE2A 0 CODE 0 lcd_code build/default/production/lcd.o
 isa$xinst 0 0 ABS 0 - build/default/production/main.o
 __Hedata 0 0 ABS 0 edata -
 __Hudata 0 0 ABS 0 udata -
 __Hconfig 30000E 0 CONFIG 4 config -
+compare_int 1FD16 0 CODE 0 interrupt_code build/default/production/interrupts.o
 __Ledata 0 0 ABS 0 edata -
 __Ludata 0 0 ABS 0 udata -
 __Hcode 0 0 ABS 0 code -
 __Hdata 0 0 ABS 0 data -
 __Lcode 0 0 ABS 0 code -
 __Ldata 0 0 ABS 0 data -
-RES0 7 0 COMRAM 1 udata_acs build/default/production/maths.o
-RES1 6 0 COMRAM 1 udata_acs build/default/production/maths.o
-RES2 5 0 COMRAM 1 udata_acs build/default/production/maths.o
-RES3 4 0 COMRAM 1 udata_acs build/default/production/maths.o
+RES0 11 0 COMRAM 1 udata_acs build/default/production/maths.o
+RES1 10 0 COMRAM 1 udata_acs build/default/production/maths.o
+RES2 F 0 COMRAM 1 udata_acs build/default/production/maths.o
+RES3 E 0 COMRAM 1 udata_acs build/default/production/maths.o
 __S0 20000 0 ABS 0 - -
-__S1 18 0 ABS 0 - -
+__S1 1F 0 ABS 0 - -
 __S3 0 0 ABS 0 - -
 __Ludata_bank10 0 0 ABS 0 udata_bank10 -
 __Ludata_bank11 0 0 ABS 0 udata_bank11 -
@@ -523,17 +581,19 @@ __Ludata_bank12 0 0 ABS 0 udata_bank12 -
 __Ludata_bank13 0 0 ABS 0 udata_bank13 -
 __Ludata_bank14 0 0 ABS 0 udata_bank14 -
 __Ludata_bank15 0 0 ABS 0 udata_bank15 -
-signal_setup 1FECE 0 CODE 0 sig_code build/default/production/signal.o
+volume_count 18 0 COMRAM 1 udata_acs build/default/production/transducer.o
+__Linterrupt_code 0 0 ABS 0 interrupt_code -
+signal_setup 1FED2 0 CODE 0 sig_code build/default/production/signal.o
 __Lconfig 0 0 CONFIG 4 config -
-LCD_Write_Message 1FE32 0 CODE 0 lcd_code build/default/production/lcd.o
+LCD_Write_Message 1FE36 0 CODE 0 lcd_code build/default/production/lcd.o
 isa$std 1 0 ABS 0 - build/default/production/main.o
-LCD_Setup 1FDD0 0 CODE 0 lcd_code build/default/production/lcd.o
+LCD_Setup 1FDD4 0 CODE 0 lcd_code build/default/production/lcd.o
 __Lspace_0 0 0 ABS 0 - -
 __Lspace_1 0 0 ABS 0 - -
 __Lspace_3 0 0 ABS 0 - -
 __Lspace_4 0 0 ABS 0 - -
-delay_x1us 1FD24 0 CODE 0 delay_code build/default/production/delay.o
-delay_x4us 1FD10 0 CODE 0 delay_code build/default/production/delay.o
+delay_x1us 1FCC8 0 CODE 0 delay_code build/default/production/delay.o
+delay_x4us 1FCB4 0 CODE 0 delay_code build/default/production/delay.o
 __Ludata_bank0 0 0 ABS 0 udata_bank0 -
 __Ludata_bank1 0 0 ABS 0 udata_bank1 -
 __Ludata_bank2 0 0 ABS 0 udata_bank2 -
@@ -544,15 +604,15 @@ __Ludata_bank6 0 0 ABS 0 udata_bank6 -
 __Ludata_bank7 0 0 ABS 0 udata_bank7 -
 __Ludata_bank8 0 0 ABS 0 udata_bank8 -
 __Ludata_bank9 0 0 ABS 0 udata_bank9 -
-MUL16x16 1FCD6 0 CODE 0 maths_code build/default/production/maths.o
+MUL16x16 1FC7A 0 CODE 0 maths_code build/default/production/maths.o
 __Hmaths_code 0 0 ABS 0 maths_code -
-volume_update 1FF0E 0 CODE 0 sig_code build/default/production/signal.o
 __Llcd_code 0 0 ABS 0 lcd_code -
 __Lmaths_code 0 0 ABS 0 maths_code -
-transducer_setup 1FD50 0 CODE 0 trans_code build/default/production/transducer.o
+transducer_setup 1FD4E 0 CODE 0 trans_code build/default/production/transducer.o
 __Hudata_acs 0 0 ABS 0 udata_acs -
 __Htrans_code 0 0 ABS 0 trans_code -
 __Ludata_acs 0 0 ABS 0 udata_acs -
+pwm_compare_start 1FD34 0 CODE 0 interrupt_code build/default/production/interrupts.o
 # %SPLITSTAB Section
 # This section enumerates all the psect splits performed by the assembler.
 # The beginning of the section is indicated by %SPLITSTAB.
@@ -577,12 +637,14 @@ __Ludata_acs 0 0 ABS 0 udata_acs -
 # and size are in units of delta. The file address is in units of bytes.
 # All other numeric quantities are in decimal.
 %SEGMENTS
-sig_code 0 1FECE 1FECE 132 1
-maths_code 0 1FCD6 1FCD6 3A 1
-trans_code 0 1FD50 1FD50 80 1
-delay_code 0 1FD10 1FD10 40 1
-udata_acs 1 0 0 18 1
-lcd_code 0 1FDD0 1FDD0 FE 1
+sig_code 0 1FED2 1FED2 12E 1
+maths_code 0 1FC7A 1FC7A 3A 1
+data 0 1FC5A 1FC5A 20 1
+trans_code 0 1FD4E 1FD4E 86 1
+interrupt_code 0 1FCF4 1FCF4 5A 1
+delay_code 0 1FCB4 1FCB4 40 1
+udata_acs 1 0 0 1F 1
+lcd_code 0 1FDD4 1FDD4 FE 1
 # %NOTES Section
 # This section contains data of all the note-psects.  The beginning of the section
 # is indicated by %NOTES. The first line indicates the name and decimal

@@ -1,6 +1,6 @@
-# 1 "main.s"
+# 1 "interrupts.s"
 # 1 "<built-in>" 1
-# 1 "main.s" 2
+# 1 "interrupts.s" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 1 3
 
 
@@ -10956,99 +10956,112 @@ stk_offset SET 0
 auto_size SET 0
 ENDM
 # 5 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 2 3
-# 1 "main.s" 2
+# 1 "interrupts.s" 2
 
 
-;extrn LCD_Setup, LCD_Write_Message, LCD_Write_Instruction, LCD_Send_Byte_D
-extrn delay_x4us, delay_x1us
-extrn signal_setup, convert_half_full, tone_toggle
-extrn transducer_setup, trans_get, pitch_count, volume_count
-extrn pwm_compare_start, compare_int
+global pitch_interrupt_start, pwm_compare_start, compare_int
 
+extrn volume_count
 
 psect udata_acs
-interrupt_count: ds 1
+volume_dummy: ds 1
 
 
-psect code, abs
+psect interrupt_code, class = CODE
 
-rst: org 0x0
- bra setup
 
-main:
- org 0x0
- goto setup
+pitch_interrupt_start:
 
- org 0x100 ; Main code starts here at address 0x100
+ movlw 00000100B ; set ((PORTH) and 0FFh), 6, a
+ movwf CCP7CON, A
+ bcf PIE4, 4, A ; disable ((PORTH) and 0FFh), 6, a capture interrupt
+ bcf PIR4, 4, A ; clear ccp7 interrupt flag
+ bsf IPR4, 4, A ; set interrupt as high priority
 
-  ; ******* Programme FLASH read Setup Code ****
-setup:
- bcf ((EECON1) and 0FFh), 6, a ; point to Flash program memory
- bsf ((EECON1) and 0FFh), 7, a ; access Flash program memory
+ bcf ((CCPTMRS1) and 0FFh), 7, b ; match ((PORTH) and 0FFh), 6, a to TMR1
+ bcf ((CCPTMRS1) and 0FFh), 6, b ; match ((PORTH) and 0FFh), 6, a to TMR1
 
- ; set port as output ; output=0 input=1
- call signal_setup
- call transducer_setup
+        bsf TRISE, 5, A ; set PORTE's RE5 as input
 
- movlw 0x00
- movwf TRISF, A
- bsf TRISE, 5, A ; set PORTE's RE5 as input
- call pwm_compare_start
+ ; setup t1con timer1 configuration and start clock
 
- goto start
+ ;bit 76 = clock source
+ ;bit 54 = prescaler
+ ;bit 3 = oscillator module enable
+ ;bit 2 = symch to external clock
+ ;bit 1 = 16bit or 8 bit operation clock
+ ;bit 0 = on/off timer
+ bcf T1CON, 0, A ; disable timer
+ clrf TMR1H
+ clrf TMR1L
+     movlw 01010111B ; enable timer
+ movwf T1CON, A
 
-start:
 
- call trans_get
- call tone_toggle
-;
- call convert_half_full
-
-; movlw 200
-; movwf PORTD, A
-;
-; movlw 50
-; call delay_x4us
-;
-; movlw 0
-; movwf PORTD, A
-;
-; movlw 50
-; call delay_x4us
-
- bra start
+ bsf PIE4, 4, A ; enable ((PORTH) and 0FFh), 6, a capture interrupt
+ bsf ((INTCON) and 0FFh), 7, a ; enable global interrupt
+ bsf ((INTCON) and 0FFh), 6, a ; enable peripheral interrupt
  return
 
 
-;lcd_position:
-; ; write to DDRAM --> set which each pixel block
-; ;(CGRAM --> each pixel within a block)
+compare_int:
+ btfss ((PIR4) and 0FFh), 1, a ; check that this is ccp timer 4 interrupt
+ retfie f ; if not then return
+ bcf ((PIR4) and 0FFh), 1, a ; clear the ((PIR4) and 0FFh), 1, a flag
+
+ bsf PORTC, 4
+ bcf PORTC, 4
+ movff PORTD, volume_dummy, A
+
+ movlw 0x0
+ cpfseq PORTD, A
+ clrf PORTD, A
+ movlw 0x0
+ cpfsgt volume_dummy, A
+ movff volume_count, PORTD, A
+
+ retfie f
+
+
+
+pwm_compare_start:
+
+; movlw 00110001B
+; movwf T3CON
 ;
-; ; movlw 11000000B ; position address instruction ; hex = 40
-; movlw 11000001B ; hex = 41
-; call LCD_Write_Instruction
-; return
+; bsf ((CCPTMRS1) and 0FFh), 1, b ;set ccp4 to timer3
+; bcf ((CCPTMRS1) and 0FFh), 0, b ;set ccp4 to timer3
 ;
-
-interrupt:
-    org 0x0008 ; high vector, no low vector
-
-    goto compare_int
-
-
-
-;interrupt:
-; org 0x08
-; btfss PIR4, 4 ; check if ccp7 capture interrupt
-; retfie ; return if not ccp7 interrupt
-; movff TMR1H, pitch_count, A ; store captured clock into variable
+; movlw 000000010B
+; movwf CCPTMRS1
+; movlw 00001011B
+; movwf CCP4CON
 ; movlw 0xff
-; movwf PORTF, A ; store captured clock into variable
+; movwf CCPR4L
+; movlw 0x00
+; movwf CCPR4H
 ;
-; incf interrupt_count
-; movff interrupt_count, PORTF, A ; store captured clock into variable
-;
-; bcf PIR4, 4 ; clear the interrupt flag
-; retfie
+; bsf ((PIE4) and 0FFh), 1, a
+; bsf ((INTCON) and 0FFh), 7, a
+; bsf ((INTCON) and 0FFh), 6, a
 
-    end
+ movlw 00110001B
+ movwf T1CON
+
+ bcf ((CCPTMRS1) and 0FFh), 1, b
+
+
+ movlw 00001011B
+ movwf CCP4CON
+ movlw 0xe0
+ movwf CCPR4L
+ movlw 0x08
+ movwf CCPR4H
+
+ bsf ((PIE4) and 0FFh), 1, a
+ bsf ((INTCON) and 0FFh), 7, a
+ bsf ((INTCON) and 0FFh), 6, a
+
+ return
+
+end

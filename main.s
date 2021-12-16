@@ -39,24 +39,23 @@ setup:
 	goto	start	
 	
 start:
+
 	call	trans_get
 	call	tone_toggle
-
+;
 	call	convert_half_full
 	
-	movlw	50
-	call	delay_x4us
-	movff	volume_count, PORTH, A	    ; check update frequency
-
-
-;	call	pwm	; waveform of choice
-
-
-	movlw	250
-	call	delay_x4us
-	
-
-    
+;	movlw	200
+;	movwf	PORTD, A
+;	
+;	movlw	50
+;	call	delay_x4us
+;	
+;	movlw	0
+;	movwf	PORTD, A	
+;	    
+;    	movlw	50
+;	call	delay_x4us
  
 	bra	start
 	return
