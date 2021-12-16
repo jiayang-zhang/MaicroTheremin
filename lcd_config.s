@@ -1,6 +1,6 @@
 #include <xc.inc>
 
-global  LCD_Setup, LCD_Write_Message, LCD_Write_Instruction, LCD_Send_Byte_D
+global  LCD_Setup, LCD_Write_Message, LCD_Write_Instruction, LCD_Send_Byte_D, LCD_Write_Hex
 
 psect	udata_acs   ; named variables in access ram
 LCD_cnt_l:	ds 1   ; reserve 1 byte for variable LCD_cnt_l
@@ -12,7 +12,13 @@ LCD_counter:	ds 1   ; reserve 1 byte for counting through nessage
 	LCD_E	EQU 5	; LCD enable bit
     	LCD_RS	EQU 4	; LCD register select bit
 
-psect	lcd_code,class=CODE
+
+PSECT	udata_acs_ovr,space=1,ovrld,class=COMRAM
+LCD_hex_tmp:	ds 1    ; reserve 1 byte for variable LCD_hex_tmp
+	
+	
+	
+psect	lcd_config_code,class=CODE
     
 LCD_Setup:
 	clrf    LATB, A
@@ -139,6 +145,23 @@ lcdlp1:	decf 	LCD_cnt_l, F, A	; no carry when 0x00 -> 0xff
 	bc 	lcdlp1		; carry, then loop again
 	return			; carry reset so return
 
+LCD_Write_Hex:			; Writes byte stored in W as hex
+	movwf	LCD_hex_tmp, A
+	swapf	LCD_hex_tmp, W, A	; high nibble first
+	call	LCD_Hex_Nib
+	movf	LCD_hex_tmp, W, A	; then low nibble
+LCD_Hex_Nib:			; writes low nibble as hex character
+	andlw	0x0F
+	movwf	LCD_tmp, A
+	movlw	0x0A
+	cpfslt	LCD_tmp, A
+	addlw	0x07		; number is greater than 9 
+	addlw	0x26
+	addwf	LCD_tmp, W, A	
+	call	LCD_Send_Byte_D ; write out ascii
+	return	
+
+	
 
     end
 

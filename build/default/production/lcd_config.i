@@ -1,6 +1,6 @@
-# 1 "maths.s"
+# 1 "lcd_config.s"
 # 1 "<built-in>" 1
-# 1 "maths.s" 2
+# 1 "lcd_config.s" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 1 3
 
 
@@ -10956,267 +10956,170 @@ stk_offset SET 0
 auto_size SET 0
 ENDM
 # 5 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 2 3
-# 1 "maths.s" 2
+# 1 "lcd_config.s" 2
 
 
-global MUL16x16, HexDec_Convert_Precise, HexDec_Convert_Rough
-global ARG1H, ARG1L, ARG2H, ARG2L
-global RES3, RES2, RES1, RES0
-global dec_output_h
-global dec_output_l
+global LCD_Setup, LCD_Write_Message, LCD_Write_Instruction, LCD_Send_Byte_D, LCD_Write_Hex
 
-extrn full_period_h, full_period_l
-psect udata_acs
-ARG1H: ds 1 ; kH
-ARG1L: ds 1 ; kL
+psect udata_acs ; named variables in access ram
+LCD_cnt_l: ds 1 ; reserve 1 byte for variable LCD_cnt_l
+LCD_cnt_h: ds 1 ; reserve 1 byte for variable LCD_cnt_h
+LCD_cnt_ms: ds 1 ; reserve 1 byte for ms counter
+LCD_tmp: ds 1 ; reserve 1 byte for temporary use
+LCD_counter: ds 1 ; reserve 1 byte for counting through nessage
 
-ARG2H: ds 1 ; voltage H
-ARG2L: ds 1 ; voltage L
-
-RES3: ds 1 ; final output 3
-RES2: ds 1 ; final output 2
-RES1: ds 1 ; final output 1
-RES0: ds 1 ; final output 0
-
-OUT3: ds 1 ; decimal in hex output 3
-OUT2: ds 1 ; decimal in hex output 2
-OUT1: ds 1 ; decimal in hex output 1
-OUT0: ds 1 ; decimal in hex output 0
+ LCD_E EQU 5 ; LCD enable bit
+     LCD_RS EQU 4 ; LCD register select bit
 
 
-dec_output_h: ds 1
-dec_output_l: ds 1
+PSECT udata_acs_ovr,space=1,ovrld,class=COMRAM
+LCD_hex_tmp: ds 1 ; reserve 1 byte for variable LCD_hex_tmp
 
 
 
-psect maths_code, class = CODE
+psect lcd_config_code,class=CODE
+
+LCD_Setup:
+ clrf LATB, A
+ movlw 11000000B ; ((PORTB) and 0FFh), 0, a:5 all outputs
+ movwf TRISB, A
+ movlw 40
+ call LCD_delay_ms ; wait 40ms for LCD to start up properly
+ movlw 00110000B ; Function set 4-bit
+ call LCD_Send_Byte_I
+ movlw 10 ; wait 40us
+ call LCD_delay_x4us
+ movlw 00101000B ; 2 line display 5x8 dot characters
+ call LCD_Send_Byte_I
+ movlw 10 ; wait 40us
+ call LCD_delay_x4us
+ movlw 00101000B ; repeat, 2 line display 5x8 dot characters
+ call LCD_Send_Byte_I
+ movlw 10 ; wait 40us
+ call LCD_delay_x4us
+ movlw 00001111B ; display on, cursor on, blinking on
+ call LCD_Send_Byte_I
+ movlw 10 ; wait 40us
+ call LCD_delay_x4us
+ movlw 00000001B ; display clear
+ call LCD_Send_Byte_I
+ movlw 2 ; wait 2ms
+ call LCD_delay_ms
+ movlw 00000110B ; entry mode incr by 1 no shift
+ call LCD_Send_Byte_I
+ movlw 10 ; wait 40us
+ call LCD_delay_x4us
+ return
+
+LCD_Write_Instruction: ; Message stored at W
+ call LCD_Send_Byte_I
+ movlw 2
+ call LCD_delay_ms
+ return
 
 
-; using initial k kernel = decimal 66
-HexDec_Convert_Rough:
- ; k lower
- movlw 0x42
- movwf ARG1L, A
- ; k higher
- movlw 0x00
- movwf ARG1H, A
+LCD_Write_Message: ; Message stored at FSR2, length stored in W
+ movwf LCD_counter, A
+LCD_Loop_message:
+ movf POSTINC2, W, A
+ call LCD_Send_Byte_D
+ decfsz LCD_counter, A
+ bra LCD_Loop_message
+ return
 
- ; voltage lower
- movff full_period_l, ARG2L, A
-; movf ADRESL, W, A
-; movwf ARG2L, A
- ; voltage higher
- movff full_period_h, ARG2L, A
-; movwf ARG2H, A
+LCD_Send_Byte_I: ; Transmits byte stored in W to instruction reg
+ movwf LCD_tmp, A
+ swapf LCD_tmp, W, A ; swap nibbles, high nibble goes first
+ andlw 0x0f ; select just low nibble
+ movwf LATB, A ; output data bits to LCD
+ bcf LATB, LCD_RS, A ; Instruction write clear RS bit
+ call LCD_Enable ; Pulse enable Bit
+ movf LCD_tmp, W, A ; swap nibbles, now do low nibble
+ andlw 0x0f ; select just low nibble
+ movwf LATB, A ; output data bits to LCD
+ bcf LATB, LCD_RS, A ; Instruction write clear RS bit
+        call LCD_Enable ; Pulse enable Bit
+ return
 
- call MUL16x16
- movff RES2, OUT3, A
- clrf RES2, A
+LCD_Send_Byte_D: ; Transmits byte stored in W to data reg
+ movwf LCD_tmp, A
+ swapf LCD_tmp, W, A ; swap nibbles, high nibble goes first
+ andlw 0x0f ; select just low nibble
+ movwf LATB, A ; output data bits to LCD
+ bsf LATB, LCD_RS, A ; Data write set RS bit
+ call LCD_Enable ; Pulse enable Bit
+ movf LCD_tmp, W, A ; swap nibbles, now do low nibble
+ andlw 0x0f ; select just low nibble
+ movwf LATB, A ; output data bits to LCD
+ bsf LATB, LCD_RS, A ; Data write set RS bit
+        call LCD_Enable ; Pulse enable Bit
+ movlw 10 ; delay 40us
+ call LCD_delay_x4us
+ return
 
- ; decimal 10 lower
+LCD_Enable: ; pulse enable bit LCD_E for 500ns
+ nop
+ nop
+ nop
+ nop
+ nop
+ nop
+ nop
+ nop
+ bsf LATB, LCD_E, A ; Take enable high
+ nop
+ nop
+ nop
+ nop
+ nop
+ nop
+ nop
+ bcf LATB, LCD_E, A ; Writes data to LCD
+ return
+
+; ** a few delay routines below here as LCD timing can be quite critical ****
+LCD_delay_ms: ; delay given in ms in W
+ movwf LCD_cnt_ms, A
+lcdlp2: movlw 250 ; 1 ms delay
+ call LCD_delay_x4us
+ decfsz LCD_cnt_ms, A
+ bra lcdlp2
+ return
+
+LCD_delay_x4us: ; delay given in chunks of 4 microsecond in W
+ movwf LCD_cnt_l, A ; now need to multiply by 16
+ swapf LCD_cnt_l, F, A ; swap nibbles
+ movlw 0x0f
+ andwf LCD_cnt_l, W, A ; move low nibble to W
+ movwf LCD_cnt_h, A ; then to LCD_cnt_h
+ movlw 0xf0
+ andwf LCD_cnt_l, F, A ; keep high nibble in LCD_cnt_l
+ call LCD_delay
+ return
+
+LCD_delay: ; delay routine 4 instruction loop == 250ns
+ movlw 0x00 ; W=0
+lcdlp1: decf LCD_cnt_l, F, A ; no carry when 0x00 -> 0xff
+ subwfb LCD_cnt_h, F, A ; no carry when 0x00 -> 0xff
+ bc lcdlp1 ; carry, then loop again
+ return ; carry reset so return
+
+LCD_Write_Hex: ; Writes byte stored in W as hex
+ movwf LCD_hex_tmp, A
+ swapf LCD_hex_tmp, W, A ; high nibble first
+ call LCD_Hex_Nib
+ movf LCD_hex_tmp, W, A ; then low nibble
+LCD_Hex_Nib: ; writes low nibble as hex character
+ andlw 0x0F
+ movwf LCD_tmp, A
  movlw 0x0A
- movwf ARG1L, A
- ; decimal 10 higher, leave arg1 as is
- movlw 0x00
- movwf ARG1H, A
- ; residue lower
- movf RES0, W, A
- movwf ARG2L, A
- ; residue higher
- movf RES1, W, A
- movwf ARG2H, A
- call MUL16x16
- movff RES2, OUT2, A
- clrf RES2, A
- ; residue lower
- movf RES0, W, A
- movwf ARG2L, A
-
- ; residue higher
- movf RES1, W, A
- movwf ARG2H, A
- call MUL16x16
- movff RES2, OUT1, A
- clrf RES2, A
- ; residue lower
- movf RES0, W, A
- movwf ARG2L, A
-
- ; residue higher
- movf RES1, W, A
- movwf ARG2H, A
-
- call MUL16x16
- movff RES2, OUT0, A
- clrf RES2, A
-
- rlncf OUT3, A
- rlncf OUT3, A
- rlncf OUT3, A
- rlncf OUT3, W, A
- addwf OUT2, W, A
- movwf dec_output_h, A
-
- rlncf OUT1, A
- rlncf OUT1, A
- rlncf OUT1, A
- rlncf OUT1, W, A
- addwf OUT0, W, A
- movwf dec_output_l, A
-
- return
-
-; higher initial k value = 16778
-HexDec_Convert_Precise:
- ; k lower
- movlw 0x8A
- movwf ARG1L, A
- ; k higher
- movlw 0x41
- movwf ARG1H, A
-
- ; voltage lower
- movff full_period_l, ARG2L, A
-; movf ADRESL, W, A
-; movwf ARG2L, A
- ; voltage higher
- movff full_period_h, ARG2L, A
-; movwf ARG2H, A
-
- call MUL16x16
- movff RES3, OUT3, A
- clrf RES3, A
-
- ; decimal 10 lower
- movlw 0x0A
- movwf ARG1L, A
-
- ; RES2, RES1, RES0 -> ARG1H, ARG2H, ARG2L
-
- ; residue RES2 -> ARG1H
- movf RES2, W, A
- movwf ARG1H, A
- ; residue RES1 -> ARG2H
- movf RES1, W, A
- movwf ARG2H, A
- ; residue RES0 -> ARG2L
- movf RES0,W, A
- movwf ARG2L, A
-
- call MUL8x24
-
- ; residue higher
- movf RES1, W, A
- movwf ARG2H, A
- call MUL16x16
- movff RES2, OUT1, A
- clrf RES2, A
- ; residue lower
- movf RES0, W, A
- movwf ARG2L, A
-
- ; residue higher
- movf RES1, W, A
- movwf ARG2H, A
-
- call MUL16x16
- movff RES2, OUT0, A
- clrf RES2, A
-
- rlncf OUT3, A
- rlncf OUT3, A
- rlncf OUT3, A
- rlncf OUT3, W, A
- addwf OUT2, W, A
- movwf dec_output_h, A
-
- rlncf OUT1, A
- rlncf OUT1, A
- rlncf OUT1, A
- rlncf OUT1, W, A
- addwf OUT0, W, A
- movwf dec_output_l, A
-
+ cpfslt LCD_tmp, A
+ addlw 0x07 ; number is greater than 9
+ addlw 0x26
+ addwf LCD_tmp, W, A
+ call LCD_Send_Byte_D ; write out ascii
  return
 
 
-MUL16x16:
- ; multiplication
- ; X = ARG2H: ARG2L
- ; Y = ARG1H: ARG1L
- ; Output = X*Y = RES3 RES2 RES1 RES0
 
- MOVF ARG1L, W
- MULWF ARG2L ; ARG1L * ARG2L->
-   ; PRODH:PRODL
- MOVFF PRODH, RES1 ;
- MOVFF PRODL, RES0 ;
-    ;
- MOVF ARG1H, W
- MULWF ARG2H ; ARG1H * ARG2H->
-      ; PRODH:PRODL
- MOVFF PRODH, RES3 ;
- MOVFF PRODL, RES2 ;
-    ;
- MOVF ARG1L, W
- MULWF ARG2H ; ARG1L * ARG2H->
-      ; PRODH:PRODL
- MOVF PRODL, W ;
- ADDWF RES1, F ; Add cross
- MOVF PRODH, W ; products
- ADDWFC RES2, F ;
- CLRF WREG ;
- ADDWFC RES3, F ;
-    ;
- MOVF ARG1H, W ;
- MULWF ARG2L ; ARG1H * ARG2L->
-      ; PRODH:PRODL
- MOVF PRODL, W ;
- ADDWF RES1, F ; Add cross
- MOVF PRODH, W ; products
- ADDWFC RES2, F ;
- CLRF WREG ;
- ADDWFC RES3, F ;
-
- return
-MUL8x24:
- ; ARG1L = 8bit number
- ; ARG1H, ARG2H, ARG2L => 24bit number (highest, high, low)
- ; We have RES3, RES2, RES1, RES0 to play with
- ; multiplication
- CLRF RES3
- CLRF RES2
- CLRF RES1
- CLRF RES0
- BCF 3, 0
-
- MOVF ARG1L, W, A
- MULWF ARG2L ; ARG1L * ARG2L->
-   ; PRODH:PRODL
- MOVFF PRODH, RES1 ;
- MOVFF PRODL, RES0 ;
-
- MOVF ARG1L, W, A
- MULWF ARG2H ; ARG1L * ARG1H->
-; ; PRODH:PRODL
-;
- MOVF PRODL, W, A
- ADDWF RES1, A
- BTFSC 3, 0
- INCF RES2, A
-
- MOVF PRODH, W, A
- ADDWF RES2, A
-
- MOVF ARG1L, W, A
- MULWF ARG1H
- MOVF PRODL, W, A
- ADDWF RES2, A
- BTFSC 3, 0
- INCF RES3, A
- MOVF PRODH, W, A
- ADDWF RES3, A
-
- return
-
-end
+    end

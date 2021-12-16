@@ -10960,9 +10960,11 @@ ENDM
 
 
 global signal_setup, convert_half_full, tone_toggle
+global full_period_h, full_period_l
 
 extrn delay_x4us, delay_x1us, pitch_count, volume_count
-extrn MUL16x16, ARG1H, ARG1L, ARG2H, ARG2L, RES3, RES2, RES1, RES0
+extrn HexDec_Convert_Precise, HexDec_Convert_Rough
+extrn lcd_setup, display_microtone, display_pentatone, display_cmajor, display_period
 
 
 psect udata_acs
@@ -10982,6 +10984,25 @@ octave_count: ds 1
 
 psect data
 cmajorTable:
+     db 0x01, 0xDE
+ db 0x01, 0xFA
+ db 0x02, 0x38
+ db 0x02, 0x7E
+ db 0x02, 0xCC
+ db 0x02, 0xF6
+ db 0x03, 0x53
+ db 0x03, 0xBC
+ db 0x03, 0xF4
+ db 0x04, 0x70
+ db 0x04, 0xFC
+ db 0x05, 0x98
+ db 0x05, 0xED
+ db 0x06, 0xA7
+ db 0x07, 0x77
+ db 0x07, 0x77
+ align 2
+
+amajorTable:
      db 0x01, 0xDE
  db 0x01, 0xFA
  db 0x02, 0x38
@@ -11025,17 +11046,26 @@ signal_setup:
 
 
 tone_toggle:
+; call HexDec_Convert_Precise
+; call display_period
+
  btfss PORTC, 0, A ; skip if 1
  call microtone ; low , call penta
+ btfss PORTC, 0, A
+ call display_microtone
  btfss PORTC, 0, A
  return
 
  btfss PORTC, 1, A
  call cmajor
  btfss PORTC, 1, A
+ call display_cmajor
+ btfss PORTC, 1, A
  return
 
  call pentatone
+ call display_pentatone
+
  return
 
 microtone:

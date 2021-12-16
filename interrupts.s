@@ -58,7 +58,7 @@ compare_int:
 	cpfseq	PORTD, A
 	clrf	PORTD, A
 	movlw	0x0
-	cpfsgt	volume_dummy, A89+
+	cpfsgt	volume_dummy, A
 	movff	volume_count, PORTD, A
 	
 	retfie	f

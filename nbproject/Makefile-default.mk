@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.s config.s lcd.s delay.s signal.s transducer.s maths.s interrupts.s
+SOURCEFILES_QUOTED_IF_SPACED=main.s config.s delay.s signal.s transducer.s maths.s interrupts.s lcd_display.s lcd_config.s
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/config.o ${OBJECTDIR}/lcd.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/signal.o ${OBJECTDIR}/transducer.o ${OBJECTDIR}/maths.o ${OBJECTDIR}/interrupts.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/config.o.d ${OBJECTDIR}/lcd.o.d ${OBJECTDIR}/delay.o.d ${OBJECTDIR}/signal.o.d ${OBJECTDIR}/transducer.o.d ${OBJECTDIR}/maths.o.d ${OBJECTDIR}/interrupts.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/config.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/signal.o ${OBJECTDIR}/transducer.o ${OBJECTDIR}/maths.o ${OBJECTDIR}/interrupts.o ${OBJECTDIR}/lcd_display.o ${OBJECTDIR}/lcd_config.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/config.o.d ${OBJECTDIR}/delay.o.d ${OBJECTDIR}/signal.o.d ${OBJECTDIR}/transducer.o.d ${OBJECTDIR}/maths.o.d ${OBJECTDIR}/interrupts.o.d ${OBJECTDIR}/lcd_display.o.d ${OBJECTDIR}/lcd_config.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/config.o ${OBJECTDIR}/lcd.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/signal.o ${OBJECTDIR}/transducer.o ${OBJECTDIR}/maths.o ${OBJECTDIR}/interrupts.o
+OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/config.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/signal.o ${OBJECTDIR}/transducer.o ${OBJECTDIR}/maths.o ${OBJECTDIR}/interrupts.o ${OBJECTDIR}/lcd_display.o ${OBJECTDIR}/lcd_config.o
 
 # Source Files
-SOURCEFILES=main.s config.s lcd.s delay.s signal.s transducer.s maths.s interrupts.s
+SOURCEFILES=main.s config.s delay.s signal.s transducer.s maths.s interrupts.s lcd_display.s lcd_config.s
 
 
 
@@ -110,14 +110,6 @@ ${OBJECTDIR}/config.o: config.s  nbproject/Makefile-${CND_CONF}.mk
 	config.s \
 	 -misa=std -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -fmax-errors=20 -mwarn=0 -xassembler-with-cpp
 	
-${OBJECTDIR}/lcd.o: lcd.s  nbproject/Makefile-${CND_CONF}.mk 
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/lcd.o 
-	${MP_AS} -mcpu=PIC18F87K22 -c \
-	-o ${OBJECTDIR}/lcd.o \
-	lcd.s \
-	 -misa=std -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -fmax-errors=20 -mwarn=0 -xassembler-with-cpp
-	
 ${OBJECTDIR}/delay.o: delay.s  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/delay.o 
@@ -156,6 +148,22 @@ ${OBJECTDIR}/interrupts.o: interrupts.s  nbproject/Makefile-${CND_CONF}.mk
 	${MP_AS} -mcpu=PIC18F87K22 -c \
 	-o ${OBJECTDIR}/interrupts.o \
 	interrupts.s \
+	 -misa=std -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -fmax-errors=20 -mwarn=0 -xassembler-with-cpp
+	
+${OBJECTDIR}/lcd_display.o: lcd_display.s  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/lcd_display.o 
+	${MP_AS} -mcpu=PIC18F87K22 -c \
+	-o ${OBJECTDIR}/lcd_display.o \
+	lcd_display.s \
+	 -misa=std -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -fmax-errors=20 -mwarn=0 -xassembler-with-cpp
+	
+${OBJECTDIR}/lcd_config.o: lcd_config.s  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/lcd_config.o 
+	${MP_AS} -mcpu=PIC18F87K22 -c \
+	-o ${OBJECTDIR}/lcd_config.o \
+	lcd_config.s \
 	 -misa=std -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -fmax-errors=20 -mwarn=0 -xassembler-with-cpp
 	
 else
@@ -175,14 +183,6 @@ ${OBJECTDIR}/config.o: config.s  nbproject/Makefile-${CND_CONF}.mk
 	config.s \
 	 -misa=std -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -fmax-errors=20 -mwarn=0 -xassembler-with-cpp
 	
-${OBJECTDIR}/lcd.o: lcd.s  nbproject/Makefile-${CND_CONF}.mk 
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/lcd.o 
-	${MP_AS} -mcpu=PIC18F87K22 -c \
-	-o ${OBJECTDIR}/lcd.o \
-	lcd.s \
-	 -misa=std -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -fmax-errors=20 -mwarn=0 -xassembler-with-cpp
-	
 ${OBJECTDIR}/delay.o: delay.s  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/delay.o 
@@ -221,6 +221,22 @@ ${OBJECTDIR}/interrupts.o: interrupts.s  nbproject/Makefile-${CND_CONF}.mk
 	${MP_AS} -mcpu=PIC18F87K22 -c \
 	-o ${OBJECTDIR}/interrupts.o \
 	interrupts.s \
+	 -misa=std -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -fmax-errors=20 -mwarn=0 -xassembler-with-cpp
+	
+${OBJECTDIR}/lcd_display.o: lcd_display.s  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/lcd_display.o 
+	${MP_AS} -mcpu=PIC18F87K22 -c \
+	-o ${OBJECTDIR}/lcd_display.o \
+	lcd_display.s \
+	 -misa=std -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -fmax-errors=20 -mwarn=0 -xassembler-with-cpp
+	
+${OBJECTDIR}/lcd_config.o: lcd_config.s  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/lcd_config.o 
+	${MP_AS} -mcpu=PIC18F87K22 -c \
+	-o ${OBJECTDIR}/lcd_config.o \
+	lcd_config.s \
 	 -misa=std -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -fmax-errors=20 -mwarn=0 -xassembler-with-cpp
 	
 endif

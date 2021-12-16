@@ -14,12 +14,13 @@
                    projectFiles="true">
       <itemPath>main.s</itemPath>
       <itemPath>config.s</itemPath>
-      <itemPath>lcd.s</itemPath>
       <itemPath>delay.s</itemPath>
       <itemPath>signal.s</itemPath>
       <itemPath>transducer.s</itemPath>
       <itemPath>maths.s</itemPath>
       <itemPath>interrupts.s</itemPath>
+      <itemPath>lcd_display.s</itemPath>
+      <itemPath>lcd_config.s</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

@@ -10959,14 +10959,26 @@ ENDM
 # 1 "delay.s" 2
 
 
-global delay_x4us, delay_x1us
+global delay_x4us, delay_x1us, delay_x1ms
 
 psect udata_acs
 delay_cnt_low: ds 1
 delay_cnt_high: ds 1
-
+delay_cnt_ms: ds 1
 
 psect delay_code, class = CODE
+
+
+ ; ===================== x4us delay function ==================================
+
+delay_x1ms: ; delay given in ms in W
+ movwf delay_cnt_ms, A
+lcdlp2: movlw 250 ; 1 ms delay
+ call delay_x4us
+ decfsz delay_cnt_ms, A
+ bra lcdlp2
+ return
+
 
 ; ===================== x4us delay function ==================================
 delay_x4us: ; delay given in chunks of 4 microsecond in W

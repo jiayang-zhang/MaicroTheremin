@@ -10959,11 +10959,12 @@ ENDM
 # 1 "main.s" 2
 
 
-;extrn LCD_Setup, LCD_Write_Message, LCD_Write_Instruction, LCD_Send_Byte_D
-extrn delay_x4us, delay_x1us
+extrn delay_x4us, delay_x1us, delay_x1ms
 extrn signal_setup, convert_half_full, tone_toggle
 extrn transducer_setup, trans_get, pitch_count, volume_count
 extrn pwm_compare_start, compare_int
+extrn lcd_setup
+
 
 
 psect udata_acs
@@ -10971,7 +10972,6 @@ interrupt_count: ds 1
 
 
 psect code, abs
-
 rst: org 0x0
  bra setup
 
@@ -10989,6 +10989,8 @@ setup:
  ; set port as output ; output=0 input=1
  call signal_setup
  call transducer_setup
+ call lcd_setup
+
 
  movlw 0x00
  movwf TRISF, A
@@ -10998,23 +11000,14 @@ setup:
  goto start
 
 start:
-
  call trans_get
  call tone_toggle
-;
+
  call convert_half_full
 
-; movlw 200
-; movwf PORTD, A
-;
-; movlw 50
-; call delay_x4us
-;
-; movlw 0
-; movwf PORTD, A
-;
-; movlw 50
-; call delay_x4us
+     movlw 100
+ call delay_x1ms
+
 
  bra start
  return
