@@ -12,26 +12,24 @@ psect	udata_acs
 pitch_count:	ds  1
 volume_count:	ds  1
 pitch_temp:	ds  1	
-volume_temp:	ds  1
+volume_temp:	ds  1	
     
+
     
 psect	trans_code, class = CODE
 ;  ======================== note =========================
-; PORTE for sensor01 I/O
-; PORTJ for sensor02 I/O
-; PORTF for sensor01 reading 
-; PORTH for sensor02 reading
+; PORTE for sensor01 (pitch) I/O
+; PORTJ for sensor02 (volume) I/O
+; PORTF for sensor01 display check 
+; PORTH for sensor02 display check
 
 transducer_setup:
     	movlw	0
 	movwf	TRISF, A	    ; output
 	movlw	0
-	movwf	TRISJ, A	    ; output
-	movlw	0
 	movwf	TRISH, A	    ; output
-;	movlw	200
-;	movwf	PORTH, A
-;	return
+
+	return
 
 
 trans_get:
@@ -54,6 +52,7 @@ trans_get:
 	; start the countdown
 	call	count_loop_init_1
 	movff	pitch_temp, pitch_count, A
+	
 	
 	movlw	0
 	movwf	TRISJ, A
@@ -90,7 +89,9 @@ count_loop_1:
 	bra	count_loop_1
 	return
 
-	
+
+;; current default countdown starts from 80 instead of 255
+;; to make volume playing distance much shorter (~10cm) 
 count_loop_init_2:	
     	movlw	80		    ; 8-bits: count from 0 to 255
 	movwf	volume_temp, A
@@ -102,7 +103,7 @@ count_loop_2:
 	movlw	2 
 	call	delay_x4us
 	
-	btfsc	PORTJ, 0, A	
+	btfsc	PORTJ, 0, A		    ; compare PORTJ with w, skip if equals
 	bra	count_loop_2
 	
 	return

@@ -1,21 +1,21 @@
 # 1 "transducer.s"
 # 1 "<built-in>" 1
 # 1 "transducer.s" 2
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 1 3
+# 1 "/opt/microchip/xc8/v2.32/pic/include/xc.inc" 1 3
 
 
 
 
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18.inc" 1 3
+# 1 "/opt/microchip/xc8/v2.32/pic/include/pic18.inc" 1 3
 
 
 
 
 
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18_chip_select.inc" 1 3
-# 1550 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18_chip_select.inc" 3
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\proc\\pic18f87k22.inc" 1 3
-# 48 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\proc\\pic18f87k22.inc" 3
+# 1 "/opt/microchip/xc8/v2.32/pic/include/pic18_chip_select.inc" 1 3
+# 1550 "/opt/microchip/xc8/v2.32/pic/include/pic18_chip_select.inc" 3
+# 1 "/opt/microchip/xc8/v2.32/pic/include/proc/pic18f87k22.inc" 1 3
+# 48 "/opt/microchip/xc8/v2.32/pic/include/proc/pic18f87k22.inc" 3
 PMD3 equ 0F16h
 
 PMD3_TMR12MD_POSN equ 0000h
@@ -10866,7 +10866,7 @@ TOSH_TOSH_MASK equ 00FFh
 
 
 TOSU equ 0FFFh
-# 12494 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\proc\\pic18f87k22.inc" 3
+# 12494 "/opt/microchip/xc8/v2.32/pic/include/proc/pic18f87k22.inc" 3
 psect udata_acs,class=COMRAM,space=1,noexec,lowdata
 
 psect udata_bank0,class=BANK0,space=1,noexec,lowdata
@@ -10889,9 +10889,8 @@ psect udata,class=RAM,space=1,noexec
 psect code,class=CODE,space=0,reloc=2
 psect data,class=CONST,space=0,reloc=2,noexec
 psect edata,class=EEDATA,space=3,delta=2,noexec
-# 1550 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18_chip_select.inc" 2 3
-# 6 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18.inc" 2 3
-
+# 1551 "/opt/microchip/xc8/v2.32/pic/include/pic18_chip_select.inc" 2 3
+# 7 "/opt/microchip/xc8/v2.32/pic/include/pic18.inc" 2 3
 
 
 
@@ -10955,9 +10954,8 @@ addwfc FSR1H,c
 stk_offset SET 0
 auto_size SET 0
 ENDM
-# 5 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 2 3
-# 1 "transducer.s" 2
-
+# 6 "/opt/microchip/xc8/v2.32/pic/include/xc.inc" 2 3
+# 2 "transducer.s" 2
 
 
 global transducer_setup, trans_get
@@ -10974,23 +10972,21 @@ pitch_temp: ds 1
 volume_temp: ds 1
 
 
+
 psect trans_code, class = CODE
 ; ======================== note =========================
-; PORTE for sensor01 I/O
-; PORTJ for sensor02 I/O
-; PORTF for sensor01 reading
-; PORTH for sensor02 reading
+; PORTE for sensor01 (pitch) I/O
+; PORTJ for sensor02 (volume) I/O
+; PORTF for sensor01 display check
+; PORTH for sensor02 display check
 
 transducer_setup:
      movlw 0
  movwf TRISF, A ; output
  movlw 0
- movwf TRISJ, A ; output
- movlw 0
  movwf TRISH, A ; output
-; movlw 200
-; movwf PORTH, A
-; return
+
+ return
 
 
 trans_get:
@@ -11013,6 +11009,7 @@ trans_get:
  ; start the countdown
  call count_loop_init_1
  movff pitch_temp, pitch_count, A
+
 
  movlw 0
  movwf TRISJ, A
@@ -11050,6 +11047,8 @@ count_loop_1:
  return
 
 
+;; current default countdown starts from 80 instead of 255
+;; to make volume playing distance much shorter (~10cm)
 count_loop_init_2:
      movlw 80 ; 8-bits: count from 0 to 255
  movwf volume_temp, A
@@ -11061,7 +11060,7 @@ count_loop_2:
  movlw 2
  call delay_x4us
 
- btfsc PORTJ, 0, A
+ btfsc PORTJ, 0, A ; compare PORTJ with w, skip if equals
  bra count_loop_2
 
  return

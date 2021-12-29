@@ -16,7 +16,7 @@ pitch_interrupt_start:
 	movlw	00000100B	    ; set CCP7
 	movwf	CCP7CON, A 
 	bcf	PIE4, 4, A	    ; disable CCP7 capture interrupt
-	bcf	PIR4, 4, A	    ; clear ccp7 interrupt flag
+	bcf	PIR4, 4, A	    ; cleainear to linearr ccp7 interrupt flag
 	bsf	IPR4, 4, A	    ; set interrupt as high priority
 
 	bcf	C7TSEL1		    ; match CCP7 to TMR1
@@ -33,8 +33,8 @@ pitch_interrupt_start:
 	;bit 1 = 16bit or 8 bit operation clock
 	;bit 0 = on/off timer
 	bcf	T1CON, 0, A	    ; disable timer
-	clrf	TMR1H
-	clrf	TMR1L
+	clrf	TMR1H, A
+	clrf	TMR1L, A
     	movlw	01010111B	    ; enable timer 
 	movwf	T1CON, A
 	
@@ -44,14 +44,13 @@ pitch_interrupt_start:
 	bsf	PEIE		    ; enable peripheral interrupt 
 	return
 
-	
+
+; interrupt subroutine, toggles PWM signal output from 0 to volume_count
 compare_int:
 	btfss	CCP4IF		; check that this is ccp timer 4 interrupt
 	retfie	f		; if not then return
 	bcf	CCP4IF	        ; clear the CCP4IF flag
 	
-	bsf	PORTC,	4
-	bcf	PORTC,	4
 	movff	PORTD, volume_dummy, A
 	
 	movlw	0x0
@@ -67,6 +66,7 @@ compare_int:
 	
 pwm_compare_start:
     
+;;;;;;;;;;; to be continued capture protocol for transducers   
 ;	movlw	00110001B
 ;	movwf	T3CON
 ;	
@@ -81,23 +81,22 @@ pwm_compare_start:
 ;	movwf	CCPR4L
 ;	movlw	0x00
 ;	movwf	CCPR4H
-;	
-;	bsf	CCP4IE	
-;	bsf	GIE
-;	bsf	PEIE
-	
+;;;;;;;;;;;	
+    
+    
+    
 	movlw	00110001B
-	movwf	T1CON
+	movwf	T1CON, A
 	
 	bcf	C4TSEL1
 	//movlw	000000001B
 	//movwf	CCPTMRS1
 	movlw	00001011B		
-	movwf	CCP4CON         	
+	movwf	CCP4CON, A         	
 	movlw	0xe0
-	movwf	CCPR4L
+	movwf	CCPR4L, A
 	movlw	0x08
-	movwf	CCPR4H
+	movwf	CCPR4H, A
 	
 	bsf	CCP4IE	
 	bsf	GIE

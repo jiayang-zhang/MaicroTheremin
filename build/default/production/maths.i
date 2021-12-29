@@ -1,21 +1,21 @@
 # 1 "maths.s"
 # 1 "<built-in>" 1
 # 1 "maths.s" 2
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 1 3
+# 1 "/opt/microchip/xc8/v2.32/pic/include/xc.inc" 1 3
 
 
 
 
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18.inc" 1 3
+# 1 "/opt/microchip/xc8/v2.32/pic/include/pic18.inc" 1 3
 
 
 
 
 
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18_chip_select.inc" 1 3
-# 1550 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18_chip_select.inc" 3
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\proc\\pic18f87k22.inc" 1 3
-# 48 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\proc\\pic18f87k22.inc" 3
+# 1 "/opt/microchip/xc8/v2.32/pic/include/pic18_chip_select.inc" 1 3
+# 1550 "/opt/microchip/xc8/v2.32/pic/include/pic18_chip_select.inc" 3
+# 1 "/opt/microchip/xc8/v2.32/pic/include/proc/pic18f87k22.inc" 1 3
+# 48 "/opt/microchip/xc8/v2.32/pic/include/proc/pic18f87k22.inc" 3
 PMD3 equ 0F16h
 
 PMD3_TMR12MD_POSN equ 0000h
@@ -10866,7 +10866,7 @@ TOSH_TOSH_MASK equ 00FFh
 
 
 TOSU equ 0FFFh
-# 12494 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\proc\\pic18f87k22.inc" 3
+# 12494 "/opt/microchip/xc8/v2.32/pic/include/proc/pic18f87k22.inc" 3
 psect udata_acs,class=COMRAM,space=1,noexec,lowdata
 
 psect udata_bank0,class=BANK0,space=1,noexec,lowdata
@@ -10889,9 +10889,8 @@ psect udata,class=RAM,space=1,noexec
 psect code,class=CODE,space=0,reloc=2
 psect data,class=CONST,space=0,reloc=2,noexec
 psect edata,class=EEDATA,space=3,delta=2,noexec
-# 1550 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18_chip_select.inc" 2 3
-# 6 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18.inc" 2 3
-
+# 1551 "/opt/microchip/xc8/v2.32/pic/include/pic18_chip_select.inc" 2 3
+# 7 "/opt/microchip/xc8/v2.32/pic/include/pic18.inc" 2 3
 
 
 
@@ -10955,9 +10954,8 @@ addwfc FSR1H,c
 stk_offset SET 0
 auto_size SET 0
 ENDM
-# 5 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 2 3
-# 1 "maths.s" 2
-
+# 6 "/opt/microchip/xc8/v2.32/pic/include/xc.inc" 2 3
+# 2 "maths.s" 2
 
 global MUL16x16, HexDec_Convert_Precise, HexDec_Convert_Rough
 global ARG1H, ARG1L, ARG2H, ARG2L
@@ -11146,37 +11144,37 @@ MUL16x16:
  ; Y = ARG1H: ARG1L
  ; Output = X*Y = RES3 RES2 RES1 RES0
 
- MOVF ARG1L, W
- MULWF ARG2L ; ARG1L * ARG2L->
+ MOVF ARG1L, W, A
+ MULWF ARG2L, A ; ARG1L * ARG2L->
    ; PRODH:PRODL
- MOVFF PRODH, RES1 ;
- MOVFF PRODL, RES0 ;
+ MOVFF PRODH, RES1, A ;
+ MOVFF PRODL, RES0, A ;
     ;
- MOVF ARG1H, W
- MULWF ARG2H ; ARG1H * ARG2H->
+ MOVF ARG1H, W, A
+ MULWF ARG2H, A ; ARG1H * ARG2H->
       ; PRODH:PRODL
- MOVFF PRODH, RES3 ;
- MOVFF PRODL, RES2 ;
+ MOVFF PRODH, RES3, A ;
+ MOVFF PRODL, RES2, A ;
     ;
- MOVF ARG1L, W
- MULWF ARG2H ; ARG1L * ARG2H->
+ MOVF ARG1L, W, A
+ MULWF ARG2H, A ; ARG1L * ARG2H->
       ; PRODH:PRODL
- MOVF PRODL, W ;
- ADDWF RES1, F ; Add cross
- MOVF PRODH, W ; products
- ADDWFC RES2, F ;
- CLRF WREG ;
- ADDWFC RES3, F ;
+ MOVF PRODL, W, A ;
+ ADDWF RES1, F, A ; Add cross
+ MOVF PRODH, W, A ; products
+ ADDWFC RES2, F, A ;
+ CLRF WREG, A ;
+ ADDWFC RES3, F, A ;
     ;
- MOVF ARG1H, W ;
- MULWF ARG2L ; ARG1H * ARG2L->
+ MOVF ARG1H, W, A ;
+ MULWF ARG2L, A ; ARG1H * ARG2L->
       ; PRODH:PRODL
- MOVF PRODL, W ;
- ADDWF RES1, F ; Add cross
- MOVF PRODH, W ; products
- ADDWFC RES2, F ;
- CLRF WREG ;
- ADDWFC RES3, F ;
+ MOVF PRODL, W, A ;
+ ADDWF RES1, F, A ; Add cross
+ MOVF PRODH, W, A ; products
+ ADDWFC RES2, F, A ;
+ CLRF WREG, A ;
+ ADDWFC RES3, F, A ;
 
  return
 MUL8x24:
@@ -11184,35 +11182,35 @@ MUL8x24:
  ; ARG1H, ARG2H, ARG2L => 24bit number (highest, high, low)
  ; We have RES3, RES2, RES1, RES0 to play with
  ; multiplication
- CLRF RES3
- CLRF RES2
- CLRF RES1
- CLRF RES0
- BCF 3, 0
+ CLRF RES3, A
+ CLRF RES2, A
+ CLRF RES1, A
+ CLRF RES0, A
+ BCF 3, 0, A
 
  MOVF ARG1L, W, A
- MULWF ARG2L ; ARG1L * ARG2L->
+ MULWF ARG2L, A ; ARG1L * ARG2L->
    ; PRODH:PRODL
- MOVFF PRODH, RES1 ;
- MOVFF PRODL, RES0 ;
+ MOVFF PRODH, RES1, A ;
+ MOVFF PRODL, RES0, A ;
 
  MOVF ARG1L, W, A
- MULWF ARG2H ; ARG1L * ARG1H->
+ MULWF ARG2H, A ; ARG1L * ARG1H->
 ; ; PRODH:PRODL
 ;
  MOVF PRODL, W, A
  ADDWF RES1, A
- BTFSC 3, 0
+ BTFSC 3, 0, A
  INCF RES2, A
 
  MOVF PRODH, W, A
  ADDWF RES2, A
 
  MOVF ARG1L, W, A
- MULWF ARG1H
+ MULWF ARG1H, A
  MOVF PRODL, W, A
  ADDWF RES2, A
- BTFSC 3, 0
+ BTFSC 3, 0, A
  INCF RES3, A
  MOVF PRODH, W, A
  ADDWF RES3, A

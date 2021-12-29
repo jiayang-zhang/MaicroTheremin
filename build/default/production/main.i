@@ -1,21 +1,21 @@
 # 1 "main.s"
 # 1 "<built-in>" 1
 # 1 "main.s" 2
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 1 3
+# 1 "/opt/microchip/xc8/v2.32/pic/include/xc.inc" 1 3
 
 
 
 
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18.inc" 1 3
+# 1 "/opt/microchip/xc8/v2.32/pic/include/pic18.inc" 1 3
 
 
 
 
 
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18_chip_select.inc" 1 3
-# 1550 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18_chip_select.inc" 3
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\proc\\pic18f87k22.inc" 1 3
-# 48 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\proc\\pic18f87k22.inc" 3
+# 1 "/opt/microchip/xc8/v2.32/pic/include/pic18_chip_select.inc" 1 3
+# 1550 "/opt/microchip/xc8/v2.32/pic/include/pic18_chip_select.inc" 3
+# 1 "/opt/microchip/xc8/v2.32/pic/include/proc/pic18f87k22.inc" 1 3
+# 48 "/opt/microchip/xc8/v2.32/pic/include/proc/pic18f87k22.inc" 3
 PMD3 equ 0F16h
 
 PMD3_TMR12MD_POSN equ 0000h
@@ -10866,7 +10866,7 @@ TOSH_TOSH_MASK equ 00FFh
 
 
 TOSU equ 0FFFh
-# 12494 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\proc\\pic18f87k22.inc" 3
+# 12494 "/opt/microchip/xc8/v2.32/pic/include/proc/pic18f87k22.inc" 3
 psect udata_acs,class=COMRAM,space=1,noexec,lowdata
 
 psect udata_bank0,class=BANK0,space=1,noexec,lowdata
@@ -10889,9 +10889,8 @@ psect udata,class=RAM,space=1,noexec
 psect code,class=CODE,space=0,reloc=2
 psect data,class=CONST,space=0,reloc=2,noexec
 psect edata,class=EEDATA,space=3,delta=2,noexec
-# 1550 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18_chip_select.inc" 2 3
-# 6 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18.inc" 2 3
-
+# 1551 "/opt/microchip/xc8/v2.32/pic/include/pic18_chip_select.inc" 2 3
+# 7 "/opt/microchip/xc8/v2.32/pic/include/pic18.inc" 2 3
 
 
 
@@ -10955,15 +10954,14 @@ addwfc FSR1H,c
 stk_offset SET 0
 auto_size SET 0
 ENDM
-# 5 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 2 3
-# 1 "main.s" 2
+# 6 "/opt/microchip/xc8/v2.32/pic/include/xc.inc" 2 3
+# 2 "main.s" 2
 
-
-extrn delay_x4us, delay_x1us, delay_x1ms
-extrn signal_setup, convert_half_full, tone_toggle
-extrn transducer_setup, trans_get, pitch_count, volume_count
-extrn pwm_compare_start, compare_int
-extrn lcd_setup
+extrn delay_x4us, delay_x1us, delay_x1ms ; from delay module
+extrn signal_setup, convert_half_full, tone_toggle ; from signal module
+extrn transducer_setup, trans_get, pitch_count, volume_count ;from transducer
+extrn pwm_compare_start, compare_int ; from interrupt module
+extrn lcd_setup ; from lcd config module
 
 
 
@@ -10972,14 +10970,10 @@ interrupt_count: ds 1
 
 
 psect code, abs
-rst: org 0x0
- bra setup
 
-main:
- org 0x0
+rst:
+ org 0x0 ;reset code starts here at address 0x0
  goto setup
-
- org 0x100 ; Main code starts here at address 0x100
 
   ; ******* Programme FLASH read Setup Code ****
 setup:
@@ -10992,8 +10986,6 @@ setup:
  call lcd_setup
 
 
- movlw 0x00
- movwf TRISF, A
  bsf TRISE, 5, A ; set PORTE's RE5 as input
  call pwm_compare_start
 
@@ -11013,15 +11005,6 @@ start:
  return
 
 
-;lcd_position:
-; ; write to DDRAM --> set which each pixel block
-; ;(CGRAM --> each pixel within a block)
-;
-; ; movlw 11000000B ; position address instruction ; hex = 40
-; movlw 11000001B ; hex = 41
-; call LCD_Write_Instruction
-; return
-;
 
 interrupt:
     org 0x0008 ; high vector, no low vector
@@ -11029,6 +11012,7 @@ interrupt:
     goto compare_int
 
 
+;;;;; deprecated capture peripheral test for ultrasound transducers
 
 ;interrupt:
 ; org 0x08
@@ -11044,4 +11028,4 @@ interrupt:
 ; bcf PIR4, 4 ; clear the interrupt flag
 ; retfie
 
-    end
+    end rst

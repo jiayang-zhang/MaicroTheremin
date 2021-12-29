@@ -1,1 +1,1 @@
-build/default/production\signal.i: signal.s
+build/default/production/signal.i: signal.s

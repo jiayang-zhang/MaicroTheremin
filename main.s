@@ -1,10 +1,10 @@
 #include <xc.inc>
 
-extrn	delay_x4us, delay_x1us, delay_x1ms
-extrn	signal_setup, convert_half_full, tone_toggle    
-extrn	transducer_setup, trans_get, pitch_count, volume_count
-extrn	pwm_compare_start, compare_int
-extrn	lcd_setup
+extrn	delay_x4us, delay_x1us, delay_x1ms	; from delay module
+extrn	signal_setup, convert_half_full, tone_toggle   ; from signal module  
+extrn	transducer_setup, trans_get, pitch_count, volume_count ;from transducer
+extrn	pwm_compare_start, compare_int	; from interrupt module
+extrn	lcd_setup   ; from lcd config module
 
     
     
@@ -13,14 +13,10 @@ interrupt_count:    ds  1
 
     
 psect	code, abs
-rst:	org	0x0
-	bra	setup
-	
-main:
-	org	0x0
-	goto	setup
 
-	org	0x100		    ; Main code starts here at address 0x100
+rst:
+	org	0x0		    ;reset code starts here at address 0x0
+	goto	setup
 
 		; ******* Programme FLASH read Setup Code ****  
 setup:	
@@ -32,11 +28,9 @@ setup:
 	call	transducer_setup
 	call	lcd_setup
 	
-	
-	movlw	0x00
-	movwf	TRISF, A
+
 	bsf	TRISE, 5, A	    ; set PORTE's RE5 as input
-	call	pwm_compare_start
+	call	pwm_compare_start   
 	
 	goto	start	
 	
@@ -53,16 +47,7 @@ start:
 	bra	start
 	return
 	
-	
-;lcd_position:
-;	; write to DDRAM --> set which each pixel block
-;	;(CGRAM --> each pixel within a block)
-;	
-;	; movlw	11000000B	; position address instruction	; hex = 40
-;	movlw	11000001B	; hex = 41
-;	call	LCD_Write_Instruction
-;	return 
-;	
+
 
 interrupt:	
 	   org	0x0008	; high vector, no low vector
@@ -70,7 +55,8 @@ interrupt:
 	   goto	compare_int
 	   
 	
-	
+;;;;; deprecated capture peripheral test for ultrasound transducers
+	   
 ;interrupt:
 ;	org	0x08
 ;	btfss	PIR4, 4			; check if ccp7 capture interrupt
@@ -85,4 +71,4 @@ interrupt:
 ;	bcf	PIR4, 4			; clear the interrupt flag
 ;	retfie
 	
-    end
+    end	rst

@@ -1,21 +1,21 @@
 # 1 "signal.s"
 # 1 "<built-in>" 1
 # 1 "signal.s" 2
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 1 3
+# 1 "/opt/microchip/xc8/v2.32/pic/include/xc.inc" 1 3
 
 
 
 
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18.inc" 1 3
+# 1 "/opt/microchip/xc8/v2.32/pic/include/pic18.inc" 1 3
 
 
 
 
 
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18_chip_select.inc" 1 3
-# 1550 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18_chip_select.inc" 3
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\proc\\pic18f87k22.inc" 1 3
-# 48 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\proc\\pic18f87k22.inc" 3
+# 1 "/opt/microchip/xc8/v2.32/pic/include/pic18_chip_select.inc" 1 3
+# 1550 "/opt/microchip/xc8/v2.32/pic/include/pic18_chip_select.inc" 3
+# 1 "/opt/microchip/xc8/v2.32/pic/include/proc/pic18f87k22.inc" 1 3
+# 48 "/opt/microchip/xc8/v2.32/pic/include/proc/pic18f87k22.inc" 3
 PMD3 equ 0F16h
 
 PMD3_TMR12MD_POSN equ 0000h
@@ -10866,7 +10866,7 @@ TOSH_TOSH_MASK equ 00FFh
 
 
 TOSU equ 0FFFh
-# 12494 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\proc\\pic18f87k22.inc" 3
+# 12494 "/opt/microchip/xc8/v2.32/pic/include/proc/pic18f87k22.inc" 3
 psect udata_acs,class=COMRAM,space=1,noexec,lowdata
 
 psect udata_bank0,class=BANK0,space=1,noexec,lowdata
@@ -10889,9 +10889,8 @@ psect udata,class=RAM,space=1,noexec
 psect code,class=CODE,space=0,reloc=2
 psect data,class=CONST,space=0,reloc=2,noexec
 psect edata,class=EEDATA,space=3,delta=2,noexec
-# 1550 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18_chip_select.inc" 2 3
-# 6 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18.inc" 2 3
-
+# 1551 "/opt/microchip/xc8/v2.32/pic/include/pic18_chip_select.inc" 2 3
+# 7 "/opt/microchip/xc8/v2.32/pic/include/pic18.inc" 2 3
 
 
 
@@ -10955,9 +10954,8 @@ addwfc FSR1H,c
 stk_offset SET 0
 auto_size SET 0
 ENDM
-# 5 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 2 3
-# 1 "signal.s" 2
-
+# 6 "/opt/microchip/xc8/v2.32/pic/include/xc.inc" 2 3
+# 2 "signal.s" 2
 
 global signal_setup, convert_half_full, tone_toggle
 global full_period_h, full_period_l
@@ -10972,17 +10970,10 @@ half_period_h: ds 1
 half_period_l: ds 1
 full_period_h: ds 1
 full_period_l: ds 1
-dummy_256: ds 1
-counter_ref_high: ds 1
-counter_ref_low: ds 1
-dummy_cr_high: ds 1
-dummy_cr_low: ds 1
-
-octave_count: ds 1
-
 
 
 psect data
+; these scale tables are all 16bit HALF periods, to be converted later
 cmajorTable:
      db 0x01, 0xDE
  db 0x01, 0xFA
@@ -11002,23 +10993,24 @@ cmajorTable:
  db 0x07, 0x77
  align 2
 
+
 amajorTable:
-     db 0x01, 0xDE
+     db 0x01, 0xC2
  db 0x01, 0xFA
  db 0x02, 0x38
- db 0x02, 0x7E
- db 0x02, 0xCC
+ db 0x02, 0x59
+ db 0x02, 0xA3
  db 0x02, 0xF6
  db 0x03, 0x53
- db 0x03, 0xBC
+ db 0x03, 0x85
  db 0x03, 0xF4
  db 0x04, 0x70
- db 0x04, 0xFC
- db 0x05, 0x98
- db 0x05, 0xED
- db 0x06, 0xA7
- db 0x07, 0x77
- db 0x07, 0x77
+ db 0x04, 0xB3
+ db 0x05, 0x47
+ db 0x05, 0xEC
+ db 0x06, 0xA6
+ db 0x07, 0x0B
+ db 0x07, 0x0B
  align 2
 
 
@@ -11026,25 +11018,25 @@ psect sig_code, class = CODE
 
 signal_setup:
  movlw 0x0
- movwf TRISD, A
- movlw 0x00
- movwf counter_ref_high, A
- movlw 0x00
- movwf counter_ref_low, A
+ movwf TRISD, A ; prepare PORTD as PWM signal output
+
 
  movlw 0x0
  movwf TRISB, A
 
- movlw 00000011B ; for tone toggle ; pin01 of PORTC
- movwf TRISC
+ movlw 00000011B ; for tone toggle, using two inputs for now
+ movwf TRISC, A
 
+ ;;; just initialising pitch_count and volume_count with max to help
+ ;;; with debugging
  movlw 255
- movwf pitch_count
- movwf volume_count
+ movwf pitch_count, A
+ movwf volume_count, A
 
  return
 
 
+;; selection subroutine that chooses tone mapping protocol based on switches
 tone_toggle:
 ; call HexDec_Convert_Precise
 ; call display_period
@@ -11068,9 +11060,31 @@ tone_toggle:
 
  return
 
+
+
+; right shift to multiply half period by 2 to accomodate CCP 0.5MHz clock
+convert_half_full:
+
+ movff half_period_h, full_period_h, A
+ movff half_period_l, full_period_l, A
+
+ bcf 3, 0, A
+ rlcf full_period_l, A
+ rlncf full_period_h, A
+ movlw 0x0
+ addwfc full_period_h, A
+
+ movff full_period_l, CCPR4L, A
+ movff full_period_h, CCPR4H, A
+
+ return
+
+
+
+;;; linear scaling of 0-255 pitch count to c4 - c6 half period values
 microtone:
  movlw 6
- mulwf pitch_count ; PRODH: PRODL
+ mulwf pitch_count, A ; PRODH: PRODL
 
  movlw 0xDE
  addwf PRODL, A
@@ -11082,32 +11096,28 @@ microtone:
  movff PRODH, half_period_h, A
  movff PRODL, half_period_l, A
 
-
  return
 
 
-cmajorTable_read:
-  movlw low highword(cmajorTable) ; address of data in PM
+
+cmajor:
+ movlw low highword(cmajorTable) ; address of data in PM
  movwf TBLPTRU, A ; load upper bits to TBLPTRU
  movlw high(cmajorTable) ; address of data in PM
  movwf TBLPTRH, A ; load high byte to TBLPTRH
  movlw low(cmajorTable) ; address of data in PM
  movwf TBLPTRL, A ; load low byte to TBLPTRL
- return
-
-cmajor:
- call cmajorTable_read
 
  swapf pitch_count, f, A
  movlw 0x0f
- andwf pitch_count, A
+ andwf pitch_count, A ; take lower nibble for counting
 
  ; Multiply by two and add to TBLPTR
  rlncf pitch_count, W, A
- addwf TBLPTRL, F
+ addwf TBLPTRL, F, A
  movlw 0x0
- addwfc TBLPTRH, F
- addwfc TBLPTRU, F
+ addwfc TBLPTRH, F, A
+ addwfc TBLPTRU, F, A
 
  ; Write the new frequency into CCP compare registers
  tblrd*+
@@ -11118,6 +11128,7 @@ cmajor:
  return
 
 
+; 'ladder' comparator chain to map period values to pitch_count
 pentatone:
  ; compare number counts
  movlw 0x07 ; set C4
@@ -11126,7 +11137,7 @@ pentatone:
  movwf half_period_l, A
 
  movlw 233 ; C4 if pitch_count = 256 to 235
- cpfslt pitch_count
+ cpfslt pitch_count, A
  return
 
 
@@ -11136,7 +11147,7 @@ pentatone:
  movwf half_period_l, A
 
  movlw 210 ; D4 if pitch_count = 235 to 214
- cpfslt pitch_count
+ cpfslt pitch_count, A
  return
 
 
@@ -11146,7 +11157,7 @@ pentatone:
  movwf half_period_l, A
 
  movlw 187
- cpfslt pitch_count
+ cpfslt pitch_count, A
  return
 
 
@@ -11156,7 +11167,7 @@ pentatone:
  movwf half_period_l, A
 
  movlw 164
- cpfslt pitch_count
+ cpfslt pitch_count, A
  return
 
 
@@ -11166,7 +11177,7 @@ pentatone:
  movwf half_period_l, A
 
  movlw 141
- cpfslt pitch_count
+ cpfslt pitch_count, A
  return
 
 
@@ -11176,7 +11187,7 @@ pentatone:
  movwf half_period_l, A
 
  movlw 118
- cpfslt pitch_count
+ cpfslt pitch_count, A
  return
 
 
@@ -11186,7 +11197,7 @@ pentatone:
  movwf half_period_l, A
 
  movlw 95
- cpfslt pitch_count
+ cpfslt pitch_count, A
  return
 
 
@@ -11196,7 +11207,7 @@ pentatone:
  movwf half_period_l, A
 
  movlw 72
- cpfslt pitch_count
+ cpfslt pitch_count, A
  return
 
 
@@ -11206,7 +11217,7 @@ pentatone:
  movwf half_period_l, A
 
  movlw 49
- cpfslt pitch_count
+ cpfslt pitch_count, A
  return
 
 
@@ -11216,7 +11227,7 @@ pentatone:
  movwf half_period_l, A
 
  movlw 26
- cpfslt pitch_count
+ cpfslt pitch_count, A
  return
 
 
@@ -11228,21 +11239,5 @@ pentatone:
 
  return
 
-
-convert_half_full:
-
- movff half_period_h, full_period_h, A
- movff half_period_l, full_period_l, A
-
- bcf 3, 0
- rlcf full_period_l, A
- rlncf full_period_h, A
- movlw 0x0
- addwfc full_period_h, A
-
- movff full_period_l, CCPR4L, A
- movff full_period_h, CCPR4H, A
-
- return
 
 end

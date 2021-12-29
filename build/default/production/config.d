@@ -1,1 +1,1 @@
-build/default/production\config.i: config.s
+build/default/production/config.i: config.s

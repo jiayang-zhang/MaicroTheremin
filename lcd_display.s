@@ -134,7 +134,8 @@ runner:
 
 	return			; goto current line in code
 	
-	
+
+; lcd send instruction subroutines
 first_row:	
 	movlw	00000000B
 	call	LCD_Write_Instruction

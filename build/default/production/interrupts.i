@@ -1,21 +1,21 @@
 # 1 "interrupts.s"
 # 1 "<built-in>" 1
 # 1 "interrupts.s" 2
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 1 3
+# 1 "/opt/microchip/xc8/v2.32/pic/include/xc.inc" 1 3
 
 
 
 
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18.inc" 1 3
+# 1 "/opt/microchip/xc8/v2.32/pic/include/pic18.inc" 1 3
 
 
 
 
 
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18_chip_select.inc" 1 3
-# 1550 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18_chip_select.inc" 3
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\proc\\pic18f87k22.inc" 1 3
-# 48 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\proc\\pic18f87k22.inc" 3
+# 1 "/opt/microchip/xc8/v2.32/pic/include/pic18_chip_select.inc" 1 3
+# 1550 "/opt/microchip/xc8/v2.32/pic/include/pic18_chip_select.inc" 3
+# 1 "/opt/microchip/xc8/v2.32/pic/include/proc/pic18f87k22.inc" 1 3
+# 48 "/opt/microchip/xc8/v2.32/pic/include/proc/pic18f87k22.inc" 3
 PMD3 equ 0F16h
 
 PMD3_TMR12MD_POSN equ 0000h
@@ -10866,7 +10866,7 @@ TOSH_TOSH_MASK equ 00FFh
 
 
 TOSU equ 0FFFh
-# 12494 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\proc\\pic18f87k22.inc" 3
+# 12494 "/opt/microchip/xc8/v2.32/pic/include/proc/pic18f87k22.inc" 3
 psect udata_acs,class=COMRAM,space=1,noexec,lowdata
 
 psect udata_bank0,class=BANK0,space=1,noexec,lowdata
@@ -10889,9 +10889,8 @@ psect udata,class=RAM,space=1,noexec
 psect code,class=CODE,space=0,reloc=2
 psect data,class=CONST,space=0,reloc=2,noexec
 psect edata,class=EEDATA,space=3,delta=2,noexec
-# 1550 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18_chip_select.inc" 2 3
-# 6 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\pic18.inc" 2 3
-
+# 1551 "/opt/microchip/xc8/v2.32/pic/include/pic18_chip_select.inc" 2 3
+# 7 "/opt/microchip/xc8/v2.32/pic/include/pic18.inc" 2 3
 
 
 
@@ -10955,9 +10954,8 @@ addwfc FSR1H,c
 stk_offset SET 0
 auto_size SET 0
 ENDM
-# 5 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\xc.inc" 2 3
-# 1 "interrupts.s" 2
-
+# 6 "/opt/microchip/xc8/v2.32/pic/include/xc.inc" 2 3
+# 2 "interrupts.s" 2
 
 global pitch_interrupt_start, pwm_compare_start, compare_int
 
@@ -10975,7 +10973,7 @@ pitch_interrupt_start:
  movlw 00000100B ; set ((PORTH) and 0FFh), 6, a
  movwf CCP7CON, A
  bcf PIE4, 4, A ; disable ((PORTH) and 0FFh), 6, a capture interrupt
- bcf PIR4, 4, A ; clear ccp7 interrupt flag
+ bcf PIR4, 4, A ; cleainear to linearr ccp7 interrupt flag
  bsf IPR4, 4, A ; set interrupt as high priority
 
  bcf ((CCPTMRS1) and 0FFh), 7, b ; match ((PORTH) and 0FFh), 6, a to TMR1
@@ -10992,8 +10990,8 @@ pitch_interrupt_start:
  ;bit 1 = 16bit or 8 bit operation clock
  ;bit 0 = on/off timer
  bcf T1CON, 0, A ; disable timer
- clrf TMR1H
- clrf TMR1L
+ clrf TMR1H, A
+ clrf TMR1L, A
      movlw 01010111B ; enable timer
  movwf T1CON, A
 
@@ -11004,13 +11002,12 @@ pitch_interrupt_start:
  return
 
 
+; interrupt subroutine, toggles PWM signal output from 0 to volume_count
 compare_int:
  btfss ((PIR4) and 0FFh), 1, a ; check that this is ccp timer 4 interrupt
  retfie f ; if not then return
  bcf ((PIR4) and 0FFh), 1, a ; clear the ((PIR4) and 0FFh), 1, a flag
 
- bsf PORTC, 4
- bcf PORTC, 4
  movff PORTD, volume_dummy, A
 
  movlw 0x0
@@ -11026,6 +11023,7 @@ compare_int:
 
 pwm_compare_start:
 
+;;;;;;;;;;; to be continued capture protocol for transducers
 ; movlw 00110001B
 ; movwf T3CON
 ;
@@ -11040,23 +11038,22 @@ pwm_compare_start:
 ; movwf CCPR4L
 ; movlw 0x00
 ; movwf CCPR4H
-;
-; bsf ((PIE4) and 0FFh), 1, a
-; bsf ((INTCON) and 0FFh), 7, a
-; bsf ((INTCON) and 0FFh), 6, a
+;;;;;;;;;;;
+
+
 
  movlw 00110001B
- movwf T1CON
+ movwf T1CON, A
 
  bcf ((CCPTMRS1) and 0FFh), 1, b
 
 
  movlw 00001011B
- movwf CCP4CON
+ movwf CCP4CON, A
  movlw 0xe0
- movwf CCPR4L
+ movwf CCPR4L, A
  movlw 0x08
- movwf CCPR4H
+ movwf CCPR4H, A
 
  bsf ((PIE4) and 0FFh), 1, a
  bsf ((INTCON) and 0FFh), 7, a
