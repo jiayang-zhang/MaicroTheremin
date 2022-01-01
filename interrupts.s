@@ -58,7 +58,7 @@ compare_int:
 	clrf	PORTD, A
 	movlw	0x0
 	cpfsgt	volume_dummy, A
-	movff	volume_count, PORTD, A
+	movff	volume_count, PORTD, A	; toggle PORTD to volume_count if 0, or 0 if PORTD is at volume_count
 	
 	retfie	f
 
@@ -85,22 +85,22 @@ pwm_compare_start:
     
     
     
-	movlw	00110001B
+	movlw	00110001B	;configure Timer and set 1:8 prescaling at 16MHz (FoSC/4)
 	movwf	T1CON, A
 	
 	bcf	C4TSEL1
 	//movlw	000000001B
 	//movwf	CCPTMRS1
 	movlw	00001011B		
-	movwf	CCP4CON, A         	
+	movwf	CCP4CON, A       ;enable compare peripheral 
 	movlw	0xe0
 	movwf	CCPR4L, A
 	movlw	0x08
-	movwf	CCPR4H, A
+	movwf	CCPR4H, A	; moving provisional intial value into compare reference
 	
-	bsf	CCP4IE	
-	bsf	GIE
-	bsf	PEIE
+	bsf	CCP4IE		; enable CCP4 module interrupt
+	bsf	GIE		; enable global interrupt
+	bsf	PEIE		; enable interrupt
 	
 	return
 	
