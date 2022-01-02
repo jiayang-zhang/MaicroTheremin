@@ -75,14 +75,14 @@ trans_get:
 	
 ; ===================== countdown function ==================================
 count_loop_init_1:
-    	movlw	256			    ; 8-bits: count from 0 to 255
+    	movlw	256			    ; 8-bits: count from 255 to 0
 	movwf	pitch_temp, A
 count_loop_1:
 	movff	pitch_temp, PORTF, A	    ; check update frequency
-	dcfsnz	pitch_temp, A		    ; increment clock
+	dcfsnz	pitch_temp, A		    ; decrement clock
 	return
 	
-	movlw	2				    ; delay 24us
+	movlw	2				    ; delay 2us
 	call	delay_x4us
 	
 	btfsc	PORTE, 0,  A		    ; compare PORTE with w, skip if equals
@@ -93,11 +93,11 @@ count_loop_1:
 ;; current default countdown starts from 80 instead of 255
 ;; to make volume playing distance much shorter (~10cm) 
 count_loop_init_2:	
-    	movlw	80		    ; 8-bits: count from 0 to 255
+    	movlw	80		    ; 8-bits: count from 80 to 0 (shortened for playing convenience)
 	movwf	volume_temp, A
 count_loop_2:
 	movff	volume_temp, PORTH, A	    ; check update frequency
-	dcfsnz	volume_temp, A		    ; increment clock
+	dcfsnz	volume_temp, A		    ; decrement clock
 	return
 	
 	movlw	2 
