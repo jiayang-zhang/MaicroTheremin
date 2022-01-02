@@ -151,10 +151,11 @@ cmajor:
 	movlw	low(cmajorTable)		; address of data in PM
 	movwf	TBLPTRL, A			; load low byte to TBLPTRL
 	
-	swapf	pitch_count, f, A
-	movlw	0x0f
+	swapf	pitch_count, f, A		; make higher nibble the lower one
+	movlw	0x0f				; set mask for lower nibble
 	andwf	pitch_count, A			; take lower nibble for counting
-	
+						; this is equivalent to dividing by 2**4 = 16
+						; so we map 256 integers to 16 bins
 	; Multiply by two and add to TBLPTR
 	rlncf	pitch_count, W, A
 	addwf	TBLPTRL, F, A
